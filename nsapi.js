@@ -25,6 +25,10 @@ app.vertrektijden = function( station, callback ) {
 }
 
 
+// ! Prijzen
+app.prijzen = function( props, callback ) {
+	app.talk( 'prijzen-v2', props, callback )
+}
 // ! Stationslijst
 app.stations = function( treeKey, callback ) {
 	if( typeof treeKey === 'function' ) {
