@@ -1,0 +1,31 @@
+{
+  "author": {
+    "name":               "Franklin van de Meent",
+    "email":              "fr@nkl.in",
+    "url":                "http://frankl.in"
+  },
+  "name":                 "ns-api",
+  "description":          "Unofficial module for Nederlandse Spoorwegen API",
+  "version":              "1.0.0",
+  "repository": {
+    "type":               "git",
+    "url":                "git://github.com/fvdm/nodejs-ns-api.git"
+  },
+  "bugs": {
+    "url":                "https://github.com/fvdm/nodejs-ns-api/issues"
+  },
+  "main":                 "nsapi.js",
+  "dependencies": {
+    "node-xml2json":      ">= 1.0.0 <2.0.0"
+  },
+  "devDependencies":      {},
+  "optionalDependencies": {},
+  "engines": {
+    "node":               "*"
+  },
+  "keywords":             ["railway", "traffic", "api"],
+  "license": {
+    "type":               "Public Domain",
+    "url":                "https://github.com/fvdm/nodejs-ns-api/raw/master/UNLICENSE"
+  }
+}
