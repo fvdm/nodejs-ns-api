@@ -73,7 +73,7 @@ app.talk = function( path, props, callback ) {
 		port:	80,
 		path:	'/ns-api-'+ path +'?'+ querystring.stringify( props ),
 		method:	'GET',
-		auth:	app.username +':'+ app.passname
+		auth:	app.username +':'+ app.password
 	}
 	
 	var req = http.request( options )
