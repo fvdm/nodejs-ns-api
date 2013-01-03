@@ -29,6 +29,24 @@ app.vertrektijden = function( station, callback ) {
 app.prijzen = function( props, callback ) {
 	app.talk( 'prijzen-v2', props, callback )
 }
+
+
+// ! Reisadviezen
+app.reisadvies = function( props, callback ) {
+	app.talk( 'treinplanner', props, function( err, data ) {
+		if( !err ) {
+			if( data.reismogelijkheden.reismogelijkheid === undefined ) {
+				callback( new Error('unexpected response') )
+			} else {
+				callback( null, data.reismogelijkheden.reismogelijkheid )
+			}
+		} else {
+			callback( err, data )
+		}
+	})
+}
+
+
 // ! Stationslijst
 app.stations = function( treeKey, callback ) {
 	if( typeof treeKey === 'function' ) {
