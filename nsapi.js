@@ -55,7 +55,7 @@ app.talk = function( path, props, callback ) {
 	})
 	
 	req.on( 'error', function( error ) {
-		var err = new Error('request')
+		var err = new Error('request failed')
 		err.details = error
 		callback( err )
 	})
