@@ -24,6 +24,44 @@ app.vertrektijden = function( station, callback ) {
 		}
 	})
 }
+
+
+// ! Stationslijst
+app.stations = function( treeKey, callback ) {
+	if( typeof treeKey === 'function' ) {
+		var callback = treeKey
+		var treeKey = 'code'
+	}
+	
+	app.talk( 'stations-v2', function( err, data ) {
+		if( !err ) {
+			if( data.stations.station === undefined ) {
+				callback( new Error('unexpected response') )
+			} else {
+				var tree = {}
+				for( var s in data.stations.station ) {
+					var station = data.stations.station[s]
+					
+					if( treeKey === 'code' ) {
+						tree[ station.code ] = station
+					} else if( typeof station[ treeKey ] !== 'string' ) {
+						callback( new Error('key not found in station') )
+						return
+					} else {
+						if( tree[ station[ treeKey ] ] === undefined ) {
+							tree[ station[ treeKey ] ] = {}
+						}
+						tree[ station[ treeKey ] ][ station.code ] = station
+					}
+				}
+				
+				callback( null, tree )
+			}
+		} else {
+			callback( err, data )
+		}
+	})
+}
 // ! Communicate
 app.talk = function( path, props, callback ) {
 	if( typeof props === 'function' ) {
