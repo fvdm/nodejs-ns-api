@@ -18,10 +18,95 @@ From Github for the most recent code:
 Or from NPM for the most recent and *stable* code:
 
 	npm install ns-api
-	
+
 
 Example
 -------
+
+```js
+var ns = require('ns-api')
+
+ns.username = 'api-username'
+ns.password = 'api-password'
+
+ns.reisadvies(
+  {
+    fromStation: 'Amersfoort',
+    toStation:   'Den Haag',
+    dateTime:    '2013-02-21T15:50',
+    departure:   false
+  },
+  function( err, data ) {
+    console.log( err || data )
+  }
+)
+```
+
+
+Callback function
+-----------------
+
+Each method takes a `callback` function as last *required* parameter. The callback receives two parameters: `err` and `data`. In case of an error the first parameter is an `Error` instance, otherwise `err` is null and `data` is an object or array.
+
+```js
+function( err, data ) {
+	if( err instance of Error ) {
+		console.log( err )
+		// err.stack
+		// err.message    // same as console.log( err )
+		// err.details    // only set when details are available
+	} else {
+		// all good
+		console.log( data )
+	}
+}
+```
+
+#### Errors
+
+	Error: disconnected        The connection was closed too early
+	Error: invalid response    The API returned invalid data, see `err.details`
+	Error: request failed      Can't make request, see `err.details`
+
+
+Methods
+-------
+
+
+### vertrektijden ( station, callback )
+
+Departure times for a `station` identified by either its name or code.
+
+
+```js
+ns.vertrektijden( 'Amersfoort', console.log )
+```
+
+```js
+[ { ritnummer: 11787,
+    vertrektijd: '2013-01-04T00:25:00+0100',
+    eindbestemming: 'Amersfoort Schothorst',
+    treinsoort: 'Intercity',
+    vervoerder: 'NS',
+    vertrekspoor: { wijziging: false } },
+  { ritnummer: 12586,
+    vertrektijd: '2013-01-04T00:26:00+0100',
+    eindbestemming: 'Utrecht Centraal',
+    treinsoort: 'Intercity',
+    vervoerder: 'NS',
+    vertrekspoor: { wijziging: false } } ]
+```
+
+
+### prijzen ( parameters, callback )
+
+You need special access for this method.
+
+
+### reisadvies ( parameters, callback )
+
+Calculate travel plans between stations
+
 
 ```js
 var ns = require('ns-api')
@@ -72,35 +157,82 @@ ns.reisadvies(
 ```
 
 
-Callback function
------------------
+### stations ( [treeKey], callback )
 
-Each method takes a `callback` function as last *required* parameter. The callback receives two parameters: `err` and `data`. In case of an error the first parameter is an `Error` instance, otherwise `err` is null and `data` is an object or array.
+Get a list of all stations.
+
+
+	treeKey   optional   string   Groep items by specified key, ie. "land".
+
+
+**Just the list:**
 
 ```js
-function( err, data ) {
-	if( err instance of Error ) {
-		console.log( err )
-		// err.stack
-		// err.message    // same as console.log( err )
-		// err.details    // only set when details are available
-	} else {
-		// all good
-		console.log( data )
-	}
-}
+ns.stations( console.log )
 ```
 
-#### Errors
+```js
+{ HT: 
+   { code: 'HT',
+     type: 'knooppuntIntercitystation',
+     namen: 
+      { kort: 'H\'bosch',
+        middel: '\'s-Hertogenbosch',
+        lang: '\'s-Hertogenbosch' },
+     land: 'NL',
+     uiccode: 8400319,
+     lat: 51.69048,
+     lon: 5.29362,
+     synoniemen: { synoniem: [Object] } } }
+```
 
-	Error: disconnected        The connection was closed too early
-	Error: invalid response    The API returned invalid data, see `err.details`
-	Error: request failed      Can't make request, see `err.details`
+
+**Grouped by type:**
+
+```js
+ns.stations( 'type', console.log )
+```
+
+```js
+{ knooppuntIntercitystation: 
+   { HT: 
+      { code: 'HT',
+        type: 'knooppuntIntercitystation',
+        namen: [Object],
+        land: 'NL',
+        uiccode: 8400319,
+        lat: 51.69048,
+        lon: 5.29362,
+        synoniemen: [Object] } }
+```
 
 
-Methods
--------
+### storingen ( parameters, callback )
 
+Get a list of maintenance and defect notifications. You need to set parameters to get any results.
+
+
+```js
+ns.storingen( {station: 'Amsterdam', unplanned: true}, console.log )
+```
+
+```js
+{ ongepland: [],
+  gepland: 
+   [ { id: '2013_alm_wp_5jan',
+       traject: 'Almere Centrum-Weesp',
+       periode: 'in de nacht van vrijdag 4 op zaterdag 5 januari tussen 01.15 en 06.30 uur',
+       reden: 'Geen treinverkeer, businzet, extra reistijd 15-30 min.',
+       advies: 'U kunt gebruikmaken van de bus de laatste Sprinter van Weesp naar Lelystad Centrum wordt tussen Weesp en Almere Centrum vervangen door een NS-bus de eerste drie Sprinters tussen Almere Centrum en Weesp worden vervangen door een NS-bus de laatste Intercity van Almere Centrum naar Amsterdam Centraal wordt vervangen door een NS-snelbus',
+       bericht: 
+        { b: 
+           [ 'Wanneer: in de nacht van vrijdag 4 op zaterdag 5 januari tussen 01.15 en 06.30 uur',
+             'Oorzaak: door geplande werkzaamheden',
+             'Advies: U kunt gebruikmaken van de bus',
+             'Extra Reistijd: een kwartier tot een half uur' ] },
+       oorzaak: 'door geplande werkzaamheden',
+       vertraging: 'een kwartier tot een half uur' } ] }
+```
 
 
 Unlicense
