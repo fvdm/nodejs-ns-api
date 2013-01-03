@@ -1,8 +1,7 @@
 var http = require('http'),
-    app = {}
     querystring = require('querystring'),
     xml2json = require('node-xml2json'),
-    app = {user: '', pass: ''}
+    app = {username: '', password: ''}
 
 
 // ! Vertrektijden
@@ -74,7 +73,7 @@ app.talk = function( path, props, callback ) {
 		port:	80,
 		path:	'/ns-api-'+ path +'?'+ querystring.stringify( props ),
 		method:	'GET',
-		auth:	app.user +':'+ app.pass
+		auth:	app.username +':'+ app.passname
 	}
 	
 	var req = http.request( options )
