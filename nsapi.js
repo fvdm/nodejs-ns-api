@@ -5,6 +5,25 @@ var http = require('http'),
     app = {user: '', pass: ''}
 
 
+// ! Vertrektijden
+app.vertrektijden = function( station, callback ) {
+	app.talk( 'avt', {station: station}, function( err, data ) {
+		if( !err ) {
+			if( data.actuelevertrektijden.vertrekkendetrein === undefined ) {
+				callback( new Error('unexpected response') )
+			} else {
+				for( var t in data.actuelevertrektijden.vertrekkendetrein ) {
+					if( data.actuelevertrektijden.vertrekkendetrein[t].vertrekspoor.wijziging === 'false' ) {
+						data.actuelevertrektijden.vertrekkendetrein[t].vertrekspoor.wijziging = false
+					}
+				}
+				callback( null, data.actuelevertrektijden.vertrekkendetrein )
+			}
+		} else {
+			callback( err, data )
+		}
+	})
+}
 // ! Communicate
 app.talk = function( path, props, callback ) {
 	if( typeof props === 'function' ) {
