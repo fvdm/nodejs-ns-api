@@ -83,6 +83,52 @@ app.stations = function( treeKey, callback ) {
 		}
 	})
 }
+
+
+// ! Storingen
+app.storingen = function( params, callback ) {
+	app.talk( 'storingen', params, function( err, data ) {
+		if( !err ) {
+			if( data.storingen.ongepland === undefined || data.storingen.gepland === undefined ) {
+				callback( new Error('unexpected response') )
+			} else {
+				if( data.storingen.ongepland.storing !== undefined ) {
+					if( data.storingen.ongepland.storing.id !== undefined ) {
+						data.storingen.ongepland = [data.storingen.ongepland.storing]
+					} else if( data.storingen.ongepland.storing.length >= 1 ) {
+						var storingen = []
+						for( var s in data.storingen.ongepland.storing ) {
+							storingen.push( data.storingen.ongepland.storing[s] )
+						}
+						data.storingen.ongepland = storingen
+					}
+				} else {
+					data.storingen.ongepland = []
+				}
+				
+				if( data.storingen.gepland.storing !== undefined ) {
+					if( data.storingen.gepland.storing.id !== undefined ) {
+						data.storingen.gepland = [data.storingen.gepland.storing]
+					} else if( data.storingen.gepland.storing.length >= 1 ) {
+						var storingen = []
+						for( var s in data.storingen.gepland.storing ) {
+							storingen.push( data.storingen.gepland.storing[s] )
+						}
+						data.storingen.gepland = storingen
+					}
+				} else {
+					data.storingen.gepland = []
+				}
+				
+				callback( null, data.storingen )
+			}
+		} else {
+			callback( err, data )
+		}
+	})
+}
+
+
 // ! Communicate
 app.talk = function( path, props, callback ) {
 	if( typeof props === 'function' ) {
