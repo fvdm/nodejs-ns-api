@@ -42,7 +42,7 @@ var http = require('http'),
 app.vertrektijden = function( station, callback ) {
 	app.talk( 'avt', {station: station}, function( err, data ) {
 		if( !err ) {
-			if( data.actuelevertrektijden.vertrekkendetrein === undefined ) {
+			if( !data.actuelevertrektijden || !data.actuelevertrektijden.vertrekkendetrein ) {
 				callback( new Error('unexpected response') )
 			} else {
 				for( var t in data.actuelevertrektijden.vertrekkendetrein ) {
@@ -69,7 +69,7 @@ app.prijzen = function( props, callback ) {
 app.reisadvies = function( props, callback ) {
 	app.talk( 'treinplanner', props, function( err, data ) {
 		if( !err ) {
-			if( data.reismogelijkheden.reismogelijkheid === undefined ) {
+			if( !data.reismogelijkheden.reismogelijkheid ) {
 				callback( new Error('unexpected response') )
 			} else {
 				callback( null, data.reismogelijkheden.reismogelijkheid )
@@ -90,7 +90,7 @@ app.stations = function( treeKey, callback ) {
 	
 	app.talk( 'stations-v2', function( err, data ) {
 		if( !err ) {
-			if( data.stations.station === undefined ) {
+			if( !data.stations.station ) {
 				callback( new Error('unexpected response') )
 			} else {
 				var tree = {}
@@ -103,7 +103,7 @@ app.stations = function( treeKey, callback ) {
 						callback( new Error('key not found in station') )
 						return
 					} else {
-						if( tree[ station[ treeKey ] ] === undefined ) {
+						if( !tree[ station[ treeKey ] ] ) {
 							tree[ station[ treeKey ] ] = {}
 						}
 						tree[ station[ treeKey ] ][ station.code ] = station
@@ -123,7 +123,7 @@ app.stations = function( treeKey, callback ) {
 app.storingen = function( params, callback ) {
 	app.talk( 'storingen', params, function( err, data ) {
 		if( !err ) {
-			if( data.storingen.ongepland === undefined || data.storingen.gepland === undefined ) {
+			if( !data.storingen.ongepland || !data.storingen.gepland ) {
 				callback( new Error('unexpected response') )
 			} else {
 				if( data.storingen.ongepland.storing !== undefined ) {
