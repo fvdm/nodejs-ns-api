@@ -42,15 +42,20 @@ var http = require('http'),
 app.vertrektijden = function( station, callback ) {
 	app.talk( 'avt', {station: station}, function( err, data ) {
 		if( !err ) {
-			if( !data.actuelevertrektijden || !data.actuelevertrektijden.vertrekkendetrein ) {
+			if( !data.ActueleVertrekTijden || !data.ActueleVertrekTijden.VertrekkendeTrein ) {
 				callback( new Error('unexpected response') )
 			} else {
-				for( var t in data.actuelevertrektijden.vertrekkendetrein ) {
-					if( data.actuelevertrektijden.vertrekkendetrein[t].vertrekspoor.wijziging === 'false' ) {
-						data.actuelevertrektijden.vertrekkendetrein[t].vertrekspoor.wijziging = false
+				data = data.ActueleVertrekTijden.VertrekkendeTrein
+				if( data.RitNummer !== undefined ) {
+					data = [data]
+					callback( null, data )
+				} else {
+					for( var t in data ) {
+						data[t].VertrekSpoor.spoor = data[t].VertrekSpoor.$t
+						delete data[t].VertrekSpoor.$t
 					}
+					callback( null, data )
 				}
-				callback( null, data.actuelevertrektijden.vertrekkendetrein )
 			}
 		} else {
 			callback( err, data )
