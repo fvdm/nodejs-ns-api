@@ -83,18 +83,24 @@ ns.vertrektijden( 'Amersfoort', console.log )
 ```
 
 ```js
-[ { ritnummer: 11787,
-    vertrektijd: '2013-01-04T00:25:00+0100',
-    eindbestemming: 'Amersfoort Schothorst',
-    treinsoort: 'Intercity',
-    vervoerder: 'NS',
-    vertrekspoor: { wijziging: false } },
-  { ritnummer: 12586,
-    vertrektijd: '2013-01-04T00:26:00+0100',
-    eindbestemming: 'Utrecht Centraal',
-    treinsoort: 'Intercity',
-    vervoerder: 'NS',
-    vertrekspoor: { wijziging: false } } ]
+[ { RitNummer: 587,
+    VertrekTijd: '2013-01-09T00:07:00+0100',
+    VertrekVertraging: 'PT10M',
+    VertrekVertragingTekst: '+10 min',
+    EindBestemming: 'Groningen',
+    TreinSoort: 'Intercity',
+    RouteTekst: 'Nijkerk, Harderwijk, Zwolle',
+    Vervoerder: 'NS',
+    VertrekSpoor: '2b',
+    VertrekSpootWijziging: false },
+  { RitNummer: 11686,
+    VertrekTijd: '2013-01-09T00:10:00+0100',
+    EindBestemming: 'Schiphol',
+    TreinSoort: 'Intercity',
+    RouteTekst: 'Hilversum, A\'dam Zuid',
+    Vervoerder: 'NS',
+    VertrekSpoor: 7,
+    VertrekSpootWijziging: false } ]
 ```
 
 
@@ -130,30 +136,30 @@ ns.reisadvies(
 **Result:**
 
 ```js
-[ { aantaloverstappen: 0,
-    geplandereistijd: '0:58',
-    actuelereistijd: '0:58',
-    optimaal: 'false',
-    geplandevertrektijd: '2013-01-05T13:40:00+0100',
-    actuelevertrektijd: '2013-01-05T13:40:00+0100',
-    geplandeaankomsttijd: '2013-01-05T14:38:00+0100',
-    actueleaankomsttijd: '2013-01-05T14:38:00+0100',
-    status: 'VOLGENS-PLAN',
-    reisdeel: 
-     { reissoort: 'TRAIN',
-       vervoerder: 'NS',
-       vervoertype: 'Intercity',
-       ritnummer: 11744,
-       status: 'VOLGENS-PLAN',
-       reisstop: 
-        [ { naam: 'Amersfoort',
-            tijd: '2013-01-05T13:40:00+0100',
-            spoor: { wijziging: 'false' } },
-          { naam: 'Utrecht Centraal', tijd: '2013-01-05T13:59:00+0100' },
-          { naam: 'Gouda', tijd: '2013-01-05T14:20:00+0100' },
-          { naam: 'Den Haag Centraal',
-            tijd: '2013-01-05T14:38:00+0100',
-            spoor: { wijziging: 'false' } } ] } } ]
+[ { AantalOverstappen: 1,
+    GeplandeReisTijd: '0:56',
+    ActueleReisTijd: '0:56',
+    Optimaal: false,
+    GeplandeVertrekTijd: '2013-02-21T13:26:00+0100',
+    ActueleVertrekTijd: '2013-02-21T13:26:00+0100',
+    GeplandeAankomstTijd: '2013-02-21T14:22:00+0100',
+    ActueleAankomstTijd: '2013-02-21T14:22:00+0100',
+    Status: 'VOLGENS-PLAN',
+    ReisDeel: 
+     [ { reisSoort: 'TRAIN',
+         Vervoerder: 'NS',
+         VervoerType: 'Intercity',
+         RitNummer: 12542,
+         Status: 'VOLGENS-PLAN',
+         ReisStop: 
+          [ { Naam: 'Amersfoort',
+              Tijd: '2013-02-21T13:26:00+0100',
+              Spoor: '6a',
+              SpoorWijziging: false },
+            { Naam: 'Utrecht Centraal',
+              Tijd: '2013-02-21T13:41:00+0100',
+              Spoor: 8,
+              SpoorWijziging: false } ] } ],
 ```
 
 
@@ -173,37 +179,52 @@ ns.stations( console.log )
 
 ```js
 { HT: 
-   { code: 'HT',
-     type: 'knooppuntIntercitystation',
-     namen: 
-      { kort: 'H\'bosch',
-        middel: '\'s-Hertogenbosch',
-        lang: '\'s-Hertogenbosch' },
-     land: 'NL',
-     uiccode: 8400319,
-     lat: 51.69048,
-     lon: 5.29362,
-     synoniemen: { synoniem: [Object] } } }
+   { Code: 'HT',
+     Type: 'knooppuntIntercitystation',
+     Namen: 
+      { Kort: 'H\'bosch',
+        Middel: '\'s-Hertogenbosch',
+        Lang: '\'s-Hertogenbosch' },
+     Land: 'NL',
+     UICCode: 8400319,
+     Lat: 51.69048,
+     Lon: 5.29362,
+     Synoniemen: { Synoniem: [ 'Hertogenbosch (\'s)', 'Den Bosch' ] } },
+  HTO: 
+   { Code: 'HTO',
+     Type: 'stoptreinstation',
+     Namen: 
+      { Kort: 'H\'bosch O',
+        Middel: 'Hertogenbosch O.',
+        Lang: '\'s-Hertogenbosch Oost' },
+     Land: 'NL',
+     UICCode: 8400320,
+     Lat: 51.700554,
+     Lon: 5.318333,
+     Synoniemen: { Synoniem: [ 'Hertogenbosch Oost (\'s)', 'Den Bosch Oost' ] } } }
 ```
 
 
 **Grouped by type:**
 
 ```js
-ns.stations( 'type', console.log )
+ns.stations( 'Type', console.log )
 ```
 
 ```js
 { knooppuntIntercitystation: 
    { HT: 
-      { code: 'HT',
-        type: 'knooppuntIntercitystation',
-        namen: [Object],
-        land: 'NL',
-        uiccode: 8400319,
-        lat: 51.69048,
-        lon: 5.29362,
-        synoniemen: [Object] } }
+      { Code: 'HT',
+        Type: 'knooppuntIntercitystation',
+        Namen: 
+         { Kort: 'H\'bosch',
+           Middel: '\'s-Hertogenbosch',
+           Lang: '\'s-Hertogenbosch' },
+        Land: 'NL',
+        UICCode: 8400319,
+        Lat: 51.69048,
+        Lon: 5.29362,
+        Synoniemen: { Synoniem: [ 'Hertogenbosch (\'s)', 'Den Bosch' ] } } }
 ```
 
 
@@ -217,21 +238,13 @@ ns.storingen( {station: 'Amsterdam', unplanned: true}, console.log )
 ```
 
 ```js
-{ ongepland: [],
-  gepland: 
-   [ { id: '2013_alm_wp_5jan',
-       traject: 'Almere Centrum-Weesp',
-       periode: 'in de nacht van vrijdag 4 op zaterdag 5 januari tussen 01.15 en 06.30 uur',
-       reden: 'Geen treinverkeer, businzet, extra reistijd 15-30 min.',
-       advies: 'U kunt gebruikmaken van de bus de laatste Sprinter van Weesp naar Lelystad Centrum wordt tussen Weesp en Almere Centrum vervangen door een NS-bus de eerste drie Sprinters tussen Almere Centrum en Weesp worden vervangen door een NS-bus de laatste Intercity van Almere Centrum naar Amsterdam Centraal wordt vervangen door een NS-snelbus',
-       bericht: 
-        { b: 
-           [ 'Wanneer: in de nacht van vrijdag 4 op zaterdag 5 januari tussen 01.15 en 06.30 uur',
-             'Oorzaak: door geplande werkzaamheden',
-             'Advies: U kunt gebruikmaken van de bus',
-             'Extra Reistijd: een kwartier tot een half uur' ] },
-       oorzaak: 'door geplande werkzaamheden',
-       vertraging: 'een kwartier tot een half uur' } ] }
+{ Ongepland: 
+   [ { id: 'prio-37230',
+       Traject: 'Winterswijk-Arnhem',
+       Reden: 'eerdere verstoring',
+       Bericht: 'Tussen Velperpoort en Winterswijk langere reistijd door een eerdere verstoring.Houdt u rekening met een extra reistijd van ongeveer 15 min.De verstoring is naar verwachting 09 januari rond 2:00 uur verholpen.',
+       Datum: '2013-01-08T18:52:00+0100' } ],
+  Gepland: [] }
 ```
 
 
