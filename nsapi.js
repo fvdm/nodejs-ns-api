@@ -33,6 +33,7 @@ For more information, please refer to <http://unlicense.org>
 */
 
 var http = require('http'),
+    util = require('util'),
     querystring = require('querystring'),
     xml2json = require('xml2json'),
     app = {username: '', password: ''}
