@@ -125,15 +125,16 @@ app.stations = function( treeKey, callback ) {
 	
 	app.talk( 'stations-v2', function( err, data ) {
 		if( !err ) {
-			if( !data.stations.station ) {
+			if( !data.Stations.Station ) {
 				callback( new Error('unexpected response') )
 			} else {
+				data = data.Stations.Station
 				var tree = {}
-				for( var s in data.stations.station ) {
-					var station = data.stations.station[s]
+				for( var s in data ) {
+					var station = data[s]
 					
 					if( treeKey === 'code' ) {
-						tree[ station.code ] = station
+						tree[ station.Code ] = station
 					} else if( typeof station[ treeKey ] !== 'string' ) {
 						callback( new Error('key not found in station') )
 						return
@@ -141,7 +142,7 @@ app.stations = function( treeKey, callback ) {
 						if( !tree[ station[ treeKey ] ] ) {
 							tree[ station[ treeKey ] ] = {}
 						}
-						tree[ station[ treeKey ] ][ station.code ] = station
+						tree[ station[ treeKey ] ][ station.Code ] = station
 					}
 				}
 				
