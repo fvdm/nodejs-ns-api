@@ -34,7 +34,7 @@ For more information, please refer to <http://unlicense.org>
 
 var http = require('http'),
     querystring = require('querystring'),
-    xml2json = require('node-xml2json'),
+    xml2json = require('xml2json'),
     app = {username: '', password: ''}
 
 
@@ -196,7 +196,12 @@ app.talk = function( path, props, callback ) {
 					callback( err )
 				})
 			} else if( data.match('<?xml') ) {
-				data = xml2json.parser( data )
+				data = xml2json.toJson( data, {
+					object: true,
+					coerce: true,
+					trim: true,
+					sanitize: true
+				})
 				callback( null, data )
 			} else {
 				var err = new Error('invalid response')
