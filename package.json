@@ -16,7 +16,7 @@
   },
   "main":                 "nsapi.js",
   "dependencies": {
-    "node-xml2json":      ">= 1.0.0 <2.0.0"
+    "xml2json":           ">= 0.3.2 <0.4.0"
   },
   "devDependencies":      {},
   "optionalDependencies": {},
