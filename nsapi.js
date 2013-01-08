@@ -235,7 +235,7 @@ app.talk = function( path, props, callback ) {
 					object: true,
 					coerce: true,
 					trim: true,
-					sanitize: true
+					sanitize: false
 				})
 				callback( null, data )
 			} else {
