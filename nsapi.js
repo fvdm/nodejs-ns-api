@@ -75,10 +75,39 @@ app.prijzen = function( props, callback ) {
 app.reisadvies = function( props, callback ) {
 	app.talk( 'treinplanner', props, function( err, data ) {
 		if( !err ) {
-			if( !data.reismogelijkheden.reismogelijkheid ) {
+			if( !data.ReisMogelijkheden || !data.ReisMogelijkheden.ReisMogelijkheid ) {
 				callback( new Error('unexpected response') )
 			} else {
-				callback( null, data.reismogelijkheden.reismogelijkheid )
+				data = data.ReisMogelijkheden.ReisMogelijkheid
+				
+				if( !util.isArray( data ) ) {
+					data = [data]
+				}
+				
+				if( data.length >= 1 ) {
+					for( var r in data ) {
+						var reis = data[r]
+						if( !util.isArray( reis.ReisDeel ) ) {
+							reis.ReisDeel = [reis.ReisDeel]
+						}
+						
+						for( var d in reis.ReisDeel ) {
+							var deel = reis.ReisDeel[d]
+							for( var s in deel.ReisStop ) {
+								var stop = deel.ReisStop[s]
+								stop.SpoorWijziging = stop.Spoor.wijziging
+								stop.Spoor = stop.Spoor.$t
+								delete stop.Spoor.$t
+								deel.ReisStop[s] = stop
+							}
+							reis.ReisDeel[d] = deel
+						}
+						
+						data[r] = reis
+					}
+				}
+				
+				callback( null, data )
 			}
 		} else {
 			callback( err, data )
