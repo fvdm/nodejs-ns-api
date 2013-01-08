@@ -95,10 +95,12 @@ app.reisadvies = function( props, callback ) {
 							var deel = reis.ReisDeel[d]
 							for( var s in deel.ReisStop ) {
 								var stop = deel.ReisStop[s]
-								stop.SpoorWijziging = stop.Spoor.wijziging
-								stop.Spoor = stop.Spoor.$t
-								delete stop.Spoor.$t
-								deel.ReisStop[s] = stop
+								if( stop.Spoor !== undefined ) {
+									stop.SpoorWijziging = stop.Spoor.wijziging
+									stop.Spoor = stop.Spoor.$t
+									delete stop.Spoor.$t
+									deel.ReisStop[s] = stop
+								}
 							}
 							reis.ReisDeel[d] = deel
 						}
