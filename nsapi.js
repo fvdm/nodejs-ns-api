@@ -159,38 +159,22 @@ app.stations = function( treeKey, callback ) {
 app.storingen = function( params, callback ) {
 	app.talk( 'storingen', params, function( err, data ) {
 		if( !err ) {
-			if( !data.storingen.ongepland || !data.storingen.gepland ) {
+			if( data.Storingen.Ongepland === undefined || data.Storingen.Gepland === undefined ) {
 				callback( new Error('unexpected response') )
 			} else {
-				if( data.storingen.ongepland.storing !== undefined ) {
-					if( data.storingen.ongepland.storing.id !== undefined ) {
-						data.storingen.ongepland = [data.storingen.ongepland.storing]
-					} else if( data.storingen.ongepland.storing.length >= 1 ) {
-						var storingen = []
-						for( var s in data.storingen.ongepland.storing ) {
-							storingen.push( data.storingen.ongepland.storing[s] )
-						}
-						data.storingen.ongepland = storingen
-					}
-				} else {
-					data.storingen.ongepland = []
+				data = data.Storingen
+				data.Ongepland = data.Ongepland.Storing || []
+				data.Gepland = data.Gepland.Storing || []
+				
+				if( !util.isArray( data.Ongepland ) ) {
+					data.Ongepland = [data.Ongepland]
 				}
 				
-				if( data.storingen.gepland.storing !== undefined ) {
-					if( data.storingen.gepland.storing.id !== undefined ) {
-						data.storingen.gepland = [data.storingen.gepland.storing]
-					} else if( data.storingen.gepland.storing.length >= 1 ) {
-						var storingen = []
-						for( var s in data.storingen.gepland.storing ) {
-							storingen.push( data.storingen.gepland.storing[s] )
-						}
-						data.storingen.gepland = storingen
-					}
-				} else {
-					data.storingen.gepland = []
+				if( !util.isArray( data.Gepland ) ) {
+					data.Gepland = [data.Gepland]
 				}
 				
-				callback( null, data.storingen )
+				callback( null, data )
 			}
 		} else {
 			callback( err, data )
