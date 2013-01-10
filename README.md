@@ -92,7 +92,7 @@ ns.vertrektijden( 'Amersfoort', console.log )
     RouteTekst: 'Nijkerk, Harderwijk, Zwolle',
     Vervoerder: 'NS',
     VertrekSpoor: '2b',
-    VertrekSpootWijziging: false },
+    VertrekSpoorWijziging: false },
   { RitNummer: 11686,
     VertrekTijd: '2013-01-09T00:10:00+0100',
     EindBestemming: 'Schiphol',
@@ -100,7 +100,7 @@ ns.vertrektijden( 'Amersfoort', console.log )
     RouteTekst: 'Hilversum, A\'dam Zuid',
     Vervoerder: 'NS',
     VertrekSpoor: 7,
-    VertrekSpootWijziging: false } ]
+    VertrekSpoorWijziging: false } ]
 ```
 
 

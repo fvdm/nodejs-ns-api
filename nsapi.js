@@ -52,7 +52,7 @@ app.vertrektijden = function( station, callback ) {
 					callback( null, data )
 				} else {
 					for( var t in data ) {
-						data[t].VertrekSpootWijziging = data[t].VertrekSpoor.wijziging
+						data[t].VertrekSpoorWijziging = data[t].VertrekSpoor.wijziging
 						data[t].VertrekSpoor = data[t].VertrekSpoor.$t
 						delete data[t].VertrekSpoor.$t
 					}
