@@ -77,6 +77,8 @@ Methods
 
 Departure times for a `station` identified by either its name or code.
 
+API docs: [Actuele vertrektijden](http://www.ns.nl/api/api#api-documentatie-actuele-vertrektijden)
+
 
 ```js
 ns.vertrektijden( 'Amersfoort', console.log )
@@ -108,10 +110,14 @@ ns.vertrektijden( 'Amersfoort', console.log )
 
 You need special access for this method.
 
+API docs: [Prijzen](http://www.ns.nl/api/api#api-documentatie-prijzen)
+
 
 ### reisadvies ( parameters, callback )
 
 Calculate travel plans between stations
+
+API docs: [Reisadviezen](http://www.ns.nl/api/api#api-documentatie-reisadviezen)
 
 
 ```js
@@ -166,6 +172,8 @@ ns.reisadvies(
 ### stations ( [treeKey], callback )
 
 Get a list of all stations.
+
+API docs: [Stationslijst](http://www.ns.nl/api/api#api-documentatie-stationslijst)
 
 
 	treeKey   optional   string   Groep items by specified key, ie. "land".
@@ -231,6 +239,8 @@ ns.stations( 'Type', console.log )
 ### storingen ( parameters, callback )
 
 Get a list of maintenance and defect notifications. You need to set parameters to get any results.
+
+API docs: [Storingen en werkzaamheden](http://www.ns.nl/api/api#api-documentatie-storingen-en-werkzaamheden)
 
 
 ```js
