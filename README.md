@@ -176,7 +176,7 @@ Get a list of all stations.
 **API docs: [Stationslijst](http://www.ns.nl/api/api#api-documentatie-stationslijst)**
 
 
-	treeKey   optional   string   Groep items by specified key, ie. "land".
+* **treeKey** - *optional* - *string* - Group items by specified key, ie. "Land".
 
 
 **Just the list:**
