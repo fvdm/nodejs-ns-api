@@ -121,11 +121,6 @@ Calculate travel plans between stations
 
 
 ```js
-var ns = require('ns-api')
-
-ns.username = 'api-username'
-ns.password = 'api-password'
-
 ns.reisadvies(
   {
     fromStation: 'Amersfoort',
@@ -169,17 +164,17 @@ ns.reisadvies(
 ```
 
 
-### stations ( [treeKey], callback )
+### stations ( [groupBy], callback )
 
 Get a list of all stations.
 
 **API docs: [Stationslijst](http://www.ns.nl/api/api#api-documentatie-stationslijst)**
 
 
-* **treeKey** - *optional* - *string* - Group items by specified key, ie. "Land".
+	groupBy   optional   string   Group items by specified key, ie. "Land"
 
 
-**Just the list:**
+#### Just the list:
 
 ```js
 ns.stations( console.log )
@@ -213,7 +208,7 @@ ns.stations( console.log )
 ```
 
 
-**Grouped by type:**
+#### Grouped by type:
 
 ```js
 ns.stations( 'Type', console.log )
