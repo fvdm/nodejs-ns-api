@@ -74,7 +74,6 @@ app.reisadvies = function( props, callback ) {
 								if( stop.Spoor !== undefined ) {
 									stop.SpoorWijziging = stop.Spoor.wijziging
 									stop.Spoor = stop.Spoor.$t
-									delete stop.Spoor.$t
 									deel.ReisStop[s] = stop
 								}
 							}
