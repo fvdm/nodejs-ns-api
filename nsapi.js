@@ -10,6 +10,8 @@ License:    Unlicense / Public Domain
 
 var http = require('http'),
     util = require('util'),
+    zlib = require('zlib'),
+    streame = require('stream'),
     querystring = require('querystring'),
     xml2json = require('xml2json'),
     app = {username: '', password: ''}
@@ -179,10 +181,16 @@ app.talk = function( path, props, callback ) {
 
 	req.on( 'response', function( response ) {
 		var data = ''
-		response.on( 'data', function( ch ) { data += ch })
-		response.on( 'close', function() { callback( new Error('disconnected') ) })
-		response.on( 'end', function() {
+		readable = response
+		if(response.headers['content-encoding'] === 'gzip') {
+			readable = new stream.PassThrough();
+			response.pipe(zlib.createGunzip()).pipe(readable);
+		}
+		readable.on( 'data', function( ch ) { data += ch })
+		readable.on( 'close', function() { callback( new Error('disconnected') ) })
+		readable.on( 'end', function() {
 			data = data.toString('utf8').trim()
+
 			if( data.match('<faultstring>') ) {
 				data.replace( /<faultstring>([0-9]+):([^<]+)<\/faultstring>/, function( s, code, error ) {
 					var err = new Error('API error')
