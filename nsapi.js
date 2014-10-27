@@ -57,18 +57,18 @@ app.reisadvies = function( props, callback ) {
 				callback( new Error('unexpected response') )
 			} else {
 				data = data.ReisMogelijkheden.ReisMogelijkheid
-				
+
 				if( !util.isArray( data ) ) {
 					data = [data]
 				}
-				
+
 				if( data.length >= 1 ) {
 					for( var r in data ) {
 						var reis = data[r]
 						if( !util.isArray( reis.ReisDeel ) ) {
 							reis.ReisDeel = [reis.ReisDeel]
 						}
-						
+
 						for( var d in reis.ReisDeel ) {
 							var deel = reis.ReisDeel[d]
 							for( var s in deel.ReisStop ) {
