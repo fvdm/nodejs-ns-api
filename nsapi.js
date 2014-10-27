@@ -11,7 +11,7 @@ License:    Unlicense / Public Domain
 var http = require('http'),
     util = require('util'),
     zlib = require('zlib'),
-    streame = require('stream'),
+    stream = require('stream'),
     querystring = require('querystring'),
     xml2json = require('xml2json'),
     app = {username: '', password: ''}
