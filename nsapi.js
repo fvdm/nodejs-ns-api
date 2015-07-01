@@ -226,8 +226,9 @@ function objectOmit (obj, key) {
       }
     }
   }
-  else if (obj instanceof Array) {
-    for (i in obj) {
+  else if (obj instanceof Array && obj.length >= 1) {
+    var i;
+    for (i = 0; i < obj.length; i++) {
       obj [i] = objectOmit (obj [i], key);
     }
   }
