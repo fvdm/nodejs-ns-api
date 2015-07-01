@@ -24,8 +24,5 @@
     "node":               "*"
   },
   "keywords":             ["railway", "traffic", "api"],
-  "license": {
-    "type":               "Public Domain",
-    "url":                "https://github.com/fvdm/nodejs-ns-api/raw/master/UNLICENSE"
-  }
+  "license":              "Unlicense"
 }
