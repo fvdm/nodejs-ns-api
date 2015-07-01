@@ -8,7 +8,6 @@ License:    Unlicense (Public Domain)
             (see UNLICENSE file or https://raw.github.com/fvdm/nodejs-ns-api/master/UNLICENSE)
 */
 
-var util = require ('util');
 var http = require ('httpreq');
 var parsexml = require ('nodexml') .xml2obj;
 var app = {username: '', password: ''};
@@ -57,14 +56,14 @@ app.reisadvies = function (props, callback) {
       } else {
         data = data.ReisMogelijkheden.ReisMogelijkheid;
 
-        if (!util.isArray (data)) {
+        if (!(data instanceof Array)) {
           data = [data];
         }
 
         if (data.length >= 1) {
           for (var r in data) {
             var reis = data [r];
-            if (!util.isArray (reis.ReisDeel)) {
+            if (!(reis.ReisDeel instanceof Array)) {
               reis.ReisDeel = [reis.ReisDeel];
             }
 
@@ -145,11 +144,11 @@ app.storingen = function (params, callback) {
         data.Ongepland = data.Ongepland.Storing || [];
         data.Gepland = data.Gepland.Storing || [];
 
-        if (!util.isArray (data.Ongepland)) {
+        if (!(data.Ongepland instanceof Array)) {
           data.Ongepland = [data.Ongepland];
         }
 
-        if (!util.isArray (data.Gepland)) {
+        if (!(data.Gepland instanceof Array)) {
           data.Gepland = [data.Gepland];
         }
 
