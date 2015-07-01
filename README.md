@@ -1,73 +1,77 @@
-nodejs-ns-api
-=============
+ns-api
+======
 
-Unofficial [Node.js](http://nodejs.org/) module for [Nederlandse Spoorwegen API](http://www.ns.nl/api/api).
+Access public transit data from [Nederlandse Spoorwegen API](http://www.ns.nl/api/api) with node.js
 
 * To use this module you need API access credentials, which you can request at <https://www.ns.nl/ews-aanvraagformulier/>.
 * The method `ns.prijzen` is disabled by default for all API accounts, you need to [contact NS](http://www.ns.nl/api/api#api-documentatie-prijzen) if you want this enabled.
+
+* [node.js](https://nodejs.org)
+* [API documentation](http://www.ns.nl/api/api)
+* [package](https://www.npmjs.com/package/ns-api)
 
 
 Installation
 ------------
 
-From Github for the most recent code:
+Normal: `npm install ns-api`
 
-	git clone https://github.com/fvdm/nodejs-ns-api
-	npm install ./nodejs-ns-api
-
-Or from NPM for the most recent and *stable* code:
-
-	npm install ns-api
+Development: `npm install fvdm/nodejs-ns-api#develop`
 
 
 Example
 -------
 
 ```js
-var ns = require('ns-api')
+var ns = require ('ns-api');
 
-ns.username = 'api-username'
-ns.password = 'api-password'
+ns.username = 'api-username';
+ns.password = 'api-password';
 
-ns.reisadvies(
+ns.reisadvies (
   {
     fromStation: 'Amersfoort',
     toStation:   'Den Haag',
     dateTime:    '2013-02-21T15:50',
     departure:   false
   },
-  function( err, data ) {
-    console.log( err || data )
+  function (err, data) {
+    console.log (err || data);
   }
-)
+);
 ```
 
 
 Callback function
 -----------------
 
-Each method takes a `callback` function as last *required* parameter. The callback receives two parameters: `err` and `data`. In case of an error the first parameter is an `Error` instance, otherwise `err` is null and `data` is an object or array.
+Each method takes a `callback` function as last *required* parameter.
+The callback receives two parameters: `err` and `data`.
+In case of an error the first parameter is an `Error` instance,
+otherwise `err` is null and `data` is an object or array.
+
 
 ```js
-function( err, data ) {
-	if( err instance of Error ) {
-		console.log( err )
-		// err.stack
-		// err.message    // same as console.log( err )
+function (err, data) {
+	if (err) {
+		console.log (err);
+		// err.stack & err.message
 		// err.details    // only set when details are available
 	} else {
 		// all good
-		console.log( data )
+		console.log (data);
 	}
 }
 ```
 
+
 #### Errors
 
-	Error: disconnected        The connection was closed too early
-	Error: invalid response    The API returned invalid data, see `err.details`
-	Error: request failed      Can't make request, see `err.details`
-
+message          | description                   | additional
+:----------------|:------------------------------|:--------------------------------------------
+request failed   | Request can't be made         | `err.details`
+invalid response | The API returned invalid data | `err.details`
+API error        | The API returned an error     | `err.details.code` and `err.details.message`
 
 Methods
 -------
@@ -81,7 +85,7 @@ Departure times for a `station` identified by either its name or code.
 
 
 ```js
-ns.vertrektijden( 'Amersfoort', console.log )
+ns.vertrektijden ('Amersfoort', console.log);
 ```
 
 ```js
@@ -121,17 +125,17 @@ Calculate travel plans between stations
 
 
 ```js
-ns.reisadvies(
+ns.reisadvies (
   {
     fromStation: 'Amersfoort',
     toStation:   'Den Haag',
     dateTime:    '2013-02-21T15:50',
     departure:   false
   },
-  function( err, data ) {
-    console.log( err || data )
+  function (err, data) {
+    console.log (err || data)
   }
-)
+);
 ```
 
 **Result:**
@@ -171,13 +175,16 @@ Get a list of all stations.
 **API docs: [Stationslijst](http://www.ns.nl/api/api#api-documentatie-stationslijst)**
 
 
-	groupBy   optional   string   Group items by specified key, ie. "Land"
+name     | type     | required | description
+:--------|:---------|:---------|:-----------
+groupBy  | string   | no       | Group items by specified key, ie. `Land`
+callback | function | yes      | i.e. `function (err, data)`
 
 
 #### Just the list:
 
 ```js
-ns.stations( console.log )
+ns.stations (console.log);
 ```
 
 ```js
@@ -211,7 +218,7 @@ ns.stations( console.log )
 #### Grouped by type:
 
 ```js
-ns.stations( 'Type', console.log )
+ns.stations ('Type', console.log);
 ```
 
 ```js
@@ -239,7 +246,7 @@ Get a list of maintenance and defect notifications. You need to set parameters t
 
 
 ```js
-ns.storingen( {station: 'Amsterdam', unplanned: true}, console.log )
+ns.storingen ({ station: 'Amsterdam', unplanned: true }, console.log);
 ```
 
 ```js
@@ -280,3 +287,11 @@ ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
 For more information, please refer to <http://unlicense.org/>
+
+
+Author
+------
+
+Franklin van de Meent
+| [Website](https://frankl.in)
+| [Github](https://github.com/fvdm)
