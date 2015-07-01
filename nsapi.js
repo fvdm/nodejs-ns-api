@@ -8,10 +8,9 @@ License:    Unlicense (Public Domain)
             (see UNLICENSE file or https://raw.github.com/fvdm/nodejs-ns-api/master/UNLICENSE)
 */
 
-var http = require ('http');
 var util = require ('util');
-var querystring = require ('querystring');
-var xml2json = require ('xml2json');
+var http = require ('httpreq');
+var parsexml = require ('nodexml') .xml2obj;
 var app = {username: '', password: ''};
 
 
@@ -166,65 +165,72 @@ app.storingen = function (params, callback) {
 // ! Communicate
 app.talk = function (path, props, callback) {
   if (typeof props === 'function') {
-    var callback = props;
-    var props = {};
+    callback = props;
+    props = {};
   }
 
+  var url = 'https://webservices.ns.nl/ns-api-'+ path;
   var options = {
-    host: 'webservices.ns.nl',
-    port: 80,
-    path: '/ns-api-'+ path +'?'+ querystring.stringify( props ),
-    method: 'GET',
+    parameters: props,
     auth: app.username +':'+ app.password
   };
 
-  var req = http.request (options);
+  http.get (url, options, function (err, res) {
+    var error = null;
+    var data = res.body;
 
-  req.on ('response', function (response) {
-    var data = '';
-    response.on ('data', function (ch) { data += ch });
-    response.on ('close', function () { callback (new Error ('disconnected')) });
-    response.on ('end', function () {
-      data = data.toString ('utf8') .trim ();
-      if (data.match ('<faultstring>')) {
-        data.replace (/<faultstring>([0-9]+):([^<]+)<\/faultstring>/, function (s, code, error) {
-          var err = new Error ('API error');
-          err.details = {
-            code: code,
-            message: error
-          }
-          callback (err);
-        });
-      } else if (data.match ('<?xml')) {
-        data = xml2json.toJson (data, {
-          object: true,
-          coerce: true,
-          trim: true,
-          sanitize: false
-        });
-        callback (null, data);
-      } else {
-        var err = new Error ('invalid response');
-        err.details = {
+    if (err) {
+      error = new Error ('request failed');
+      error.details = err;
+    }
+
+    try {
+      data = parsexml (data);
+      data = objectOmit (data, '@');
+      
+      if (data ['soap:Envelop'] ['soap:Body'] ['soap:Fault'] ['faultcode']) {
+        error = new Error ('API error');
+        error.details = {
+          code: data ['soap:Envelop'] ['soap:Body'] ['soap:Fault'] ['faultcode'],
+          message: data ['soap:Envelop'] ['soap:Body'] ['soap:Fault'] ['faultstring']
+        };
+      }
+    }
+    catch (e) {
+      if (!error) {
+        error = new Error ('invalid reponse');
+        error.details = {
           request: options,
           response: {
             headers: response.headers,
             data: data
           }
         };
-        callback (err);
       }
-    });
-  });
+    }
 
-  req.on ('error', function (error) {
-    var err = new Error ('request failed');
-    err.details = error;
-    callback (err);
+    callback (error, !error && data);
   });
-
-  req.end ();
 }
 
 // ready
 module.exports = app;
+
+// Strip a key from object
+function objectOmit (obj, key) {
+  if (obj instanceof Object) {
+    for (k in obj) {
+      if (k === key) {
+        delete obj [k];
+      } else {
+        obj [k] = objectOmit (obj [k], key);
+      }
+    }
+  }
+  else if (obj instanceof Array) {
+    for (i in obj) {
+      obj [i] = objectOmit (obj [i], key);
+    }
+  }
+  return obj;
+}
