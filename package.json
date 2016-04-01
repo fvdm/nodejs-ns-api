@@ -20,13 +20,15 @@
     "UNLICENSE"
   ],
   "scripts": {
-    "test": "node test.js"
+    "test": "eslint . && node test.js"
   },
   "dependencies": {
     "httpreq": "^0.4.16",
     "nodexml": "^1.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^2.5.3"
+  },
   "optionalDependencies": {},
   "engines": {
     "node": ">=0.8.0"
