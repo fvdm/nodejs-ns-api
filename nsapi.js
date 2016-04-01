@@ -426,17 +426,20 @@ function methodStoringen (params, callback) {
 }
 
 
-// Setup
-function setup (username, password, timeout) {
-  if (username instanceof Object) {
-    timeout = username.timeout || config.timeout;
-    password = username.password || null;
-    username = username.username || null;
-  }
+/**
+ * Module configuration
+ *
+ * @param conf {object} - Configuration parameters
+ * @param conf.username {string} - API username
+ * @param conf.password {string} - API password
+ * @param [conf.timeout] {number=5000} - Request time out in ms
+ * @returns {object} - Interface methods
+ */
 
-  config.username = username;
-  config.password = password;
-  config.timeout = timeout || config.timeout;
+function setup (conf) {
+  config.username = conf.username;
+  config.password = conf.password;
+  config.timeout = conf.timeout || config.timeout;
 
   return {
     vertrektijden: methodVertrektijden,
@@ -447,5 +450,4 @@ function setup (username, password, timeout) {
   };
 }
 
-// ready
 module.exports = setup;
