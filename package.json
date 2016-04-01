@@ -27,6 +27,7 @@
     "nodexml": "^1.0.2"
   },
   "devDependencies": {
+    "dotest": "^1.4.0",
     "eslint": "^2.5.3"
   },
   "optionalDependencies": {},
