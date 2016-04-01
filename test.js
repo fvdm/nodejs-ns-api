@@ -1,11 +1,15 @@
 var dotest = require ('dotest');
 var app = require ('./');
 
-var ns = app (
-  process.env.NS_USERNAME || null,
-  process.env.NS_PASSWORD || null,
-  process.env.NS_TIMEOUT || 5000
-);
+var ns;
+var config = {
+  username: process.env.NS_USERNAME || null,
+  password: process.env.NS_PASSWORD || null,
+  timeout: process.env.NS_TIMEOUT || 5000
+};
+
+
+ns = app (config);
 
 
 dotest.add ('Module', function () {
