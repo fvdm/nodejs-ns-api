@@ -201,7 +201,7 @@ API docs: [Stationslijst](http://www.ns.nl/reisinformatie/ns-api/documentatie-st
 
 name     | type     | required | default | description
 :--------|:---------|:---------|:--------|:-----------
-groupBy  | string   | no       | Code    | Group items by specified key, ie. `Land`. Set to `false` to returns an _array_.
+groupBy  | string   | no       | Code    | Group items by specified key, ie. `Land`. Set to `false` to return an _array_.
 callback | function | yes      |         | i.e. `function (err, data)`
 
 
