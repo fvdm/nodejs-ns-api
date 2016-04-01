@@ -217,7 +217,7 @@ function methodVertrektijden (station, callback) {
     }
 
     for (i in data) {
-      data [i] .VertrekSpoorWijziging = data [i] .VertrekSpoor.wijziging === 'true' ? true : false;
+      data [i] .VertrekSpoorWijziging = data [i] .VertrekSpoor.wijziging === 'true';
       data [i] .VertrekSpoor = data [i] .VertrekSpoor ['@text'];
     }
 
@@ -289,7 +289,7 @@ function methodReisadvies (params, callback) {
             stop = deel.ReisStop [s];
 
             if (stop.Spoor) {
-              stop.SpoorWijziging = stop.Spoor.wijziging === 'true' ? true : false;
+              stop.SpoorWijziging = stop.Spoor.wijziging === 'true';
               stop.Spoor = stop.Spoor ['@text'];
               deel.ReisStop [s] = stop;
             }
