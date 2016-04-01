@@ -9,6 +9,12 @@ var config = {
 };
 
 
+if (!config.username || !config.password) {
+  dotest.log ('fail', 'NS_USERNAME and NS_PASSWORD are required');
+  process.exit ();
+}
+
+
 ns = app (config);
 
 
