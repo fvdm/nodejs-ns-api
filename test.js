@@ -137,7 +137,7 @@ dotest.add ('Method .vertrektijden', function () {
 
 
 dotest.add ('Method .prijzen', function () {
-  dotest.log ('warn', 'No test available yet')
+  dotest.log ('warn', 'No test available yet');
   dotest.test () .done ();
 });
 
