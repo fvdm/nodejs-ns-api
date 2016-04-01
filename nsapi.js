@@ -311,7 +311,7 @@ function methodReisadvies (params, callback) {
  * List available stations
  *
  * @callback callback
- * @param [treeKey] {string} - 
+ * @param [treeKey] {string} - Group by this key
  * @param callback {function} - `function (err, data) {}`
  */
 
