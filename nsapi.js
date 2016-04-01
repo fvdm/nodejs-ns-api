@@ -428,6 +428,12 @@ function methodStoringen (params, callback) {
 
 // Setup
 function setup (username, password, timeout) {
+  if (username instanceof Object) {
+    timeout = username.timeout || config.timeout;
+    password = username.password || null;
+    username = username.username || null;
+  }
+
   config.username = username;
   config.password = password;
   config.timeout = timeout || config.timeout;
