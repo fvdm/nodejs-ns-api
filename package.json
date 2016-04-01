@@ -20,6 +20,7 @@
     "UNLICENSE"
   ],
   "dependencies": {
+    "httpreq": "^0.4.16",
     "nodexml": "^1.0.2"
   },
   "devDependencies": {},
