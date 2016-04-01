@@ -19,6 +19,9 @@
     "nsapi.js",
     "UNLICENSE"
   ],
+  "scripts": {
+    "test": "node test.js"
+  },
   "dependencies": {
     "httpreq": "^0.4.16",
     "nodexml": "^1.0.2"
