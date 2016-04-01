@@ -1,7 +1,7 @@
 ns-api
 ======
 
-Access public transit data from [Nederlandse Spoorwegen API](http://www.ns.nl/api/api) with node.js
+Access public transit data from [Nederlandse Spoorwegen API](http://www.ns.nl/reisinformatie/ns-api) with node.js
 
 [![Build Status](https://travis-ci.org/fvdm/nodejs-ns-api.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-ns-api)
 
