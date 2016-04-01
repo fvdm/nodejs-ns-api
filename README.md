@@ -74,12 +74,12 @@ otherwise `err` is null and `data` is an object or array.
 
 ```js
 function (err, data) {
-	if (err) {
-		console.log (err);
-		return;
-	}
+  if (err) {
+    console.log (err);
+    return;
+  }
 
-	console.log (data);
+  console.log (data);
 }
 ```
 
