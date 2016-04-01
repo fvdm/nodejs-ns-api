@@ -20,7 +20,7 @@
     "UNLICENSE"
   ],
   "dependencies": {
-    "nodexml": "^1.0.0"
+    "nodexml": "^1.0.2"
   },
   "devDependencies": {},
   "optionalDependencies": {},
