@@ -13,6 +13,28 @@ var parsexml = require ('nodexml') .xml2obj;
 var app = {username: '', password: ''};
 
 
+
+// Strip a key from object
+function objectOmit (obj, key) {
+  if (obj instanceof Object) {
+    for (k in obj) {
+      if (k === key) {
+        delete obj [k];
+      } else {
+        obj [k] = objectOmit (obj [k], key);
+      }
+    }
+  }
+  else if (obj instanceof Array && obj.length >= 1) {
+    var i;
+    for (i = 0; i < obj.length; i++) {
+      obj [i] = objectOmit (obj [i], key);
+    }
+  }
+  return obj;
+}
+
+
 // ! Vertrektijden
 app.vertrektijden = function (station, callback) {
   app.talk ('avt', { station: station }, function (err, data) {
@@ -214,23 +236,3 @@ app.talk = function (path, props, callback) {
 
 // ready
 module.exports = app;
-
-// Strip a key from object
-function objectOmit (obj, key) {
-  if (obj instanceof Object) {
-    for (k in obj) {
-      if (k === key) {
-        delete obj [k];
-      } else {
-        obj [k] = objectOmit (obj [k], key);
-      }
-    }
-  }
-  else if (obj instanceof Array && obj.length >= 1) {
-    var i;
-    for (i = 0; i < obj.length; i++) {
-      obj [i] = objectOmit (obj [i], key);
-    }
-  }
-  return obj;
-}
