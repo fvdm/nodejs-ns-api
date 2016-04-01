@@ -7,7 +7,7 @@ Access public transit data from [Nederlandse Spoorwegen API](http://www.ns.nl/ap
 
 
 To use this module you need API access credentials,
-which you can request at <https://www.ns.nl/ews-aanvraagformulier/>.
+which you can request at <http://www.ns.nl/ews-aanvraagformulier/>.
 
 The method `prijzen` is disabled by default for all API accounts,
 you need to [contact NS](http://www.ns.nl/reisinformatie/ns-api/documentatie-prijzen.html) if you want this enabled.
