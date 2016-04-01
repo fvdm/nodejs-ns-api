@@ -3,32 +3,27 @@ ns-api
 
 Access public transit data from [Nederlandse Spoorwegen API](http://www.ns.nl/api/api) with node.js
 
-To use this module you need API access credentials, which you can request at <https://www.ns.nl/ews-aanvraagformulier/>.
 [![Build Status](https://travis-ci.org/fvdm/nodejs-ns-api.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-ns-api)
 
-The method `ns.prijzen` is disabled by default for all API accounts, you need to [contact NS](http://www.ns.nl/api/api#api-documentatie-prijzen) if you want this enabled.
+To use this module you need API access credentials,
+which you can request at <https://www.ns.nl/ews-aanvraagformulier/>.
 
-* [node.js](https://nodejs.org)
+The method `ns.prijzen` is disabled by default for all API accounts,
+you need to [contact NS](http://www.ns.nl/api/api#api-documentatie-prijzen) if you want this enabled.
+
+* [Node.js](https://nodejs.org)
 * [API documentation](http://www.ns.nl/api/api)
 * [package](https://www.npmjs.com/package/ns-api)
-
-
-Installation
-------------
-
-Normal: `npm install ns-api`
-
-Development: `npm install fvdm/nodejs-ns-api#develop`
 
 
 Example
 -------
 
 ```js
-var ns = require ('ns-api');
-
-ns.username = 'api-username';
-ns.password = 'api-password';
+var ns = require ('ns-api') ({
+  username: 'api-username',
+  password: 'api-password'
+});
 
 ns.reisadvies (
   {
@@ -44,6 +39,12 @@ ns.reisadvies (
 ```
 
 
+Installation
+------------
+
+`npm install ns-api`
+
+
 Callback function
 -----------------
 
@@ -57,12 +58,10 @@ otherwise `err` is null and `data` is an object or array.
 function (err, data) {
 	if (err) {
 		console.log (err);
-		// err.stack & err.message
-		// err.details    // only set when details are available
-	} else {
-		// all good
-		console.log (data);
+		return;
 	}
+
+	console.log (data);
 }
 ```
 
@@ -71,15 +70,16 @@ function (err, data) {
 
 message          | description                   | additional
 :----------------|:------------------------------|:--------------------------------------------
-request failed   | Request can't be made         | `err.details`
-invalid response | The API returned invalid data | `err.details`
-API error        | The API returned an error     | `err.details.code` and `err.details.message`
+request failed   | Request can't be made         | `err.error`
+invalid response | The API returned invalid data | `err.body`
+API error        | The API returned an error     | `err.api`
+
 
 Methods
 -------
 
-
-### vertrektijden ( station, callback )
+### vertrektijden
+**( station, callback )**
 
 Departure times for a `station` identified by either its name or code.
 
@@ -112,14 +112,16 @@ ns.vertrektijden ('Amersfoort', console.log);
 ```
 
 
-### prijzen ( parameters, callback )
+### prijzen
+**( parameters, callback )**
 
 You need special access for this method.
 
 **API docs: [Prijzen](http://www.ns.nl/api/api#api-documentatie-prijzen)**
 
 
-### reisadvies ( parameters, callback )
+### reisadvies
+**( parameters, callback )**
 
 Calculate travel plans between stations
 
@@ -170,7 +172,8 @@ ns.reisadvies (
 ```
 
 
-### stations ( [groupBy], callback )
+### stations
+**( [groupBy], callback )**
 
 Get a list of all stations.
 
@@ -240,7 +243,8 @@ ns.stations ('Type', console.log);
 ```
 
 
-### storingen ( parameters, callback )
+### storingen
+**( [parameters], callback )**
 
 Get a list of maintenance and defect notifications. You need to set parameters to get any results.
 
