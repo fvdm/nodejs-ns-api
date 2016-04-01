@@ -4,6 +4,7 @@ ns-api
 Access public transit data from [Nederlandse Spoorwegen API](http://www.ns.nl/api/api) with node.js
 
 To use this module you need API access credentials, which you can request at <https://www.ns.nl/ews-aanvraagformulier/>.
+[![Build Status](https://travis-ci.org/fvdm/nodejs-ns-api.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-ns-api)
 
 The method `ns.prijzen` is disabled by default for all API accounts, you need to [contact NS](http://www.ns.nl/api/api#api-documentatie-prijzen) if you want this enabled.
 
