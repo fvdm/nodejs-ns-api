@@ -49,30 +49,15 @@ function objectOmit (obj, key) {
 
 
 /**
- * Process talk() response
+ * Process decoded data
  *
- * @param err {Error,null} - httpreq error
- * @param res {object} - Response resource
+ * @param data {string} - Response data string
  * @param callback {function} - `function (err, data) {}`
  * @returns {void}
  */
 
-function processResponse (err, res, callback) {
-  var data = res && res.body || '';
+function processData (data, callback) {
   var error = null;
-
-  // request error
-  if (err) {
-    error = new Error ('request failed');
-    error.error = err;
-    callback (error);
-    return;
-  }
-
-  // gzip decoding
-  if (res.headers ['content-encoding'] === 'gzip') {
-    data = zlib.gunzipSync (data) .toString ('utf8');
-  }
 
   data = data.replace (/&#039;/g, '\'');
 
@@ -114,6 +99,42 @@ function processResponse (err, res, callback) {
 
   // all good
   callback (null, data);
+}
+
+
+/**
+ * Process talk() response
+ *
+ * @param err {Error,null} - httpreq error
+ * @param res {object} - Response resource
+ * @param callback {function} - `function (err, data) {}`
+ * @returns {void}
+ */
+
+function processResponse (err, res, callback) {
+  var data = res && res.body || new Buffer ();
+  var error = null;
+
+  // request error
+  if (err) {
+    error = new Error ('request failed');
+    error.error = err;
+    callback (error);
+    return;
+  }
+
+  // gzip decoding
+  if (res.headers ['content-encoding'] === 'gzip') {
+    zlib.gunzip (data, function (zErr, zData) {
+      if (zErr) {
+        callback (zErr);
+        return;
+      }
+
+      data = zData.toString ('utf8');
+      processData (data, callback);
+    });
+  }
 }
 
 
