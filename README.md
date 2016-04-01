@@ -5,14 +5,16 @@ Access public transit data from [Nederlandse Spoorwegen API](http://www.ns.nl/ap
 
 [![Build Status](https://travis-ci.org/fvdm/nodejs-ns-api.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-ns-api)
 
+
 To use this module you need API access credentials,
 which you can request at <https://www.ns.nl/ews-aanvraagformulier/>.
 
-The method `ns.prijzen` is disabled by default for all API accounts,
-you need to [contact NS](http://www.ns.nl/api/api#api-documentatie-prijzen) if you want this enabled.
+The method `prijzen` is disabled by default for all API accounts,
+you need to [contact NS](http://www.ns.nl/reisinformatie/ns-api/documentatie-prijzen.html) if you want this enabled.
+
 
 * [Node.js](https://nodejs.org)
-* [API documentation](http://www.ns.nl/api/api)
+* [API documentation](http://www.ns.nl/reisinformatie/ns-api)
 * [package](https://www.npmjs.com/package/ns-api)
 
 
@@ -101,7 +103,7 @@ Methods
 
 Departure times for a `station` identified by either its name or code.
 
-**API docs: [Actuele vertrektijden](http://www.ns.nl/api/api#api-documentatie-actuele-vertrektijden)**
+API docs: [Actuele vertrektijden](http://www.ns.nl/reisinformatie/ns-api/documentatie-actuele-vertrektijden.html)
 
 
 ```js
@@ -135,7 +137,7 @@ ns.vertrektijden ('Amersfoort', console.log);
 
 You need special access for this method.
 
-**API docs: [Prijzen](http://www.ns.nl/api/api#api-documentatie-prijzen)**
+API docs: [Prijzen](http://www.ns.nl/reisinformatie/ns-api/documentatie-prijzen.html)
 
 
 ### reisadvies
@@ -143,7 +145,7 @@ You need special access for this method.
 
 Calculate travel plans between stations
 
-**API docs: [Reisadviezen](http://www.ns.nl/api/api#api-documentatie-reisadviezen)**
+API docs: [Reisadviezen](http://www.ns.nl/reisinformatie/ns-api/documentatie-reisadviezen.html)
 
 
 ```js
@@ -194,13 +196,13 @@ ns.reisadvies (params, function (err, data) {
 
 Get a list of all stations.
 
-**API docs: [Stationslijst](http://www.ns.nl/api/api#api-documentatie-stationslijst)**
+API docs: [Stationslijst](http://www.ns.nl/reisinformatie/ns-api/documentatie-stationslijst.html)
 
 
-name     | type     | required | description
-:--------|:---------|:---------|:-----------
-groupBy  | string   | no       | Group items by specified key, ie. `Land`
-callback | function | yes      | i.e. `function (err, data)`
+name     | type     | required | default | description
+:--------|:---------|:---------|:--------|:-----------
+groupBy  | string   | no       | Code    | Group items by specified key, ie. `Land`. Set to `false` to returns an _array_.
+callback | function | yes      |         | i.e. `function (err, data)`
 
 
 #### Just the list:
@@ -265,7 +267,7 @@ ns.stations ('Type', console.log);
 
 Get a list of maintenance and defect notifications. You need to set parameters to get any results.
 
-**API docs: [Storingen en werkzaamheden](http://www.ns.nl/api/api#api-documentatie-storingen-en-werkzaamheden)**
+API docs: [Storingen en werkzaamheden](http://www.ns.nl/reisinformatie/ns-api/documentatie-storingen-en-werkzaamheden.html)
 
 
 ```js
