@@ -45,6 +45,24 @@ Installation
 `npm install ns-api`
 
 
+Configuration
+-------------
+
+param    | type   | required | default | description
+:--------|:-------|:---------|:--------|:----------------------
+username | string | yes      |         | Your API username
+password | string | yes      |         | Your API password
+timeout  | number | no       | 5000    | Request time out in ms
+
+
+```js
+var ns = require ('ns-api') ({
+  username: 'your-username',
+  password: 'your-password'
+});
+```
+
+
 Callback function
 -----------------
 
