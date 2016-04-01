@@ -147,17 +147,16 @@ Calculate travel plans between stations
 
 
 ```js
-ns.reisadvies (
-  {
-    fromStation: 'Amersfoort',
-    toStation:   'Den Haag',
-    dateTime:    '2013-02-21T15:50',
-    departure:   false
-  },
-  function (err, data) {
-    console.log (err || data)
-  }
-);
+var params = {
+  fromStation: 'Amersfoort',
+  toStation: 'Den Haag',
+  dateTime: '2013-02-21T15:50',
+  departure: false
+};
+
+ns.reisadvies (params, function (err, data) {
+  console.log (err || data)
+});
 ```
 
 **Result:**
@@ -222,7 +221,7 @@ ns.stations (console.log);
      UICCode: 8400319,
      Lat: 51.69048,
      Lon: 5.29362,
-     Synoniemen: { Synoniem: [ 'Hertogenbosch (\'s)', 'Den Bosch' ] } },
+     Synoniemen: [ 'Hertogenbosch (\'s)', 'Den Bosch' ] },
   HTO: 
    { Code: 'HTO',
      Type: 'stoptreinstation',
@@ -234,7 +233,7 @@ ns.stations (console.log);
      UICCode: 8400320,
      Lat: 51.700554,
      Lon: 5.318333,
-     Synoniemen: { Synoniem: [ 'Hertogenbosch Oost (\'s)', 'Den Bosch Oost' ] } } }
+     Synoniemen: [ 'Hertogenbosch Oost (\'s)', 'Den Bosch Oost' ] } }
 ```
 
 
@@ -257,7 +256,7 @@ ns.stations ('Type', console.log);
         UICCode: 8400319,
         Lat: 51.69048,
         Lon: 5.29362,
-        Synoniemen: { Synoniem: [ 'Hertogenbosch (\'s)', 'Den Bosch' ] } } }
+        Synoniemen: [ 'Hertogenbosch (\'s)', 'Den Bosch' ] } }
 ```
 
 
@@ -270,7 +269,12 @@ Get a list of maintenance and defect notifications. You need to set parameters t
 
 
 ```js
-ns.storingen ({ station: 'Amsterdam', unplanned: true }, console.log);
+var params = {
+  station: 'Amsterdam',
+  unplanned: true
+};
+
+ns.storingen (params, console.log);
 ```
 
 ```js
