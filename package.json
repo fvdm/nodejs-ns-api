@@ -1,28 +1,36 @@
 {
   "author": {
-    "name":               "Franklin van de Meent",
-    "email":              "fr@nkl.in",
-    "url":                "http://frankl.in"
+    "name": "Franklin van de Meent",
+    "email": "fr@nkl.in",
+    "url": "https://frankl.in"
   },
-  "name":                 "ns-api",
-  "version":              "1.1.1",
-  "description":          "Access public transit data from Nederlandse Spoorwegen API",
+  "name": "ns-api",
+  "version": "1.1.1",
+  "description": "Access public transit data from Nederlandse Spoorwegen API",
   "repository": {
-    "type":               "git",
-    "url":                "git://github.com/fvdm/nodejs-ns-api.git"
+    "type": "git",
+    "url": "git://github.com/fvdm/nodejs-ns-api.git"
   },
   "bugs": {
-    "url":                "https://github.com/fvdm/nodejs-ns-api/issues"
+    "url": "https://github.com/fvdm/nodejs-ns-api/issues"
   },
-  "main":                 "nsapi.js",
+  "main": "nsapi.js",
+  "files": [
+    "nsapi.js",
+    "UNLICENSE"
+  ],
   "dependencies": {
-    "nodexml":            "1.x"
+    "nodexml": "^1.0.0"
   },
-  "devDependencies":      {},
+  "devDependencies": {},
   "optionalDependencies": {},
   "engines": {
-    "node":               ">=0.8.0"
+    "node": ">=0.8.0"
   },
-  "keywords":             ["railway", "traffic", "api"],
-  "license":              "Unlicense"
+  "keywords": [
+    "railway",
+    "traffic",
+    "api"
+  ],
+  "license": "Unlicense"
 }
