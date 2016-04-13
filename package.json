@@ -20,7 +20,7 @@
     "UNLICENSE"
   ],
   "scripts": {
-    "test": "eslint . && node test.js"
+    "test": "st=0; eslint . || st=1; node test.js || st=1; exit $st"
   },
   "dependencies": {
     "httpreq": "^0.4.16",
