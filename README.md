@@ -3,6 +3,7 @@ ns-api
 
 Access public transit data from [Nederlandse Spoorwegen API](http://www.ns.nl/reisinformatie/ns-api) with node.js
 
+[![npm](https://img.shields.io/npm/v/ns-api.svg?maxAge=3600)](https://github.com/fvdm/nodejs-ns-api/blob/master/CHANGELOG.md)
 [![Build Status](https://travis-ci.org/fvdm/nodejs-ns-api.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-ns-api)
 [![Dependency Status](https://gemnasium.com/badges/github.com/fvdm/nodejs-ns-api.svg)](https://gemnasium.com/github.com/fvdm/nodejs-ns-api#runtime-dependencies)
 
