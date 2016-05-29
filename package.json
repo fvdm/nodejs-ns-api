@@ -35,13 +35,17 @@
     "node": ">=0.12.0"
   },
   "keywords": [
+    "api",
+    "navigation",
+    "nl",
+    "ns",
+    "public transport",
     "railway",
     "traffic",
     "trains",
     "transit",
     "transport",
-    "api",
-    "nl"
+    "unlicense"
   ],
   "license": "Unlicense"
 }
