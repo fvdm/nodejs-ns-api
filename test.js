@@ -9,15 +9,10 @@ var config = {
 };
 
 
-if (!config.username || !config.password) {
-  dotest.log ('fail', 'NS_USERNAME and NS_PASSWORD are required');
-  process.exit ();
-}
-
-
 ns = app (config);
 
 
+// Basic tests
 dotest.add ('Module', function () {
   dotest.test ()
     .isFunction ('fail', 'exports', app)
@@ -42,6 +37,14 @@ dotest.add ('API error', function () {
       .done ();
   });
 });
+
+
+// Method tests require API access
+if (!config.username || !config.password) {
+  dotest.log ('fail', 'NS_USERNAME and NS_PASSWORD are required');
+  dotest.run ();
+  process.exit ();
+}
 
 
 dotest.add ('Method .reisadvies', function () {
