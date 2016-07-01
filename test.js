@@ -135,6 +135,7 @@ dotest.add ('Method .vertrektijden - error', function (test) {
   ns.vertrektijden ('test', function (err, data) {
     test ()
       .isError ('fail', 'err', err)
+      .isExactly ('fail', 'err.message', err && err.message, 'API error')
       .isObject ('fail', 'err.api', err && err.api)
       .isString ('fail', 'err.api.message', err && err.api && err.api.message)
       .isUndefined ('fail', 'data', data)
