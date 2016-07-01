@@ -123,8 +123,8 @@ function processData (data, callback) {
  * @returns {void}
  */
 
-  var data = res && res.body || new Buffer ();
 function httpResponse (err, res, callback) {
+  var data = Buffer (res && res.body || '');
 
   // request error
   if (err) {
