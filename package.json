@@ -16,7 +16,9 @@
   },
   "main": "nsapi.js",
   "files": [
+    "example.js"
   ],
+  "tonicExampleFilename": "example.js",
   "scripts": {
     "test": "bash test.sh"
   },
