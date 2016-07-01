@@ -180,7 +180,7 @@ function httpRequest (method, params, callback) {
   if (Object.keys (params) .length) {
     for (i in params) {
       if (typeof params [i] === 'boolean') {
-        params [i] = params [i] === true ? 'true' : 'false';
+        params [i] = params [i] ? 'true' : 'false';
       }
     }
 
