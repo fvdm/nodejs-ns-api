@@ -3,22 +3,22 @@ ns-api
 
 Access public transit data from [Nederlandse Spoorwegen API](http://www.ns.nl/reisinformatie/ns-api) with node.js
 
-[![npm](https://img.shields.io/npm/v/ns-api.svg?maxAge=3600)](https://github.com/fvdm/nodejs-ns-api/blob/master/CHANGELOG.md)
+[![Changelog](https://img.shields.io/npm/v/ns-api.svg?maxAge=3600)](https://github.com/fvdm/nodejs-ns-api/blob/master/CHANGELOG.md)
 [![Build Status](https://travis-ci.org/fvdm/nodejs-ns-api.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-ns-api)
 [![Dependency Status](https://gemnasium.com/badges/github.com/fvdm/nodejs-ns-api.svg)](https://gemnasium.com/github.com/fvdm/nodejs-ns-api#runtime-dependencies)
 [![Coverage Status](https://coveralls.io/repos/github/fvdm/nodejs-ns-api/badge.svg?branch=master)](https://coveralls.io/github/fvdm/nodejs-ns-api?branch=master)
 
 
 To use this module you need API access credentials,
-which you can request at <http://www.ns.nl/ews-aanvraagformulier/>.
+which you can request at [Here](https://www.ns.nl/ews-aanvraagformulier/) (Dutch).
 
 The method `prijzen` is disabled by default for all API accounts,
 you need to [contact NS](http://www.ns.nl/reisinformatie/ns-api/documentatie-prijzen.html) if you want this enabled.
 
 
 * [Node.js](https://nodejs.org)
-* [API documentation](http://www.ns.nl/reisinformatie/ns-api)
 * [package](https://www.npmjs.com/package/ns-api)
+* [API documentation](https://www.ns.nl/reisinformatie/ns-api)
 
 
 Example
