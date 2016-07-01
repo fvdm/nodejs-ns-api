@@ -143,4 +143,20 @@ dotest.add ('Method .prijzen', function () {
 });
 
 
+dotest.add ('Config .timeout', function () {
+  var tmp = app ({
+    username: config.username,
+    password: config.password,
+    timeout: 1
+  });
+
+  tmp.stations (function (err, data) {
+    dotest.test ()
+      .isError ('fail', 'err', err)
+      .isUndefined ('fail', 'data', data)
+      .done ();
+  });
+});
+
+
 dotest.run ();
