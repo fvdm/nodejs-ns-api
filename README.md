@@ -30,17 +30,22 @@ var ns = require ('ns-api') ({
   password: 'api-password'
 });
 
-ns.reisadvies (
-  {
-    fromStation: 'Amersfoort',
-    toStation:   'Den Haag',
-    dateTime:    '2013-02-21T15:50',
-    departure:   false
-  },
-  function (err, data) {
-    console.log (err || data);
-  }
-);
+// Travel parameters
+var params = {
+  fromStation: 'Amersfoort',
+  toStation: 'Den Haag',
+};
+
+// console.log is limited to 3 levels
+function myCallback (err, data) {
+  console.dir (err || data, {
+    depth: null,
+    colors: true
+  });
+}
+
+// Get travel advise
+ns.reisadvies (params, myCallback);
 ```
 
 
