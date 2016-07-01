@@ -42,8 +42,6 @@ dotest.add ('API error', function () {
 // Method tests require API access
 if (!config.username || !config.password) {
   dotest.log ('fail', 'NS_USERNAME and NS_PASSWORD are required');
-  dotest.run ();
-  process.exit ();
 }
 
 
