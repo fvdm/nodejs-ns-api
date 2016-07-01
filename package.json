@@ -6,7 +6,7 @@
   },
   "name": "ns-api",
   "version": "2.0.1",
-  "description": "Access public transit data from Nederlandse Spoorwegen API",
+  "description": "Public transit data from Nederlandse Spoorwegen API",
   "repository": {
     "type": "git",
     "url": "git://github.com/fvdm/nodejs-ns-api.git"
