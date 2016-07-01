@@ -6,7 +6,7 @@ var ns = require ('ns-api') ({
 // Travel parameters
 var params = {
   fromStation: 'Amersfoort',
-  toStation: 'Den Haag',
+  toStation: 'Den Haag'
 };
 
 // console.log does not log >3 levels
