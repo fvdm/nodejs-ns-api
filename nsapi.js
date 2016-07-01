@@ -111,9 +111,9 @@ function processData (data, callback) {
  * @returns {void}
  */
 
-function processResponse (err, res, callback) {
   var data = res && res.body || new Buffer ();
   var error = null;
+function httpResponse (err, res, callback) {
 
   // request error
   if (err) {
@@ -180,7 +180,7 @@ function talk (method, params, callback) {
 
   // do request
   http.doRequest (options, function (err, res) {
-    processResponse (err, res, callback);
+    httpResponse (err, res, callback);
   });
 }
 
