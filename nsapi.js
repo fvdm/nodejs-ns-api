@@ -437,9 +437,11 @@ function methodStoringen (params, callback) {
  */
 
 function setup (conf) {
-  config.username = conf.username;
-  config.password = conf.password;
-  config.timeout = conf.timeout || config.timeout;
+  if (conf instanceof Object) {
+    config.username = conf.username || null;
+    config.password = conf.password || null;
+    config.timeout = conf.timeout || config.timeout;
+  }
 
   return {
     vertrektijden: methodVertrektijden,
