@@ -146,7 +146,7 @@ function httpResponse (err, res, callback) {
  * @param callback {function} - `function (err, data) {}`
  */
 
-function talk (method, params, callback) {
+function httpRequest (method, params, callback) {
   var i;
   var options = {
     url: 'https://webservices.ns.nl/ns-api-' + method,
@@ -195,7 +195,7 @@ function talk (method, params, callback) {
  */
 
 function methodVertrektijden (station, callback) {
-  talk ('avt', { station: station }, function (err, data) {
+  httpRequest ('avt', { station: station }, function (err, data) {
     var i;
 
     if (err) {
@@ -204,7 +204,7 @@ function methodVertrektijden (station, callback) {
     }
 
     if (!data.ActueleVertrekTijden || !data.ActueleVertrekTijden.VertrekkendeTrein) {
-      callback (new Error ('unexpected response'));
+      callback (makeError ('unexpected response', 'data', data));
       return;
     }
 
@@ -236,7 +236,7 @@ function methodVertrektijden (station, callback) {
  */
 
 function methodPrijzen (params, callback) {
-  talk ('prijzen-v3', params, callback);
+  httpRequest ('prijzen-v3', params, callback);
 }
 
 
@@ -250,7 +250,7 @@ function methodPrijzen (params, callback) {
  */
 
 function methodReisadvies (params, callback) {
-  talk ('treinplanner', params, function (err, data) {
+  httpRequest ('treinplanner', params, function (err, data) {
     var reis;
     var deel;
     var stop;
@@ -321,7 +321,7 @@ function methodStations (treeKey, callback) {
     treeKey = 'code';
   }
 
-  talk ('stations-v2', function (err, data) {
+  httpRequest ('stations-v2', function (err, data) {
     var tree = {};
     var station;
     var s;
@@ -390,7 +390,7 @@ function methodStoringen (params, callback) {
     };
   }
 
-  talk ('storingen', params, function (err, data) {
+  httpRequest ('storingen', params, function (err, data) {
     if (err) {
       callback (err);
       return;
