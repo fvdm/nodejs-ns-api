@@ -20,6 +20,25 @@ var config = {
 
 
 /**
+ * Make an error
+ *
+ * @param message {string} - Error.message
+ * @param key {string} - Error [key] = err
+ * @param err {Error, null} - Error [key] = err
+ * @param code {string, number} - Error.code
+ * @returns {Error} - The generated error
+ */
+
+function makeError (message, key, err, code) {
+  var error = new Error (message);
+
+  error.statusCode = code;
+  error [key] = err;
+  return error;
+}
+
+
+/**
  * Strip a key from an object
  *
  * @param obj {object} - Object to alter
@@ -66,31 +85,24 @@ function processData (data, callback) {
     data = parsexml (data);
     data = objectOmit (data, '@');
   } catch (e) {
-    error = new Error ('invalid response');
-    error.body = data;
-
-    callback (error);
+    callback (makeError ('invalid response', 'body', data));
     return;
   }
 
   // parse API error
   if (data.error) {
-    error = new Error ('API error');
-    error.api = data.error;
-
-    callback (error);
+    callback (makeError ('API error', 'api', data.error));
     return;
   }
 
   try {
     if (data ['soap:Envelope'] ['soap:Body'] ['soap:Fault'] .faultcode) {
-      error = new Error ('API error');
-      error.api = {
+      error = {
         code: data ['soap:Envelope'] ['soap:Body'] ['soap:Fault'] .faultcode,
         message: data ['soap:Envelope'] ['soap:Body'] ['soap:Fault'] .faultstring
       };
 
-      callback (error);
+      callback (makeError ('API error', 'api', error));
       return;
     }
   } catch (e) {
@@ -112,14 +124,11 @@ function processData (data, callback) {
  */
 
   var data = res && res.body || new Buffer ();
-  var error = null;
 function httpResponse (err, res, callback) {
 
   // request error
   if (err) {
-    error = new Error ('request failed');
-    error.error = err;
-    callback (error);
+    callback (makeError ('request failed', 'error', err, null));
     return;
   }
 
@@ -127,7 +136,7 @@ function httpResponse (err, res, callback) {
   if (res.headers ['content-encoding'] === 'gzip') {
     zlib.gunzip (data, function (zErr, zData) {
       if (zErr) {
-        callback (zErr);
+        callback (makeError ('unexpected response', 'error', zErr, res.statusCode));
         return;
       }
 
@@ -264,7 +273,7 @@ function methodReisadvies (params, callback) {
     }
 
     if (!data.ReisMogelijkheden || !data.ReisMogelijkheden.ReisMogelijkheid) {
-      callback (new Error ('unexpected response'));
+      callback (makeError ('unexpected response', 'data', data));
       return;
     }
 
@@ -336,7 +345,7 @@ function methodStations (treeKey, callback) {
     }
 
     if (!data.Stations.Station) {
-      callback (new Error ('unexpected response'));
+      callback (makeError ('unexpected response', 'data', data));
       return;
     }
 
@@ -391,6 +400,8 @@ function methodStoringen (params, callback) {
   }
 
   httpRequest ('storingen', params, function (err, data) {
+    var error = null;
+
     if (err) {
       callback (err);
       return;
@@ -405,7 +416,9 @@ function methodStoringen (params, callback) {
     }
 
     if (!data.Storingen.Ongepland || !data.Storingen.Gepland) {
-      callback (new Error ('unexpected response'));
+      error = new Error ('unexpected response');
+      error.data = data;
+      callback (makeError ('unexpected response', 'data', data));
       return;
     }
 
