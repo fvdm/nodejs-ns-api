@@ -131,6 +131,18 @@ dotest.add ('Method .vertrektijden', function (test) {
 });
 
 
+dotest.add ('Method .vertrektijden - error', function (test) {
+  ns.vertrektijden ('test', function (err, data) {
+    test ()
+      .isError ('fail', 'err', err)
+      .isObject ('fail', 'err.api', err && err.api)
+      .isString ('fail', 'err.api.message', err && err.api && err.api.message)
+      .isUndefined ('fail', 'data', data)
+      .done ();
+  });
+});
+
+
 dotest.add ('Method .prijzen', function (test) {
   dotest.log ('warn', 'No test available yet');
   test () .done ();
