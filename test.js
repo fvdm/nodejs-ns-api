@@ -13,8 +13,8 @@ ns = app (config);
 
 
 // Basic tests
-dotest.add ('Module', function () {
-  dotest.test ()
+dotest.add ('Module', function (test) {
+  test ()
     .isFunction ('fail', 'exports', app)
     .isObject ('fail', 'interface', ns)
     .isFunction ('fail', '.vertrektijden method', ns && ns.vertrektijden)
@@ -26,9 +26,9 @@ dotest.add ('Module', function () {
 });
 
 
-dotest.add ('API error', function () {
+dotest.add ('API error', function (test) {
   ns.reisadvies (function (err, data) {
-    dotest.test ()
+    test ()
       .isError ('fail', 'err', err)
       .isExactly ('fail', 'err.message', err && err.message, 'API error')
       .isObject ('fail', 'err.api', err && err.api)
@@ -39,14 +39,14 @@ dotest.add ('API error', function () {
 });
 
 
-dotest.add ('Method .reisadvies', function () {
+dotest.add ('Method .reisadvies', function (test) {
   var params = {
     fromStation: 'Amersfoort',
     toStation: 'Amsterdam'
   };
 
   ns.reisadvies (params, function (err, data) {
-    dotest.test (err)
+    test (err)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isObject ('fail', 'data[0]', data && data [0])
@@ -57,9 +57,9 @@ dotest.add ('Method .reisadvies', function () {
 });
 
 
-dotest.add ('Method .storingen - with params', function () {
+dotest.add ('Method .storingen - with params', function (test) {
   ns.storingen ({ actual: false }, function (err, data) {
-    dotest.test (err)
+    test (err)
       .isObject ('fail', 'data', data)
       .isArray ('fail', 'data.Ongepland', data && data.Ongepland)
       .isArray ('fail', 'data.Gepland', data && data.Gepland)
@@ -68,9 +68,9 @@ dotest.add ('Method .storingen - with params', function () {
 });
 
 
-dotest.add ('Method .storingen - without params', function () {
+dotest.add ('Method .storingen - without params', function (test) {
   ns.storingen (function (err, data) {
-    dotest.test (err)
+    test (err)
       .isObject ('fail', 'data', data)
       .isArray ('fail', 'data.Ongepland', data && data.Ongepland)
       .isArray ('fail', 'data.Gepland', data && data.Gepland)
@@ -79,9 +79,9 @@ dotest.add ('Method .storingen - without params', function () {
 });
 
 
-dotest.add ('Method .stations - no key', function () {
+dotest.add ('Method .stations - no key', function (test) {
   ns.stations (function (err, data) {
-    dotest.test (err)
+    test (err)
       .isObject ('fail', 'data', data)
       .isObject ('fail', 'data.HT', data && data.HT)
       .isExactly ('fail', 'data.HT.Code', data && data.HT && data.HT.Code, 'HT')
@@ -91,9 +91,9 @@ dotest.add ('Method .stations - no key', function () {
 });
 
 
-dotest.add ('Method .stations - array', function () {
+dotest.add ('Method .stations - array', function (test) {
   ns.stations (false, function (err, data) {
-    dotest.test (err)
+    test (err)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isObject ('fail', 'data[0]', data && data [0])
@@ -104,9 +104,9 @@ dotest.add ('Method .stations - array', function () {
 });
 
 
-dotest.add ('Method .stations - by Type', function () {
+dotest.add ('Method .stations - by Type', function (test) {
   ns.stations ('Type', function (err, data) {
-    dotest.test (err)
+    test (err)
       .isObject ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isObject ('fail', 'data.megastation', data && data.megastation)
@@ -118,9 +118,9 @@ dotest.add ('Method .stations - by Type', function () {
 });
 
 
-dotest.add ('Method .vertrektijden', function () {
+dotest.add ('Method .vertrektijden', function (test) {
   ns.vertrektijden ('UT', function (err, data) {
-    dotest.test (err)
+    test (err)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isObject ('fail', 'data[0]', data && data [0])
@@ -131,13 +131,13 @@ dotest.add ('Method .vertrektijden', function () {
 });
 
 
-dotest.add ('Method .prijzen', function () {
+dotest.add ('Method .prijzen', function (test) {
   dotest.log ('warn', 'No test available yet');
-  dotest.test () .done ();
+  test () .done ();
 });
 
 
-dotest.add ('Config .timeout', function () {
+dotest.add ('Config .timeout', function (test) {
   var tmp = app ({
     username: config.username,
     password: config.password,
@@ -145,7 +145,7 @@ dotest.add ('Config .timeout', function () {
   });
 
   tmp.stations (function (err, data) {
-    dotest.test ()
+    test ()
       .isError ('fail', 'err', err)
       .isUndefined ('fail', 'data', data)
       .done ();
