@@ -317,6 +317,71 @@ function methodReisadvies (params, callback) {
 
 
 /**
+ * Clean up station object
+ *
+ * @param station {object} - Station from data
+ * @returns {object} - Cleaned up station
+ */
+
+function cleanupStation (station) {
+  station.Synoniemen = station.Synoniemen && station.Synoniemen.Synoniem || [];
+
+  if (typeof station.Synoniemen === 'string') {
+    station.Synoniemen = [station.Synoniemen];
+  }
+
+  return station;
+}
+
+
+/**
+ * Build stations tree
+ *
+ * @param data {object} - Data from methodStations
+ * @param [treeKey = Code] {string, boolean} - Group stations by station.key
+ * @returns {object, array} - Array if `treeKey` == false, else an object
+ */
+
+function buildStationsTree (data, treeKey) {
+  var station;
+  var tree = {};
+  var i;
+
+  // make an array with stations
+  if (treeKey === false) {
+    tree = [];
+  }
+
+  // shorten data
+  data = data.Stations.Station;
+
+  // iterate stations
+  for (i in data) {
+    station = cleanupStation (data [i]);
+
+    if (treeKey === false) {
+      tree.push (station);
+      break;
+    }
+
+    if (treeKey === 'code') {
+      tree [station.Code] = station;
+    } else if (!station [treeKey]) {
+      return new Error ('key not found in station');
+    }
+
+    if (!tree [station [treeKey]]) {
+      tree [station [treeKey]] = {};
+    }
+
+    tree [station [treeKey]] [station.Code] = station;
+  }
+
+  return tree;
+}
+
+
+/**
  * List available stations
  *
  * @callback callback
@@ -331,48 +396,20 @@ function methodStations (treeKey, callback) {
   }
 
   httpRequest ('stations-v2', function (err, data) {
-    var tree = {};
-    var station;
-    var s;
+    var tree;
 
     if (err) {
       return callback (err);
-    }
-
-    if (treeKey === false) {
-      tree = [];
     }
 
     if (!data.Stations.Station) {
       return callback (makeError ('unexpected response', 'data', data));
     }
 
-    data = data.Stations.Station;
+    tree = buildStationsTree (data, treeKey);
 
-    for (s in data) {
-      station = data [s];
-      station.Synoniemen = station.Synoniemen && station.Synoniemen.Synoniem || [];
-
-      if (typeof station.Synoniemen === 'string') {
-        station.Synoniemen = [station.Synoniemen];
-      }
-
-      if (treeKey === false) {
-        tree.push (station);
-        break;
-      }
-
-      if (treeKey === 'code') {
-        tree [station.Code] = station;
-      } else if (!station [treeKey]) {
-        return callback (new Error ('key not found in station'));
-      } else {
-        if (!tree [station [treeKey]]) {
-          tree [station [treeKey]] = {};
-        }
-
-        tree [station [treeKey]] [station.Code] = station;
-      }
+    if (!tree) {
+      return callback (tree);
     }
 
     return callback (null, tree);
