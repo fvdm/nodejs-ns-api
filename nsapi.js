@@ -239,6 +239,59 @@ function methodPrijzen (params, callback) {
 
 
 /**
+ * Clean up ReisDeel
+ *
+ * @param data {array, object} - Data from .methodReisAdvies
+ * @returns {array} - Converted data
+ */
+
+function cleanupReisDeel (data) {
+  var reis;
+  var deel;
+  var stop;
+  var r;
+  var d;
+  var s;
+
+  data = data.ReisMogelijkheden.ReisMogelijkheid;
+
+  if (!(data instanceof Array)) {
+    data = [data];
+  }
+
+  if (data.length) {
+    for (r in data) {
+      reis = data [r];
+
+      if (!(reis.ReisDeel instanceof Array)) {
+        reis.ReisDeel = [reis.ReisDeel];
+      }
+
+      for (d in reis.ReisDeel) {
+        deel = reis.ReisDeel [d];
+
+        for (s in deel.ReisStop) {
+          stop = deel.ReisStop [s];
+
+          if (stop.Spoor) {
+            stop.SpoorWijziging = stop.Spoor.wijziging === 'true';
+            stop.Spoor = stop.Spoor ['@text'];
+            deel.ReisStop [s] = stop;
+          }
+        }
+
+        reis.ReisDeel [d] = deel;
+      }
+
+      data [r] = reis;
+    }
+  }
+
+  return data;
+}
+
+
+/**
  * Reisadvies - travel advise
  *
  * @callback callback
@@ -249,13 +302,6 @@ function methodPrijzen (params, callback) {
 
 function methodReisadvies (params, callback) {
   httpRequest ('treinplanner', params, function (err, data) {
-    var reis;
-    var deel;
-    var stop;
-    var r;
-    var d;
-    var s;
-
     if (err) {
       return callback (err);
     }
@@ -264,40 +310,7 @@ function methodReisadvies (params, callback) {
       return callback (makeError ('unexpected response', 'data', data));
     }
 
-    data = data.ReisMogelijkheden.ReisMogelijkheid;
-
-    if (!(data instanceof Array)) {
-      data = [data];
-    }
-
-    if (data.length) {
-      for (r in data) {
-        reis = data [r];
-
-        if (!(reis.ReisDeel instanceof Array)) {
-          reis.ReisDeel = [reis.ReisDeel];
-        }
-
-        for (d in reis.ReisDeel) {
-          deel = reis.ReisDeel [d];
-
-          for (s in deel.ReisStop) {
-            stop = deel.ReisStop [s];
-
-            if (stop.Spoor) {
-              stop.SpoorWijziging = stop.Spoor.wijziging === 'true';
-              stop.Spoor = stop.Spoor ['@text'];
-              deel.ReisStop [s] = stop;
-            }
-          }
-
-          reis.ReisDeel [d] = deel;
-        }
-
-        data [r] = reis;
-      }
-    }
-
+    data = cleanupReisDeel (data);
     return callback (null, data);
   });
 }
