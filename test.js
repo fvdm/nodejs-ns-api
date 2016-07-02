@@ -145,8 +145,13 @@ dotest.add ('Method .vertrektijden - error', function (test) {
 
 
 dotest.add ('Method .prijzen', function (test) {
-  dotest.log ('warn', 'No test available yet');
-  test () .done ();
+  ns.prijzen (function (err, data) {
+    test ()
+      .warn ('No test available yet')
+      .isError ('fail', 'err', err)
+      .isUndefined ('fail', 'data', data)
+      .done ();
+  });
 });
 
 
