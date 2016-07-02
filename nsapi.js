@@ -76,8 +76,6 @@ function objectOmit (obj, key) {
  */
 
 function processData (data, callback) {
-  var error = null;
-
   data = data.replace (/&#039;/g, '\'');
 
   // parse xml
@@ -85,32 +83,27 @@ function processData (data, callback) {
     data = parsexml (data);
     data = objectOmit (data, '@');
   } catch (e) {
-    callback (makeError ('invalid response', 'body', data));
-    return;
+    return callback (makeError ('invalid response', 'body', data));
   }
 
   // parse API error
   if (data.error) {
-    callback (makeError ('API error', 'api', data.error));
-    return;
+    return callback (makeError ('API error', 'api', data.error));
   }
 
   try {
     if (data ['soap:Envelope'] ['soap:Body'] ['soap:Fault'] .faultcode) {
-      error = {
+      return callback (makeError ('API error', 'api', {
         code: data ['soap:Envelope'] ['soap:Body'] ['soap:Fault'] .faultcode,
         message: data ['soap:Envelope'] ['soap:Body'] ['soap:Fault'] .faultstring
-      };
-
-      callback (makeError ('API error', 'api', error));
-      return;
+      }));
     }
   } catch (e) {
     // skip
   }
 
   // all good
-  callback (null, data);
+  return callback (null, data);
 }
 
 
@@ -128,22 +121,22 @@ function httpResponse (err, res, callback) {
 
   // request error
   if (err) {
-    callback (makeError ('request failed', 'error', err, null));
-    return;
+    return callback (makeError ('request failed', 'error', err, null));
   }
 
   // gzip decoding
   if (res.headers ['content-encoding'] === 'gzip') {
     zlib.gunzip (data, function (zErr, zData) {
       if (zErr) {
-        callback (makeError ('unexpected response', 'error', zErr, res.statusCode));
-        return;
+        return callback (makeError ('unexpected response', 'error', zErr, res.statusCode));
       }
 
       data = zData.toString ('utf8');
-      processData (data, callback);
+      return processData (data, callback);
     });
   }
+
+  return null;
 }
 
 
@@ -208,21 +201,17 @@ function methodVertrektijden (station, callback) {
     var i;
 
     if (err) {
-      callback (err);
-      return;
+      return callback (err);
     }
 
     if (!data.ActueleVertrekTijden || !data.ActueleVertrekTijden.VertrekkendeTrein) {
-      callback (makeError ('unexpected response', 'data', data));
-      return;
+      return callback (makeError ('unexpected response', 'data', data));
     }
 
     data = data.ActueleVertrekTijden.VertrekkendeTrein;
 
     if (data.RitNummer) {
-      data = [data];
-      callback (null, data);
-      return;
+      return callback (null, [data]);
     }
 
     for (i in data) {
@@ -230,7 +219,7 @@ function methodVertrektijden (station, callback) {
       data [i] .VertrekSpoor = data [i] .VertrekSpoor ['@text'];
     }
 
-    callback (null, data);
+    return callback (null, data);
   });
 }
 
@@ -268,13 +257,11 @@ function methodReisadvies (params, callback) {
     var s;
 
     if (err) {
-      callback (err);
-      return;
+      return callback (err);
     }
 
     if (!data.ReisMogelijkheden || !data.ReisMogelijkheden.ReisMogelijkheid) {
-      callback (makeError ('unexpected response', 'data', data));
-      return;
+      return callback (makeError ('unexpected response', 'data', data));
     }
 
     data = data.ReisMogelijkheden.ReisMogelijkheid;
@@ -311,7 +298,7 @@ function methodReisadvies (params, callback) {
       }
     }
 
-    callback (null, data);
+    return callback (null, data);
   });
 }
 
@@ -336,8 +323,7 @@ function methodStations (treeKey, callback) {
     var s;
 
     if (err) {
-      callback (err);
-      return;
+      return callback (err);
     }
 
     if (treeKey === false) {
@@ -345,8 +331,7 @@ function methodStations (treeKey, callback) {
     }
 
     if (!data.Stations.Station) {
-      callback (makeError ('unexpected response', 'data', data));
-      return;
+      return callback (makeError ('unexpected response', 'data', data));
     }
 
     data = data.Stations.Station;
@@ -367,8 +352,7 @@ function methodStations (treeKey, callback) {
       if (treeKey === 'code') {
         tree [station.Code] = station;
       } else if (!station [treeKey]) {
-        callback (new Error ('key not found in station'));
-        return;
+        return callback (new Error ('key not found in station'));
       } else {
         if (!tree [station [treeKey]]) {
           tree [station [treeKey]] = {};
@@ -378,7 +362,7 @@ function methodStations (treeKey, callback) {
       }
     }
 
-    callback (null, tree);
+    return callback (null, tree);
   });
 }
 
@@ -400,11 +384,8 @@ function methodStoringen (params, callback) {
   }
 
   httpRequest ('storingen', params, function (err, data) {
-    var error = null;
-
     if (err) {
-      callback (err);
-      return;
+      return callback (err);
     }
 
     if (typeof data.Storingen.Ongepland === 'string') {
@@ -416,10 +397,7 @@ function methodStoringen (params, callback) {
     }
 
     if (!data.Storingen.Ongepland || !data.Storingen.Gepland) {
-      error = new Error ('unexpected response');
-      error.data = data;
-      callback (makeError ('unexpected response', 'data', data));
-      return;
+      return callback (makeError ('unexpected response', 'data', data));
     }
 
     data = data.Storingen;
@@ -434,7 +412,7 @@ function methodStoringen (params, callback) {
       data.Gepland = [data.Gepland];
     }
 
-    callback (null, data);
+    return callback (null, data);
   });
 }
 
