@@ -5,7 +5,7 @@
     "url": "https://frankl.in"
   },
   "name": "ns-api",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "Public transit data from Nederlandse Spoorwegen API",
   "repository": {
     "type": "git",
