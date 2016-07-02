@@ -58,7 +58,7 @@ dotest.add ('Method .reisadvies', function (test) {
 
 
 dotest.add ('Method .storingen - with params', function (test) {
-  ns.storingen ({ actual: false }, function (err, data) {
+  ns.storingen ({ actual: true }, function (err, data) {
     test (err)
       .isObject ('fail', 'data', data)
       .isArray ('fail', 'data.Ongepland', data && data.Ongepland)
