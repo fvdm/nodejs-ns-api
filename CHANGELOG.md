@@ -1,3 +1,60 @@
+#### 2.0.2 (2016-7-2)
+
+##### Chores
+
+* **example:** Removed dangling comma ([6aa349a3](https://github.com/fvdm/nodejs-ns-api/commit/6aa349a34a5265a5c5fe53ee7e8e241fc83b23b6))
+* **package:**
+  * Add example.js ([e3b5d935](https://github.com/fvdm/nodejs-ns-api/commit/e3b5d93567a04dce233f5240f5a7fa57b1b326d1))
+  * Update dotest dev dep ([04a503d5](https://github.com/fvdm/nodejs-ns-api/commit/04a503d58e621f2fb1097e7d78bf1036ba9638ef))
+  * Add test.sh runner and dev deps ([d9cff20d](https://github.com/fvdm/nodejs-ns-api/commit/d9cff20d722217019785020775fb0f79ba442f9a))
+  * Clean up unneeded stuff ([a0c21643](https://github.com/fvdm/nodejs-ns-api/commit/a0c216434d70fc3471bbff2fa0bc6efc0f86d35a))
+  * Renamed UNLICENSE file to LICENSE ([3a5bf9d5](https://github.com/fvdm/nodejs-ns-api/commit/3a5bf9d55c672ffad917fde54709e40f0207c413))
+  * Add .package.json to gitignore ([ba4a51d9](https://github.com/fvdm/nodejs-ns-api/commit/ba4a51d9c21abaaea09eb2a40f3aec0752e6cd1d))
+  * update eslint to version 3.0.0 ([e493b732](https://github.com/fvdm/nodejs-ns-api/commit/e493b732b37495de138eea1d0ee48eebd12fa3c3))
+
+##### Documentation Changes
+
+* **readme:**
+  * Remove dangling comma ([dd292693](https://github.com/fvdm/nodejs-ns-api/commit/dd292693b51b8afd4c1e81c7521cd6fb98ff5754))
+  * Use example from example.js ([8fdfd8e0](https://github.com/fvdm/nodejs-ns-api/commit/8fdfd8e04d37a257374c210dc7510d440fd05036))
+  * Use https links for NS.nl ([0884a402](https://github.com/fvdm/nodejs-ns-api/commit/0884a4027673c9bef8889872032320aaf63e75e1))
+  * Minor author line cleanup ([f6cd71ee](https://github.com/fvdm/nodejs-ns-api/commit/f6cd71eed8f0f5d7a9360764d0cd9edd20b12a87))
+* **badges:** Add coverage status badge ([19188006](https://github.com/fvdm/nodejs-ns-api/commit/19188006caab98eefd1afa5be1941b509d4c3336))
+
+##### Bug Fixes
+
+* **processData:** Make sure data is always a Buffer ([a0fdd89b](https://github.com/fvdm/nodejs-ns-api/commit/a0fdd89b53c4f15028c70567705f2286f9f06195))
+* **setup:** Fixed fatal error when config is missing ([1da58df3](https://github.com/fvdm/nodejs-ns-api/commit/1da58df384a7999dd3d2cf394feb24692fedb278))
+
+##### Refactors
+
+* **style:**
+  * Reduced complexity of methodStoringen ([3455c2f2](https://github.com/fvdm/nodejs-ns-api/commit/3455c2f24eb4027f0f0c2d8c8ae511564784be68))
+  * Reduced complexity of methodStations ([8b8d0116](https://github.com/fvdm/nodejs-ns-api/commit/8b8d011651b878a851d49ed9abadf4d7ad73a7be))
+  * Reduced complexity methodReisadvies ([f71bc605](https://github.com/fvdm/nodejs-ns-api/commit/f71bc605f74acfc08269bded164c30ea28cdb90a))
+  * More consistent returns ([f3a8d760](https://github.com/fvdm/nodejs-ns-api/commit/f3a8d7605a740a96090443b7b4f450a5b767ea6e))
+* **request:**
+  * Cleaner boolean conversion ([156d4f69](https://github.com/fvdm/nodejs-ns-api/commit/156d4f69f1ffde6ce45ad81d5e18258de30e0f36))
+  * Renamed talk to httpRequest ([a0705a32](https://github.com/fvdm/nodejs-ns-api/commit/a0705a32c74de9eace95441363d8b70f1469bd73))
+* **errors:** Generate most errors with makeError() ([acc14be2](https://github.com/fvdm/nodejs-ns-api/commit/acc14be23b7c63cfd938206133b965654c58f27c))
+* **response:** Renamed processResponse to httpResponse ([48543393](https://github.com/fvdm/nodejs-ns-api/commit/48543393f0a1be2d217512c9ff825aa62b3cf90f))
+* **package:**
+  * Minor description change ([1cfb2d5e](https://github.com/fvdm/nodejs-ns-api/commit/1cfb2d5e1061d8222e48d7304b941e62ac623134))
+  * Minimum node v4.0.0 ([741cc1f5](https://github.com/fvdm/nodejs-ns-api/commit/741cc1f52050a62876a6109365d5ca1ecba595eb))
+
+##### Tests
+
+* **tests:**
+  * Do test .prijzen even tough it is not available ([4b7e5dbc](https://github.com/fvdm/nodejs-ns-api/commit/4b7e5dbcdfdc06b71ce6354bc35b2422d865834b))
+  * Check err.message on .vertrektijden error ([6fc519db](https://github.com/fvdm/nodejs-ns-api/commit/6fc519dbab9b240b28fce17286712c843f5d2554))
+  * Add .vertrektijden error test ([b159081e](https://github.com/fvdm/nodejs-ns-api/commit/b159081e47a18507eab16b11280cdda4dfd832c2))
+  * Use test() alias instead of dotest.test() ([81784da7](https://github.com/fvdm/nodejs-ns-api/commit/81784da7758664730f1ce808dd48a959e6ac1137))
+  * Add config.timeout test ([c9c558d2](https://github.com/fvdm/nodejs-ns-api/commit/c9c558d2766c2884a296e4effe8e6e461618327f))
+  * Run all tests even without user/pass ([ad426f66](https://github.com/fvdm/nodejs-ns-api/commit/ad426f6652b885545973481b0fb6c5a84499fe7a))
+* **script:** No need to check for user/pass ([e961140f](https://github.com/fvdm/nodejs-ns-api/commit/e961140fa77714c93a7dd9dc238d305834a3f682))
+* **config:** Removed node v0.12 from Travis CI ([1f88a049](https://github.com/fvdm/nodejs-ns-api/commit/1f88a049ff41e8ba8595986fbb4279103e49416e))
+* **fix:** Fixed eslint operator-linebreak before ([bfe6d713](https://github.com/fvdm/nodejs-ns-api/commit/bfe6d71336a65cb3b1ebf0d15d1cb2a6d9c125fe))
+
 #### 2.0.1 (2016-5-29)
 
 ##### Chores
