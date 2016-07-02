@@ -57,10 +57,6 @@ function objectOmit (obj, key) {
         obj [i] = objectOmit (obj [i], key);
       }
     }
-  } else if (obj instanceof Array && obj.length) {
-    for (i = 0; i < obj.length; i++) {
-      obj [i] = objectOmit (obj [i], key);
-    }
   }
 
   return obj;
