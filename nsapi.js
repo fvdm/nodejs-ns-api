@@ -427,14 +427,10 @@ function methodStations (treeKey, callback) {
 function cleanupStoringen (data) {
   var storingen = {};
 
-  try {
-    storingen.Gepland = data.Storingen.Gepland.Storing;
-    storingen.Ongepland = data.Storingen.Ongepland.Storing;
-  } catch (e) {
-    storingen.Gepland = [];
-    storingen.Ongepland = [];
-  }
+  storingen.Gepland = data.Storingen.Gepland.Storing || [];
+  storingen.Ongepland = data.Storingen.Ongepland.Storing || [];
 
+  // if object or string convert to array
   if (!Array.isArray (storingen.Gepland)) {
     storingen.Gepland = [storingen.Gepland];
   }
