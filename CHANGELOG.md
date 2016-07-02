@@ -1,3 +1,9 @@
+#### 2.0.4 (2016-7-2)
+
+##### Refactors
+
+* **cleanup:** Removed unused iteration from objectOmit ([c0852859](https://github.com/fvdm/nodejs-ns-api/commit/c08528596ee0058f950f201a70014fa345ef68f9))
+
 #### 2.0.3 (2016-7-2)
 
 ##### Bug Fixes
