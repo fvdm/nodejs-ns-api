@@ -1,3 +1,13 @@
+#### 2.0.3 (2016-7-2)
+
+##### Bug Fixes
+
+* **storingen:** Fixed empty dataset handling ([820a019c](https://github.com/fvdm/nodejs-ns-api/commit/820a019c67da3624ae50f3867384f510506ada20))
+
+##### Tests
+
+* **tests:** Set actual to true for storingen with params ([bde8f006](https://github.com/fvdm/nodejs-ns-api/commit/bde8f006e3c3ba60ba05e3985f194c36af8cd891))
+
 #### 2.0.2 (2016-7-2)
 
 ##### Chores
