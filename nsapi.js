@@ -418,6 +418,36 @@ function methodStations (treeKey, callback) {
 
 
 /**
+ * Clean up storingen
+ *
+ * @param data {object} - Response data from methodStoringen
+ * @returns {array} - Clean up array
+ */
+
+function cleanupStoringen (data) {
+  var storingen = {};
+
+  try {
+    storingen.Gepland = data.Storingen.Gepland.Storing;
+    storingen.Ongepland = data.Storingen.Ongepland.Storing;
+  } catch (e) {
+    storingen.Gepland = [];
+    storingen.Ongepland = [];
+  }
+
+  if (!Array.isArray (storingen.Gepland)) {
+    storingen.Gepland = [storingen.Gepland];
+  }
+
+  if (!Array.isArray (storingen.Ongepland)) {
+    storingen.Ongepland = [storingen.Ongepland];
+  }
+
+  return storingen;
+}
+
+
+/**
  * List disruptions
  *
  * @callback callback
@@ -438,30 +468,7 @@ function methodStoringen (params, callback) {
       return callback (err);
     }
 
-    if (typeof data.Storingen.Ongepland === 'string') {
-      data.Storingen.Ongepland = [data.Storingen.Ongepland];
-    }
-
-    if (typeof data.Storingen.Gepland === 'string') {
-      data.Storingen.Gepland = [data.Storingen.Gepland];
-    }
-
-    if (!data.Storingen.Ongepland || !data.Storingen.Gepland) {
-      return callback (makeError ('unexpected response', 'data', data));
-    }
-
-    data = data.Storingen;
-    data.Ongepland = data.Ongepland.Storing || [];
-    data.Gepland = data.Gepland.Storing || [];
-
-    if (!(data.Ongepland instanceof Array)) {
-      data.Ongepland = [data.Ongepland];
-    }
-
-    if (!(data.Gepland instanceof Array)) {
-      data.Gepland = [data.Gepland];
-    }
-
+    data = cleanupStoringen (data);
     return callback (null, data);
   });
 }
