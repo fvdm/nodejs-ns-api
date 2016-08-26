@@ -20,17 +20,14 @@
   ],
   "tonicExampleFilename": "example.js",
   "scripts": {
-    "test": "bash test.sh"
+    "test": "dotest"
   },
   "dependencies": {
     "httpreq": "^0.4.22",
     "nodexml": "^1.0.2"
   },
   "devDependencies": {
-    "coveralls": "^2.11.9",
-    "dotest": "^1.12.4",
-    "eslint": "^3.0.0",
-    "istanbul": "^0.4.4"
+    "dotest": "^1.13.0"
   },
   "engines": {
     "node": ">=4.0.0"
