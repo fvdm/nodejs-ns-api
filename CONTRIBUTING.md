@@ -45,9 +45,9 @@ When you intent to submit a PR, please follow these instructions:
  *
  * @callback callback
  * @param message {string} - Some awesome message
- * @param [amount] {number=2} - Optional argument with default
+ * @param [amount=2] {number} - Optional argument with default
  * @param [config] {object} - Configuration
- * @param [config.prop=5] - Property
+ * @param [config.prop=5] {number} - Optional property
  * @param callback {function} - Callback function
  * @return void
  */
