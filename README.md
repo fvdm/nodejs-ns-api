@@ -5,8 +5,9 @@ Access public transit data from [Nederlandse Spoorwegen API](http://www.ns.nl/re
 
 [![Changelog](https://img.shields.io/npm/v/ns-api.svg?maxAge=3600)](https://github.com/fvdm/nodejs-ns-api/blob/master/CHANGELOG.md)
 [![Build Status](https://travis-ci.org/fvdm/nodejs-ns-api.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-ns-api)
-[![Dependency Status](https://gemnasium.com/badges/github.com/fvdm/nodejs-ns-api.svg)](https://gemnasium.com/github.com/fvdm/nodejs-ns-api#runtime-dependencies)
 [![Coverage Status](https://coveralls.io/repos/github/fvdm/nodejs-ns-api/badge.svg?branch=master)](https://coveralls.io/github/fvdm/nodejs-ns-api?branch=master)
+[![bitHound Dependencies](https://www.bithound.io/github/fvdm/nodejs-ns-api/badges/dependencies.svg)](https://www.bithound.io/github/fvdm/nodejs-ns-api/develop/dependencies/npm)
+[![bitHound Code](https://www.bithound.io/github/fvdm/nodejs-ns-api/badges/code.svg)](https://www.bithound.io/github/fvdm/nodejs-ns-api)
 
 
 To use this module you need API access credentials,
