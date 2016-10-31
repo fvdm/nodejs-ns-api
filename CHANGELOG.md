@@ -1,3 +1,29 @@
+#### 2.0.5 (2016-10-31)
+
+##### Chores
+
+* **package:**
+  * Added CONTRIBUTING.md ([164f92a1](https://github.com/fvdm/nodejs-ns-api/commit/164f92a1916e1bbac57f070f3cb9864d31d67af9))
+  * Updated dev deps ([2e7e5947](https://github.com/fvdm/nodejs-ns-api/commit/2e7e5947df5c98509724e48e8953cb4abb4950d4))
+  * Replaced test runner and dev deps by dotest ([7d61a11d](https://github.com/fvdm/nodejs-ns-api/commit/7d61a11dd78cc457e6ac9c699b544beda663a043))
+* **develop:** Added bitHound config ([040313a6](https://github.com/fvdm/nodejs-ns-api/commit/040313a61599a012b419555c5baf8e194dc570b6))
+
+##### Documentation Changes
+
+* **readme:** Added linebreak at end ([6c74a046](https://github.com/fvdm/nodejs-ns-api/commit/6c74a0463fa6bb2e54c1e385c05c7d43ec0b9346))
+* **badges:** Replaced deps badge, code quality ([0011f95d](https://github.com/fvdm/nodejs-ns-api/commit/0011f95de0ca8e17e39b11af8c9a208dbdb1cb6a))
+
+##### Refactors
+
+* **main:** No need to wrap body in Buffer ([2b8f0f59](https://github.com/fvdm/nodejs-ns-api/commit/2b8f0f593813737613ff5c1893b337a8a57ea70d))
+
+##### Tests
+
+* **config:**
+  * Set bitHound long file to 500 lines ([045c234b](https://github.com/fvdm/nodejs-ns-api/commit/045c234b6c26de13eb8076d7234650e62cf7eda5))
+  * Use dynamic node versions on Travis CI ([86731d5a](https://github.com/fvdm/nodejs-ns-api/commit/86731d5aa374696b16d1c6138074ac61b2e89064))
+* **lint:** Update eslint to ES6 ([d6a58f80](https://github.com/fvdm/nodejs-ns-api/commit/d6a58f80c3b8266378414d6180f71a31323869e1))
+
 #### 2.0.4 (2016-7-2)
 
 ##### Refactors
