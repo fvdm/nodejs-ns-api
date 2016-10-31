@@ -16,6 +16,7 @@
   },
   "main": "nsapi.js",
   "files": [
+    "CONTRIBUTING.md",
     "example.js"
   ],
   "tonicExampleFilename": "example.js",
