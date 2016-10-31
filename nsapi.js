@@ -113,7 +113,7 @@ function processData (data, callback) {
  */
 
 function httpResponse (err, res, callback) {
-  var data = Buffer (res && res.body || '');
+  var data = res && res.body || '';
 
   // request error
   if (err) {
