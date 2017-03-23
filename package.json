@@ -28,7 +28,7 @@
     "nodexml": "^1.0.2"
   },
   "devDependencies": {
-    "dotest": "^1.13.6"
+    "dotest": "^2.0.0"
   },
   "engines": {
     "node": ">=4.0.0"
