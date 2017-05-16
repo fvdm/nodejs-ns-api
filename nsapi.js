@@ -22,11 +22,11 @@ var config = {
 /**
  * Make an error
  *
- * @param message {string} - Error.message
- * @param key {string} - Error [key] = err
- * @param err {Error, null} - Error [key] = err
- * @param code {string, number} - Error.code
- * @returns {Error} - The generated error
+ * @param   {string}         message  Error.message
+ * @param   {string}         key      Error [key] = err
+ * @param   {Error|null}     err      Error [key] = err
+ * @param   {string|number}  code     Error.code
+ * @return  {Error}                   The generated error
  */
 
 function makeError (message, key, err, code) {
@@ -41,9 +41,9 @@ function makeError (message, key, err, code) {
 /**
  * Strip a key from an object
  *
- * @param obj {object} - Object to alter
- * @param key {string} - Key to remove
- * @returns {object}
+ * @param   {object}  obj   Object to alter
+ * @param   {string}  key   Key to remove
+ * @return  {object}
  */
 
 function objectOmit (obj, key) {
@@ -66,9 +66,10 @@ function objectOmit (obj, key) {
 /**
  * Process decoded data
  *
- * @param data {string} - Response data string
- * @param callback {function} - `function (err, data) {}`
- * @returns {void}
+ * @callback callback
+ * @param    {string}    data      Response data string
+ * @param    {function}  callback  `(err, data)`
+ * @return   {void}
  */
 
 function processData (data, callback) {
@@ -106,10 +107,11 @@ function processData (data, callback) {
 /**
  * Process talk() response
  *
- * @param err {Error,null} - httpreq error
- * @param res {object} - Response resource
- * @param callback {function} - `function (err, data) {}`
- * @returns {void}
+ * @callback callback
+ * @param    {Error|null}  err       httpreq error
+ * @param    {object}      res       Response resource
+ * @param    {function}    callback  `(err, data)`
+ * @return   {void}
  */
 
 function httpResponse (err, res, callback) {
@@ -139,9 +141,11 @@ function httpResponse (err, res, callback) {
 /**
  * Communication with API
  *
- * @param method {string} - Part of request path `/ns-api-METHOD_NAME`
- * @param [params] {object} - Request parameters
- * @param callback {function} - `function (err, data) {}`
+ * @callback callback
+ * @param    {string}    method    Part of request path `/ns-api-METHOD_NAME`
+ * @param    {object}    [params]  Request parameters
+ * @param    {function}  callback  `(err, data)`
+ * @return   {void}
  */
 
 function httpRequest (method, params, callback) {
@@ -187,9 +191,9 @@ function httpRequest (method, params, callback) {
  * Vertrektijden - departure times
  *
  * @callback callback
- * @param station {string} - Station ID
- * @param callback {function} - `function (err, data) {}`
- * @returns {void}
+ * @param   {string}    station   Station ID
+ * @param   {function}  callback  `(err, data)`
+ * @return  {void}
  */
 
 function methodVertrektijden (station, callback) {
@@ -224,9 +228,9 @@ function methodVertrektijden (station, callback) {
  * Prijzen - tariffs
  *
  * @callback callback
- * @param params {object} - Parameters
- * @param callback {function} - `function (err, data) {}`
- * @returns {void}
+ * @param   {object}    params    Parameters
+ * @param   {function}  callback  `(err, data)`
+ * @return  {void}
  */
 
 function methodPrijzen (params, callback) {
@@ -237,8 +241,8 @@ function methodPrijzen (params, callback) {
 /**
  * Clean up ReisDeel
  *
- * @param data {array, object} - Data from .methodReisAdvies
- * @returns {array} - Converted data
+ * @param   {array|object}  data  Data from .methodReisAdvies
+ * @return  {array}               Converted data
  */
 
 function cleanupReisDeel (data) {
@@ -291,9 +295,9 @@ function cleanupReisDeel (data) {
  * Reisadvies - travel advise
  *
  * @callback callback
- * @param params {object} - Parameters
- * @param callback {function} - `function (err, data) {}`
- * @returns {void}
+ * @param    {object}    params    Parameters
+ * @param    {function}  callback  `(err, data)`
+ * @return   {void}
  */
 
 function methodReisadvies (params, callback) {
@@ -315,8 +319,8 @@ function methodReisadvies (params, callback) {
 /**
  * Clean up station object
  *
- * @param station {object} - Station from data
- * @returns {object} - Cleaned up station
+ * @param   {object}  station  Station from data
+ * @return  {object}           Cleaned up station
  */
 
 function cleanupStation (station) {
@@ -333,9 +337,9 @@ function cleanupStation (station) {
 /**
  * Build stations tree
  *
- * @param data {object} - Data from methodStations
- * @param [treeKey = Code] {string, boolean} - Group stations by station.key
- * @returns {object, array} - Array if `treeKey` == false, else an object
+ * @param   {object}          data            Data from methodStations
+ * @param   {string|boolean}  [treeKey=Code]  Group stations by station.key
+ * @return  {object|array}                    Array if `treeKey` == false, else an object
  */
 
 function buildStationsTree (data, treeKey) {
@@ -381,8 +385,9 @@ function buildStationsTree (data, treeKey) {
  * List available stations
  *
  * @callback callback
- * @param [treeKey] {string} - Group by this key
- * @param callback {function} - `function (err, data) {}`
+ * @param    {string}    [treeKey]  Group by this key
+ * @param    {function}  callback   `(err, data)`
+ * @return   {void}
  */
 
 function methodStations (treeKey, callback) {
@@ -416,8 +421,8 @@ function methodStations (treeKey, callback) {
 /**
  * Clean up storingen
  *
- * @param data {object} - Response data from methodStoringen
- * @returns {array} - Clean up array
+ * @param   {object}  data  Response data from methodStoringen
+ * @return  {array}         Clean up array
  */
 
 function cleanupStoringen (data) {
@@ -443,8 +448,9 @@ function cleanupStoringen (data) {
  * List disruptions
  *
  * @callback callback
- * @param params {object} - Parameters
- * @param callback {function} - `function (err, data) {}`
+ * @param    {object}    params    Parameters
+ * @param    {function}  callback  `(err, data)`
+ * @return   {void}
  */
 
 function methodStoringen (params, callback) {
@@ -469,11 +475,11 @@ function methodStoringen (params, callback) {
 /**
  * Module configuration
  *
- * @param conf {object} - Configuration parameters
- * @param conf.username {string} - API username
- * @param conf.password {string} - API password
- * @param [conf.timeout] {number=5000} - Request time out in ms
- * @returns {object} - Interface methods
+ * @param   {object}       conf            Configuration parameters
+ * @param   {string}       conf.username   API username
+ * @param   {string}       conf.password   API password
+ * @param   {number=5000}  [conf.timeout]  Request time out in ms
+ * @return  {object}                       Interface methods
  */
 
 function setup (conf) {
