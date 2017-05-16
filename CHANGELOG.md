@@ -1,3 +1,24 @@
+#### 2.0.6 (2017-5-16)
+
+##### Chores
+
+* **package:**
+  * Update deps versions ([6093f361](https://github.com/fvdm/nodejs-ns-api/commit/6093f361b1e3e898e9e390a322311a85b115b6b7))
+  * Update dotest dev dep ([15804b57](https://github.com/fvdm/nodejs-ns-api/commit/15804b5772101198dab9eab1563c88cd729be690))
+  * Update dev deps ([f4009689](https://github.com/fvdm/nodejs-ns-api/commit/f4009689e29d7d5ba78b89efd3880f074a7a0afc))
+* **develop:** Fixed JSdoc syntax ([b8b93056](https://github.com/fvdm/nodejs-ns-api/commit/b8b93056a71c33ead7268e8224fba9f159a38e2e))
+
+##### Documentation Changes
+
+* **readme:** Add coffee button to Author ([204575c3](https://github.com/fvdm/nodejs-ns-api/commit/204575c3b8ecb17c0e2b8fa36ee09f26a1a46e81))
+
+##### Code Style Changes
+
+* **main:**
+  * Correct LICENSE file ([6184e387](https://github.com/fvdm/nodejs-ns-api/commit/6184e38721f20ebe16168fbc63ada42c5cf46fcc))
+  * Minor JSDoc edits ([2210f965](https://github.com/fvdm/nodejs-ns-api/commit/2210f965e6e6826d4e1407d32fdd41a667b5f836))
+  * Correct JSDoc syntax ([521e63de](https://github.com/fvdm/nodejs-ns-api/commit/521e63de69b2988c6f5c2e8eaa1184fa7c92264b))
+
 #### 2.0.5 (2016-10-31)
 
 ##### Chores
