@@ -191,9 +191,9 @@ function httpRequest (method, params, callback) {
  * Vertrektijden - departure times
  *
  * @callback callback
- * @param   {string}    station   Station ID
- * @param   {function}  callback  `(err, data)`
- * @return  {void}
+ * @param    {string}    station   Station ID
+ * @param    {function}  callback  `(err, data)`
+ * @return   {void}
  */
 
 function methodVertrektijden (station, callback) {
@@ -228,9 +228,9 @@ function methodVertrektijden (station, callback) {
  * Prijzen - tariffs
  *
  * @callback callback
- * @param   {object}    params    Parameters
- * @param   {function}  callback  `(err, data)`
- * @return  {void}
+ * @param    {object}    params    Parameters
+ * @param    {function}  callback  `(err, data)`
+ * @return   {void}
  */
 
 function methodPrijzen (params, callback) {
