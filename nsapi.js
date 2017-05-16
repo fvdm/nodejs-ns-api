@@ -5,7 +5,7 @@ Source:     https://github.com/fvdm/nodejs-ns-api
 Feedback:   https://github.com/fvdm/nodejs-ns-api/issues
 API Docs:   http://www.ns.nl/api/api
 License:    Unlicense (Public Domain)
-            (see UNLICENSE file or https://raw.github.com/fvdm/nodejs-ns-api/master/UNLICENSE)
+            (see LICENSE file or https://raw.github.com/fvdm/nodejs-ns-api/master/LICENSE)
 */
 
 var zlib = require ('zlib');
