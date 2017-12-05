@@ -8,6 +8,7 @@ Access public transit data from [Nederlandse Spoorwegen API](http://www.ns.nl/re
 [![Coverage Status](https://coveralls.io/repos/github/fvdm/nodejs-ns-api/badge.svg?branch=master)](https://coveralls.io/github/fvdm/nodejs-ns-api?branch=master)
 [![bitHound Dependencies](https://www.bithound.io/github/fvdm/nodejs-ns-api/badges/dependencies.svg)](https://www.bithound.io/github/fvdm/nodejs-ns-api/develop/dependencies/npm)
 [![bitHound Code](https://www.bithound.io/github/fvdm/nodejs-ns-api/badges/code.svg)](https://www.bithound.io/github/fvdm/nodejs-ns-api)
+[![Greenkeeper badge](https://badges.greenkeeper.io/fvdm/nodejs-ns-api.svg)](https://greenkeeper.io/)
 
 
 To use this module you need API access credentials,
