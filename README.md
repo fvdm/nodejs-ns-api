@@ -27,13 +27,13 @@ Example
 -------
 
 ```js
-var ns = require ('ns-api') ({
+const ns = require ('ns-api') ({
   username: 'api-username',
   password: 'api-password'
 });
 
 // Travel parameters
-var params = {
+const params = {
   fromStation: 'Amersfoort',
   toStation: 'Den Haag'
 };
@@ -54,7 +54,7 @@ ns.reisadvies (params, myCallback);
 Installation
 ------------
 
-`npm install ns-api`
+`npm i ns-api --save`
 
 
 Configuration
@@ -68,7 +68,7 @@ timeout  | number | no       | 5000    | Request time out in ms
 
 
 ```js
-var ns = require ('ns-api') ({
+const ns = require ('ns-api') ({
   username: 'your-username',
   password: 'your-password'
 });
@@ -159,7 +159,7 @@ API docs: [Reisadviezen](http://www.ns.nl/reisinformatie/ns-api/documentatie-rei
 
 
 ```js
-var params = {
+const params = {
   fromStation: 'Amersfoort',
   toStation: 'Den Haag',
   dateTime: '2013-02-21T15:50',
@@ -275,13 +275,14 @@ ns.stations ('Type', console.log);
 ### storingen
 **( [parameters], callback )**
 
-Get a list of maintenance and defect notifications. You need to set parameters to get any results.
+Get a list of maintenance and defect notifications.
+You need to set parameters to get any results.
 
 API docs: [Storingen en werkzaamheden](http://www.ns.nl/reisinformatie/ns-api/documentatie-storingen-en-werkzaamheden.html)
 
 
 ```js
-var params = {
+const params = {
   station: 'Amsterdam',
   unplanned: true
 };
