@@ -24,7 +24,7 @@
     "test": "dotest"
   },
   "dependencies": {
-    "httpreq": "^0.4.23",
+    "httpreq": "^0.4.24",
     "nodexml": "^1.0.2"
   },
   "devDependencies": {
