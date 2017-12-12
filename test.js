@@ -1,15 +1,13 @@
 const dotest = require ('dotest');
 const app = require ('./');
 
-const ns;
 const config = {
   username: process.env.NS_USERNAME || null,
   password: process.env.NS_PASSWORD || null,
   timeout: process.env.NS_TIMEOUT || 5000
 };
 
-
-ns = app (config);
+const ns = app (config);
 
 
 // Basic tests
