@@ -1,3 +1,34 @@
+#### 2.0.8 (2017-12-12)
+
+##### Chores
+
+* **package:**
+  * Update httpreq dependency ([44dbc87e](https://github.com/fvdm/nodejs-ns-api/commit/44dbc87e2ffaa6eae6bc753f23235c5091bbdde7))
+  * Reduce dev deps to dotest ([c499eae2](https://github.com/fvdm/nodejs-ns-api/commit/c499eae233a592c9fd25690b4fcf5684c3aa4918))
+* **develop:** Cleanup .gitignore ([6a753e7f](https://github.com/fvdm/nodejs-ns-api/commit/6a753e7ff534486ffdd6d6819e7ab5a5d9cd8f74))
+
+##### Documentation Changes
+
+* **readme:** Minor style changes ([789e3ee9](https://github.com/fvdm/nodejs-ns-api/commit/789e3ee9eb05b50e05bb1b77988f4d0983af4a46))
+* **badges:** Get bithound badges for master ([d2c308ab](https://github.com/fvdm/nodejs-ns-api/commit/d2c308ab74e89ed36d71799368d3cc833a225921))
+
+##### Bug Fixes
+
+* **package:** Fixed syntax typo ([4821d618](https://github.com/fvdm/nodejs-ns-api/commit/4821d618c7a7aee9503ea14283227cd3a55559b3))
+
+##### Code Style Changes
+
+* **example:** Convert to ES6 syntax ([1ea95fe0](https://github.com/fvdm/nodejs-ns-api/commit/1ea95fe0e7deff47c2edf80348bff935970f84ed))
+
+##### Tests
+
+* **main:** Fixed ES6 syntax ([93e76bc0](https://github.com/fvdm/nodejs-ns-api/commit/93e76bc05e517188fce484cffb6c42614370f89c))
+* **style:** Convert syntax to ES6 ([3f415ab5](https://github.com/fvdm/nodejs-ns-api/commit/3f415ab5b1a8215c3dc423e031aec80e7b1c7b23))
+* **config:**
+  * Remove ecmaVersion from .eslintrc ([a3cf2a32](https://github.com/fvdm/nodejs-ns-api/commit/a3cf2a326ca907fe939b75ec9490712fd246f554))
+  * Update Travis CI node versions ([f3b23bb7](https://github.com/fvdm/nodejs-ns-api/commit/f3b23bb7a8b8100f15342d450f4bd7fe2b190d51))
+  * Replaced node 7 with 8 on Travis CI ([6f7da3a9](https://github.com/fvdm/nodejs-ns-api/commit/6f7da3a91157ebb36e05c2f04d4683a1a93aa7d0))
+
 #### 2.0.7 (2017-12-12)
 
 #### 2.0.6 (2017-5-16)
