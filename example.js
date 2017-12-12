@@ -1,10 +1,10 @@
-var ns = require ('ns-api') ({
+const ns = require ('ns-api') ({
   username: 'api-username',
   password: 'api-password'
 });
 
 // Travel parameters
-var params = {
+const params = {
   fromStation: 'Amersfoort',
   toStation: 'Den Haag'
 };
