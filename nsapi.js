@@ -361,7 +361,7 @@ function buildStationsTree (data, treeKey) {
 
     if (treeKey === false) {
       tree.push (station);
-      break;
+      continue;
     }
 
     if (treeKey === 'code') {
