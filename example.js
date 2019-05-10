@@ -11,14 +11,11 @@ function output (data) {
   });
 }
 
-// Travel parameters
-const params = {
+// Get travel advise
+ns.getTrips ({
   fromStation: 'Amersfoort',
   toStation: 'Den Haag',
-};
-
-// Get travel advise
-ns.trips (params)
+})
   .then (output)
   .catch (console.error)
 ;
