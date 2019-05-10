@@ -298,13 +298,7 @@ module.exports = class NSAPI {
 
   async getTrip ({
 
-    ctxRecon = '',
     date = '',
-    lang = '',
-    product = '',
-    travelClass = '',
-    discount = '',
-    travelRequestType = '',
 
   } = {}) {
 
