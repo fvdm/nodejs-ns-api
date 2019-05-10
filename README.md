@@ -205,7 +205,11 @@ argument   | type           | description
 [dateTime] | Date or string | Value will be converted to the right format
 
 ```js
-ns.getTrips ({ dateTime: '2019-05-10 17:40' })
+ns.getTrips ({
+  dateTime: '2019-05-10 17:40',
+  fromStation: 'Amersfoort',
+  toStation: 'Den Haag',
+})
   .then (console.log)
   .catch (console.error)
 ;
