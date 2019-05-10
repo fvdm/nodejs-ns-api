@@ -102,7 +102,7 @@ module.exports = class NSAPI {
       path: '/public-reisinformatie/api/v2/stations',
     });
 
-    return data;
+    return data.payload;
   }
 
 
@@ -135,7 +135,7 @@ module.exports = class NSAPI {
       parameters: arguments[0],
     });
 
-    return data;
+    return data.payload.arrivals;
 
   }
 
@@ -169,7 +169,7 @@ module.exports = class NSAPI {
       parameters: arguments[0],
     });
 
-    return data;
+    return data.payload.departures;
 
   }
 
@@ -203,7 +203,7 @@ module.exports = class NSAPI {
       parameters: arguments[0],
     });
 
-    return data;
+    return data.payload.departures;
 
   }
 
@@ -223,7 +223,7 @@ module.exports = class NSAPI {
       path: `/public-reisinformatie/api/v2/disruptions/${id}`,
     });
 
-    return data;
+    return data.payload;
 
   }
 
@@ -252,7 +252,7 @@ module.exports = class NSAPI {
       parameters: arguments[0],
     });
 
-    return data;
+    return data.payload;
 
   }
 
@@ -276,7 +276,7 @@ module.exports = class NSAPI {
       path: `/public-reisinformatie/api/v2/disruptions/station/${station}`,
     });
 
-    return data;
+    return data.payload;
 
   }
 
@@ -317,7 +317,7 @@ module.exports = class NSAPI {
       parameters: arguments[0],
     });
 
-    return data;
+    return data.payload;
 
   }
 
@@ -374,7 +374,7 @@ module.exports = class NSAPI {
       parameters: arguments[0],
     });
 
-    return data;
+    return data.priceOptions;
   }
 
 };
