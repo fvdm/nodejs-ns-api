@@ -72,6 +72,8 @@ const ns = new NSAPI ({
 Each method returns a Promise, so make sure to catch the errors properly.
 I'm not going to outline to full posibilities of each method here,
 only to parts that adjust the API response or make the request easier.
+Read the API documention links to find all available parameters that each
+method can take.
 
 
 ### getAllStations
