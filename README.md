@@ -249,11 +249,11 @@ toStation   | string         | Station name or ID
 ns.getPrices ({
   fromStation: 'AMF',
   toStation: 'Den Haag',
-  date: 0,
 })
   .then (console.log)
   .catch (console.error)
 ;
+
 ```
 
 [API documentation](https://apiportal.ns.nl/docs/services/public-prijsinformatie-api/operations/getPrices_2)
