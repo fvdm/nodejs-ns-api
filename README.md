@@ -1,308 +1,261 @@
-ns-api
-======
+# ns-api
 
-Access public transit data from [Nederlandse Spoorwegen API](http://www.ns.nl/reisinformatie/ns-api) with node.js
+Access public transit data from [Nederlandse Spoorwegen API](https://www.ns.nl/reisinformatie/ns-api) with node.js
 
 [![Changelog](https://img.shields.io/npm/v/ns-api.svg?maxAge=3600)](https://github.com/fvdm/nodejs-ns-api/blob/master/CHANGELOG.md)
 [![Build Status](https://travis-ci.org/fvdm/nodejs-ns-api.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-ns-api)
 [![Coverage Status](https://coveralls.io/repos/github/fvdm/nodejs-ns-api/badge.svg?branch=master)](https://coveralls.io/github/fvdm/nodejs-ns-api?branch=master)
-[![bitHound Dependencies](https://www.bithound.io/github/fvdm/nodejs-ns-api/badges/master/dependencies.svg)](https://www.bithound.io/github/fvdm/nodejs-ns-api/master/dependencies/npm)
-[![bitHound Code](https://www.bithound.io/github/fvdm/nodejs-ns-api/badges/master/code.svg)](https://www.bithound.io/github/fvdm/nodejs-ns-api/master/files)
 [![Greenkeeper badge](https://badges.greenkeeper.io/fvdm/nodejs-ns-api.svg)](https://greenkeeper.io/)
 
 
 To use this module you need API access credentials,
-which you can request at [Here](https://www.ns.nl/ews-aanvraagformulier/) (Dutch).
-
-The method `prijzen` is disabled by default for all API accounts,
-you need to [contact NS](http://www.ns.nl/reisinformatie/ns-api/documentatie-prijzen.html) if you want this enabled.
-
+which you can request at [Here](https://apiportal.ns.nl) (Dutch).
 
 * [Node.js](https://nodejs.org)
 * [package](https://www.npmjs.com/package/ns-api)
-* [API documentation](https://www.ns.nl/reisinformatie/ns-api)
+* [API documentation](https://apiportal.ns.nl)
 
 
-Example
--------
+## Example
 
 ```js
-const ns = require ('ns-api') ({
-  username: 'api-username',
-  password: 'api-password'
+const NSAPI = require ('ns-api');
+const ns = new NSAPI ({
+  key: 'abc123',
 });
+
+// console.log does not log >3 levels
+function output (data) {
+  console.dir (data, {
+    depth: null,
+    colors: true,
+  });
+}
 
 // Travel parameters
 const params = {
   fromStation: 'Amersfoort',
-  toStation: 'Den Haag'
+  toStation: 'Den Haag',
 };
-
-// console.log is limited to 3 levels
-function myCallback (err, data) {
-  console.dir (err || data, {
-    depth: null,
-    colors: true
-  });
-}
 
 // Get travel advise
-ns.reisadvies (params, myCallback);
+ns.trips (params)
+  .then (output)
+  .catch (console.error)
+;
 ```
 
 
-Installation
-------------
+## Installation
 
-`npm i ns-api --save`
+`npm i ns-api`
 
 
-Configuration
--------------
+## Configuration
 
-param    | type   | required | default | description
-:--------|:-------|:---------|:--------|:----------------------
-username | string | yes      |         | Your API username
-password | string | yes      |         | Your API password
-timeout  | number | no       | 5000    | Request time out in ms
+param   | type   | required | default | description
+:-------|:-------|:---------|:--------|:-----------
+key     | string | yes      |         | One of your API keys
+timeout | number | no       | 5000    | Request time out in ms
 
 
 ```js
-const ns = require ('ns-api') ({
-  username: 'your-username',
-  password: 'your-password'
+const NSAPI = require ('ns-api');
+const ns = new NSAPI ({
+  key: 'abc123',
 });
 ```
 
 
-Callback function
------------------
+## Methods
 
-Each method takes a `callback` function as last *required* parameter.
-The callback receives two parameters: `err` and `data`.
-In case of an error the first parameter is an `Error` instance,
-otherwise `err` is null and `data` is an object or array.
+Each method returns a Promise, so make sure to catch the errors properly.
+I'm not going to outline to full posibilities of each method here,
+only to parts that adjust the API response or make the request easier.
 
+
+### getAllStations
+
+List of all stations
 
 ```js
-function (err, data) {
-  if (err) {
-    console.log (err);
-    return;
-  }
-
-  console.log (data);
-}
+ns.getAllStations()
+  .then (console.log)
+  .catch (console.error)
+;
 ```
 
-
-#### Errors
-
-message          | description                   | additional
-:----------------|:------------------------------|:--------------------------------------------
-request failed   | Request can't be made         | `err.error`
-invalid response | The API returned invalid data | `err.body`
-API error        | The API returned an error     | `err.api`
+[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV2StationsGet)
 
 
-Methods
--------
+### getArrivals
 
-### vertrektijden
-**( station, callback )**
+List of arrivals at a station
 
-Departure times for a `station` identified by either its name or code.
-
-API docs: [Actuele vertrektijden](http://www.ns.nl/reisinformatie/ns-api/documentatie-actuele-vertrektijden.html)
-
+argument   | type           | description
+:----------|:---------------|:-----------
+[dateTime] | Date or string | Value will be converted to the right format
 
 ```js
-ns.vertrektijden ('Amersfoort', console.log);
+ns.getArrivals ({ dateTime: '2019-05-10' })
+  .then (console.log)
+  .catch (console.error)
+;
 ```
 
+[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV2ArrivalsGet)
+
+
+### getBigDepartures
+
+Large list of departures at a station
+
+argument   | type           | description
+:----------|:---------------|:-----------
+[dateTime] | Date or string | Value will be converted to the right format
+
 ```js
-[ { RitNummer: 587,
-    VertrekTijd: '2013-01-09T00:07:00+0100',
-    VertrekVertraging: 'PT10M',
-    VertrekVertragingTekst: '+10 min',
-    EindBestemming: 'Groningen',
-    TreinSoort: 'Intercity',
-    RouteTekst: 'Nijkerk, Harderwijk, Zwolle',
-    Vervoerder: 'NS',
-    VertrekSpoor: '2b',
-    VertrekSpoorWijziging: false },
-  { RitNummer: 11686,
-    VertrekTijd: '2013-01-09T00:10:00+0100',
-    EindBestemming: 'Schiphol',
-    TreinSoort: 'Intercity',
-    RouteTekst: 'Hilversum, A\'dam Zuid',
-    Vervoerder: 'NS',
-    VertrekSpoor: 7,
-    VertrekSpoorWijziging: false } ]
+ns.getBigDepartures ({ dateTime: '2019-05-10' })
+  .then (console.log)
+  .catch (console.error)
+;
 ```
 
-
-### prijzen
-**( parameters, callback )**
-
-You need special access for this method.
-
-API docs: [Prijzen](http://www.ns.nl/reisinformatie/ns-api/documentatie-prijzen.html)
+[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV2DeparturesBigGet)
 
 
-### reisadvies
-**( parameters, callback )**
+### getDepartures
 
-Calculate travel plans between stations
+List all departures
 
-API docs: [Reisadviezen](http://www.ns.nl/reisinformatie/ns-api/documentatie-reisadviezen.html)
-
+argument | type   | description
+:--------|:-------|:-----------
+id       | string | Departure object ID
 
 ```js
-const params = {
-  fromStation: 'Amersfoort',
+ns.getDepartures ({ id: 'abc123' })
+  .then (console.log)
+  .catch (console.error)
+;
+```
+
+[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV2DeparturesGet)
+
+
+### getDisruptions
+
+List all disruptions
+
+argument | type    | description
+:--------|:--------|:-----------
+[actual] | boolean | Only return disruptions within 2 hours
+
+```js
+ns.getDisruptions()
+  .then (console.log)
+  .catch (console.error)
+;
+```
+
+[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV2DisruptionsGet)
+
+
+### getStationDisruption
+
+List of disruptions at a station
+
+argument   | type           | description
+:----------|:---------------|:-----------
+[dateTime] | Date or string | Value will be converted to the right format
+
+```js
+ns.getStationDisruption ({ dateTime: '2019-05-10' })
+  .then (console.log)
+  .catch (console.error)
+;
+```
+
+[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV2DisruptionsStationByCodeGet)
+
+
+### getDisruption
+
+Get details about one disruption
+
+argument | type   | description
+:--------|:-------|:-----------
+id       | string | Disruption object ID
+
+```js
+ns.getDisruption ({ id: 'abc123' })
+  .then (console.log)
+  .catch (console.error)
+;
+```
+
+[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV2DisruptionsByIdGet)
+
+
+### getTrips
+
+Get a list of travel advises
+
+argument   | type           | description
+:----------|:---------------|:-----------
+[dateTime] | Date or string | Value will be converted to the right format
+
+```js
+ns.getTrips ({ dateTime: '2019-05-10 17:40' })
+  .then (console.log)
+  .catch (console.error)
+;
+```
+
+[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV3TripsGet)
+
+
+### getTrip
+
+Get a specific travel advise
+
+argument | type   | description
+:--------|:-------|:-----------
+ctxRecon | string | Trip `ctxRecon` from [getTrips()](#getTrips)
+
+```js
+ns.getTrip ({ ctxRecon: 'abc123' })
+  .then (console.log)
+  .catch (console.error)
+;
+```
+
+[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV3TripsTripGet)
+
+
+### getPrices
+
+Get pricing for travel between two stations.
+
+argument    | type           | description
+:-----------|:---------------|:-----------
+fromStation | string         | Station name or ID
+toStation   | string         | Station name or ID
+
+```js
+ns.getPrices ({
+  fromStation: 'AMF',
   toStation: 'Den Haag',
-  dateTime: '2013-02-21T15:50',
-  departure: false
-};
-
-ns.reisadvies (params, function (err, data) {
-  console.log (err || data)
-});
+  date: 0,
+})
+  .then (console.log)
+  .catch (console.error)
+;
 ```
 
-**Result:**
-
-```js
-[ { AantalOverstappen: 1,
-    GeplandeReisTijd: '0:56',
-    ActueleReisTijd: '0:56',
-    Optimaal: false,
-    GeplandeVertrekTijd: '2013-02-21T13:26:00+0100',
-    ActueleVertrekTijd: '2013-02-21T13:26:00+0100',
-    GeplandeAankomstTijd: '2013-02-21T14:22:00+0100',
-    ActueleAankomstTijd: '2013-02-21T14:22:00+0100',
-    Status: 'VOLGENS-PLAN',
-    ReisDeel: 
-     [ { reisSoort: 'TRAIN',
-         Vervoerder: 'NS',
-         VervoerType: 'Intercity',
-         RitNummer: 12542,
-         Status: 'VOLGENS-PLAN',
-         ReisStop: 
-          [ { Naam: 'Amersfoort',
-              Tijd: '2013-02-21T13:26:00+0100',
-              Spoor: '6a',
-              SpoorWijziging: false },
-            { Naam: 'Utrecht Centraal',
-              Tijd: '2013-02-21T13:41:00+0100',
-              Spoor: 8,
-              SpoorWijziging: false } ] } ],
-```
+[API documentation](https://apiportal.ns.nl/docs/services/public-prijsinformatie-api/operations/getPrices_2)
 
 
-### stations
-**( [groupBy], callback )**
-
-Get a list of all stations.
-
-API docs: [Stationslijst](http://www.ns.nl/reisinformatie/ns-api/documentatie-stationslijst.html)
-
-
-name     | type     | required | default | description
-:--------|:---------|:---------|:--------|:-----------
-groupBy  | string   | no       | Code    | Group items by specified key, ie. `Land`. Set to `false` to return an _array_.
-callback | function | yes      |         | i.e. `function (err, data)`
-
-
-#### Just the list:
-
-```js
-ns.stations (console.log);
-```
-
-```js
-{ HT: 
-   { Code: 'HT',
-     Type: 'knooppuntIntercitystation',
-     Namen: 
-      { Kort: 'H\'bosch',
-        Middel: '\'s-Hertogenbosch',
-        Lang: '\'s-Hertogenbosch' },
-     Land: 'NL',
-     UICCode: 8400319,
-     Lat: 51.69048,
-     Lon: 5.29362,
-     Synoniemen: [ 'Hertogenbosch (\'s)', 'Den Bosch' ] },
-  HTO: 
-   { Code: 'HTO',
-     Type: 'stoptreinstation',
-     Namen: 
-      { Kort: 'H\'bosch O',
-        Middel: 'Hertogenbosch O.',
-        Lang: '\'s-Hertogenbosch Oost' },
-     Land: 'NL',
-     UICCode: 8400320,
-     Lat: 51.700554,
-     Lon: 5.318333,
-     Synoniemen: [ 'Hertogenbosch Oost (\'s)', 'Den Bosch Oost' ] } }
-```
-
-
-#### Grouped by type:
-
-```js
-ns.stations ('Type', console.log);
-```
-
-```js
-{ knooppuntIntercitystation: 
-   { HT: 
-      { Code: 'HT',
-        Type: 'knooppuntIntercitystation',
-        Namen: 
-         { Kort: 'H\'bosch',
-           Middel: '\'s-Hertogenbosch',
-           Lang: '\'s-Hertogenbosch' },
-        Land: 'NL',
-        UICCode: 8400319,
-        Lat: 51.69048,
-        Lon: 5.29362,
-        Synoniemen: [ 'Hertogenbosch (\'s)', 'Den Bosch' ] } }
-```
-
-
-### storingen
-**( [parameters], callback )**
-
-Get a list of maintenance and defect notifications.
-You need to set parameters to get any results.
-
-API docs: [Storingen en werkzaamheden](http://www.ns.nl/reisinformatie/ns-api/documentatie-storingen-en-werkzaamheden.html)
-
-
-```js
-const params = {
-  station: 'Amsterdam',
-  unplanned: true
-};
-
-ns.storingen (params, console.log);
-```
-
-```js
-{ Ongepland: 
-   [ { id: 'prio-37230',
-       Traject: 'Winterswijk-Arnhem',
-       Reden: 'eerdere verstoring',
-       Bericht: 'Tussen Velperpoort en Winterswijk langere reistijd door een eerdere verstoring.Houdt u rekening met een extra reistijd van ongeveer 15 min.De verstoring is naar verwachting 09 januari rond 2:00 uur verholpen.',
-       Datum: '2013-01-08T18:52:00+0100' } ],
-  Gepland: [] }
-```
-
-
-Unlicense
----------
+## Unlicense
 
 This is free and unencumbered software released into the public domain.
 
@@ -327,12 +280,10 @@ OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
-For more information, please refer to <http://unlicense.org/>
+For more information, please refer to <https://unlicense.org/>
 
 
 Author
 ------
 
-[Franklin van de Meent](https://frankl.in)
-
-[![Buy me a coffee](https://frankl.in/u/kofi/kofi-readme.png)](https://ko-fi.com/franklin)
+[Franklin van de Meent](https://fvdm.com)
