@@ -16,15 +16,22 @@ module.exports = class NSAPI {
   /**
    * Configuration
    *
-   * @param   {string}  key      Primary API key
-   * @param   {number}  timeout  Request timeout in ms
+   * @param   {string}  key             Primary API key
+   * @param   {number}  [timeout=5000]  Request timeout in ms
    */
 
-  constructor ({ key, timeout } = {}) {
+  constructor ({
+
+    key,
+    timeout = 5000,
+
+  } = {}) {
+
     this._config = {
       key,
-      timeout: timeout || 5000,
+      timeout,
     };
+
   }
 
 
