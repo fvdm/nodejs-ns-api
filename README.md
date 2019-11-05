@@ -1,7 +1,7 @@
 ns-api
 ======
 
-Access public transit data from [Nederlandse Spoorwegen API](http://www.ns.nl/reisinformatie/ns-api) with node.js
+Access public transit data from [Nederlandse Spoorwegen API](https://apiportal.ns.nl) with node.js
 
 [![Changelog](https://img.shields.io/npm/v/ns-api.svg?maxAge=3600)](https://github.com/fvdm/nodejs-ns-api/blob/master/CHANGELOG.md)
 [![Build Status](https://travis-ci.org/fvdm/nodejs-ns-api.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-ns-api)
@@ -10,15 +10,11 @@ Access public transit data from [Nederlandse Spoorwegen API](http://www.ns.nl/re
 
 
 To use this module you need API access credentials,
-which you can request at [Here](https://www.ns.nl/ews-aanvraagformulier/) (Dutch).
-
-The method `prijzen` is disabled by default for all API accounts,
-you need to [contact NS](http://www.ns.nl/reisinformatie/ns-api/documentatie-prijzen.html) if you want this enabled.
-
+which you can request at [Here](https://apiportal.ns.nl/startersguide) (Dutch).
 
 * [Node.js](https://nodejs.org)
-* [package](https://www.npmjs.com/package/ns-api)
-* [API documentation](https://www.ns.nl/reisinformatie/ns-api)
+* [Package](https://www.npmjs.com/package/ns-api)
+* [API documentation](https://apiportal.ns.nl)
 
 
 Example
