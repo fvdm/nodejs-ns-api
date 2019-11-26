@@ -180,10 +180,29 @@ dotest.add ('Method .getCalamities', async test => {
 });
 
 
-dotest.add ('Method .getDepartures', async test => {
+dotest.add ('Method .getDepartures - Without dateTime', async test => {
   try {
     const data = await ns.getDepartures ({
       station: 'UT',
+    });
+
+    test ()
+      .isArray ('fail', 'data', data)
+      .isNotEmpty ('warn', 'data', data)
+      .done ()
+    ;
+  }
+  catch (err) {
+    test (err).done ();
+  }
+});
+
+
+dotest.add ('Method .getDepartures - Date instance dateTime', async test => {
+  try {
+    const data = await ns.getDepartures ({
+      station: 'UT',
+      dateTime: dateTime.toGMTString(),
     });
 
     test ()
@@ -265,11 +284,36 @@ dotest.add ('Method .getStationDisruption', async test => {
 });
 
 
-dotest.add ('Method .getTrips', async test => {
+dotest.add ('Method .getTrips - Without dateTime', async test => {
   try {
     const data = await ns.getTrips ({
       fromStation: 'UT',
       toStation: 'AMF',
+    });
+
+    test ()
+      .isArray ('fail', 'data', data)
+      .isNotEmpty ('warn', 'data', data)
+      .done ()
+    ;
+
+    // save one for the next test
+    if (data[0]) {
+      trip = data[0];
+    }
+  }
+  catch (err) {
+    test (err).done ();
+  }
+});
+
+
+dotest.add ('Method .getTrips - Including dateTime', async test => {
+  try {
+    const data = await ns.getTrips ({
+      fromStation: 'UT',
+      toStation: 'AMF',
+      dateTime: dateTime.toGMTString(),
     });
 
     test ()
@@ -317,7 +361,7 @@ dotest.add ('Method .getTrip', async test => {
 });
 
 
-dotest.add ('Method .getPrice', async test => {
+dotest.add ('Method .getPrice - Without date', async test => {
   if (!trip) {
     test ()
       .warn ('No trip available!')
@@ -345,17 +389,26 @@ dotest.add ('Method .getPrice', async test => {
 });
 
 
-/*
-dotest.add ('Method .getInternationalPrice', async test => {
+dotest.add ('Method .getPrice - Including date', async test => {
+  if (!trip) {
+    test ()
+      .warn ('No trip available!')
+      .done ()
+    ;
+
+    return;
+  }
+
   try {
-    const data = await ns.getInternationalPrice ({
-      fromStation: 'UT',
-      toStation: 'INNSB',
-      plannedFromTime: dateTime.toISOString(),
+    const data = await ns.getPrice ({
+      ctxRecon: trip.ctxRecon,
+      date: dateTime.toString(),
     });
 
     test ()
-      .info (data)
+      .isObject ('fail', 'data', data)
+      .isNotEmpty ('fail', 'data', data)
+      .isNumber ('fail', 'data.totalPriceInCents', data && data.totalPriceInCents)
       .done ()
     ;
   }
@@ -363,7 +416,30 @@ dotest.add ('Method .getInternationalPrice', async test => {
     test (err).done ();
   }
 });
-*/
+
+
+dotest.add ('Method .getInternationalPrice', async test => {
+  let data;
+  let error;
+
+  try {
+    data = await ns.getInternationalPrice ({
+      fromStation: 8400055,
+      toStation: 8101187,
+      plannedFromTime: '2019-11-26T13:36:00+01:00',
+    });
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test ()
+      .isError ('fail', 'err', error)
+      .isUndefined ('fail', 'data', data)
+      .done ()
+    ;
+  }
+});
 
 
 dotest.add ('Config timeout', async test => {
