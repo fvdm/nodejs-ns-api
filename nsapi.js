@@ -79,13 +79,13 @@ module.exports = class NSAPI {
         }
 
         if (data.fieldErrors && data.fieldErrors.length) {
-          error = new Error ('API field error');
+          error = new Error ('API field errors');
           error.errors = data.fieldErrors;
           return reject (error);
         }
 
         if (data.errors && data.errors[0]) {
-          error = new Error ('API error');
+          error = new Error ('API errors');
           error.errors = data.errors;
           return reject (error);
         }
@@ -246,9 +246,12 @@ module.exports = class NSAPI {
    */
 
   async getTrip (parameters = {}) {
+
+    /*
     if (parameters.date && !(parameters.date instanceof Date)) {
       parameters.date = new Date (parameters.date).toISOString();
     }
+    */
 
     const data = await this._request ({
       path: '/reisinformatie-api/api/v3/trips/trip',
@@ -312,8 +315,8 @@ module.exports = class NSAPI {
    * @return  {Promise<array>}
    */
 
-  async getInternationalPrice (parameters = {}) {
-    return new Error ('not yet implemented');
+  async getInternationalPrice (parameters) {
+    throw new Error ('not yet implemented');
 
     /*
     const data = await this._request ({
