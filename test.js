@@ -2,171 +2,374 @@ const dotest = require ('dotest');
 const app = require ('./');
 
 const config = {
-  username: process.env.NS_USERNAME || null,
-  password: process.env.NS_PASSWORD || null,
-  timeout: process.env.NS_TIMEOUT || 5000
+  key: process.env.NS_APIKEY,
+  timeout: process.env.NS_TIMEOUT || 5000,
 };
 
-const ns = app (config);
+const ns = new app (config);
+
+// data stores
+let disruption;
+let trip;
+
+let dateTime = new Date();
+
+dateTime.setDate (dateTime.getDate() + 1);
+dateTime.setHours (14);
+dateTime.setMinutes (0);
 
 
 // Basic tests
-dotest.add ('Module', test => {
+dotest.add ('Module', async test => {
   test()
-    .isFunction ('fail', 'exports', app)
-    .isObject ('fail', 'interface', ns)
-    .isFunction ('fail', '.vertrektijden method', ns && ns.vertrektijden)
-    .isFunction ('fail', '.reisadvies method', ns && ns.reisadvies)
-    .isFunction ('fail', '.prijzen method', ns && ns.prijzen)
-    .isFunction ('fail', '.stations method', ns && ns.stations)
-    .isFunction ('fail', '.storingen method', ns && ns.storingen)
-    .done();
+    .isClass ('fail', 'exports', app)
+    .isFunction ('fail', '.getAllStations', ns && ns.getAllStations)
+    .isFunction ('fail', '.getArrivals', ns && ns.getArrivals)
+    .isFunction ('fail', '.getCalamities', ns && ns.getCalamities)
+    .isFunction ('fail', '.getDepartures', ns && ns.getDepartures)
+    .isFunction ('fail', '.getDisruption', ns && ns.getDisruption)
+    .isFunction ('fail', '.getDisruptions', ns && ns.getDisruptions)
+    .isFunction ('fail', '.getStationDisruption', ns && ns.getStationDisruption)
+    .isFunction ('fail', '.getTrip', ns && ns.getTrip)
+    .isFunction ('fail', '.getTrips', ns && ns.getTrips)
+    .isFunction ('fail', '.getPrice', ns && ns.getPrice)
+    .isFunction ('fail', '.getInternationalPrice', ns && ns.getInternationalPrice)
+    .done ()
+  ;
 });
 
 
-dotest.add ('API error', test => {
-  ns.reisadvies ((err, data) => {
-    test()
-      .isError ('fail', 'err', err)
-      .isExactly ('fail', 'err.message', err && err.message, 'API error')
-      .isObject ('fail', 'err.api', err && err.api)
-      .isString ('fail', 'err.api.message', err && err.api && err.api.message)
+dotest.add ('API error', async test => {
+  let data;
+  let error;
+
+  try {
+    data = await ns.getTrip();
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test ()
+      .isError ('fail', 'err', error)
+      .isExactly ('fail', 'err.message', error && error.message, 'Resource not found')
       .isUndefined ('fail', 'data', data)
-      .done();
-  });
+      .done ()
+    ;
+  }
 });
 
 
-dotest.add ('Method .reisadvies', test => {
-  const params = {
-    fromStation: 'Amersfoort',
-    toStation: 'Amsterdam'
-  };
+dotest.add ('Method .getAllStations', async test => {
+  try {
+    const data = await ns.getAllStations();
 
-  ns.reisadvies (params, (err, data) => {
-    test (err)
+    test ()
       .isArray ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
-      .isObject ('fail', 'data[0]', data && data [0])
-      .isArray ('fail', 'data[0].ReisDeel', data && data [0] && data [0] .ReisDeel)
-      .isNotEmpty ('fail', 'data[0].ReisDeel', data && data [0] && data [0] .ReisDeel)
-      .done();
-  });
+      .isObject ('fail', 'data[0]', data && data[0])
+      .isString ('fail', 'data[0].code', data && data[0] && data[0].code)
+      .done ()
+    ;
+  }
+  catch (err) {
+    test (err).done ();
+  }
 });
 
 
-dotest.add ('Method .storingen - with params', test => {
-  ns.storingen ({ actual: true }, (err, data) => {
-    test (err)
-      .isObject ('fail', 'data', data)
-      .isArray ('fail', 'data.Ongepland', data && data.Ongepland)
-      .isArray ('fail', 'data.Gepland', data && data.Gepland)
-      .done();
-  });
-});
+dotest.add ('Method .getArrivals - Without dateTime', async test => {
+  try {
+    const data = await ns.getArrivals ({
+      station: 'UT',
+    });
 
-
-dotest.add ('Method .storingen - without params', test => {
-  ns.storingen ((err, data) => {
-    test (err)
-      .isObject ('fail', 'data', data)
-      .isArray ('fail', 'data.Ongepland', data && data.Ongepland)
-      .isArray ('fail', 'data.Gepland', data && data.Gepland)
-      .done();
-  });
-});
-
-
-dotest.add ('Method .stations - no key', test => {
-  ns.stations ((err, data) => {
-    test (err)
-      .isObject ('fail', 'data', data)
-      .isObject ('fail', 'data.HT', data && data.HT)
-      .isExactly ('fail', 'data.HT.Code', data && data.HT && data.HT.Code, 'HT')
-      .isArray ('fail', 'data.HT.Synoniemen', data && data.HT && data.HT.Synoniemen)
-      .done();
-  });
-});
-
-
-dotest.add ('Method .stations - array', test => {
-  ns.stations (false, (err, data) => {
-    test (err)
+    test ()
       .isArray ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
-      .isObject ('fail', 'data[0]', data && data [0])
-      .isString ('fail', 'data[0].Code', data && data [0] && data [0] .Code)
-      .isArray ('fail', 'data[0].Synoniemen', data && data [0] && data [0] .Synoniemen)
-      .done();
-  });
+      .isObject ('fail', 'data[0]', data && data[0])
+      .isString ('fail', 'data[0].name', data && data[0] && data[0].name)
+      .done ()
+    ;
+  }
+  catch (err) {
+    test (err).done ();
+  }
 });
 
 
-dotest.add ('Method .stations - by Type', test => {
-  ns.stations ('Type', (err, data) => {
-    test (err)
-      .isObject ('fail', 'data', data)
-      .isNotEmpty ('fail', 'data', data)
-      .isObject ('fail', 'data.megastation', data && data.megastation)
-      .isObject ('fail', 'data.megastation.ASD', data && data.megastation.ASD)
-      .isExactly ('fail', 'data.megastation.ASD.Land', data && data.megastation && data.megastation.ASD && data.megastation.ASD.Land, 'NL')
-      .isArray ('fail', 'data.megastation.ASD.Synoniemen', data && data.megastation && data.megastation.ASD && data.megastation.ASD.Synoniemen)
-      .done();
-  });
-});
+dotest.add ('Method .getArrivals - Date instance dateTime', async test => {
+  try {
+    const data = await ns.getArrivals ({
+      dateTime,
+      station: 'UT',
+    });
 
-
-dotest.add ('Method .vertrektijden', test => {
-  ns.vertrektijden ('UT', (err, data) => {
-    test (err)
+    test ()
+      .info ('dateTime = Tomorrow 14:00')
+      .info (dateTime)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
-      .isObject ('fail', 'data[0]', data && data [0])
-      .isString ('fail', 'data[0].RitNummer', data && data [0] && data [0] .RitNummer)
-      .isBoolean ('fail', 'data[0].VertrekSpoorWijziging', data && data [0] && data [0] .VertrekSpoorWijziging)
-      .done();
-  });
+      .isObject ('fail', 'data[0]', data && data[0])
+      .isString ('fail', 'data[0].actualDateTime', data && data[0] && data[0].actualDateTime)
+      .done ()
+    ;
+  }
+  catch (err) {
+    test (err).done ();
+  }
 });
 
 
-dotest.add ('Method .vertrektijden - error', test => {
-  ns.vertrektijden ('test', (err, data) => {
-    test()
-      .isError ('fail', 'err', err)
-      .isExactly ('fail', 'err.message', err && err.message, 'API error')
-      .isObject ('fail', 'err.api', err && err.api)
-      .isString ('fail', 'err.api.message', err && err.api && err.api.message)
+dotest.add ('Method .getArrivals - String dateTime', async test => {
+  try {
+    const data = await ns.getArrivals ({
+      dateTime: dateTime.toString(),
+      station: 'UT',
+    });
+
+    test ()
+      .info ('dateTime = Tomorrow 14:00')
+      .info (dateTime.toString())
+      .isArray ('fail', 'data', data)
+      .isNotEmpty ('fail', 'data', data)
+      .isObject ('fail', 'data[0]', data && data[0])
+      .isString ('fail', 'data[0].actualDateTime', data && data[0] && data[0].actualDateTime)
+      .done ()
+    ;
+  }
+  catch (err) {
+    test (err).done ();
+  }
+});
+
+
+dotest.add ('Method .getCalamities', async test => {
+  try {
+    const data = await ns.getCalamities();
+
+    test ()
+      .isArray ('fail', 'data', data)
+      .isNotEmpty ('warn', 'data', data)
+      .done ()
+    ;
+  }
+  catch (err) {
+    test (err).done ();
+  }
+});
+
+
+dotest.add ('Method .getDepartures', async test => {
+  try {
+    const data = await ns.getDepartures ({
+      station: 'UT',
+    });
+
+    test ()
+      .isArray ('fail', 'data', data)
+      .isNotEmpty ('warn', 'data', data)
+      .done ()
+    ;
+  }
+  catch (err) {
+    test (err).done ();
+  }
+});
+
+
+dotest.add ('Method .getDisruptions', async test => {
+  try {
+    const data = await ns.getDisruptions();
+
+    test ()
+      .isArray ('fail', 'data', data)
+      .isNotEmpty ('warn', 'data', data)
+      .done ()
+    ;
+
+    // save one for the next test
+    if (data[0]) {
+      disruption = data[0];
+    }
+  }
+  catch (err) {
+    test (err).done ();
+  }
+});
+
+
+dotest.add ('Method .getDisruption', async test => {
+  if (!disruption) {
+    test ()
+      .warn ('No disruption available! Wow this is unique.')
+      .done ()
+    ;
+
+    return;
+  }
+
+  try {
+    const data = await ns.getDisruption ({
+      id: disruption.id,
+    });
+
+    test ()
+      .isObject ('fail', 'data', data)
+      .isNotEmpty ('fail', 'data', data)
+      .isExactly ('fail', 'data.id', data && data.id, disruption.id)
+      .done ()
+    ;
+  }
+  catch (err) {
+    test (err).done ();
+  }
+});
+
+
+dotest.add ('Method .getStationDisruption', async test => {
+  try {
+    const data = await ns.getStationDisruption ({
+      code: 'UT',
+    });
+
+    test ()
+      .isArray ('fail', 'data', data)
+      .isNotEmpty ('warn', 'data', data)
+      .done ()
+    ;
+  }
+  catch (err) {
+    test (err).done ();
+  }
+});
+
+
+dotest.add ('Method .getTrips', async test => {
+  try {
+    const data = await ns.getTrips ({
+      fromStation: 'UT',
+      toStation: 'AMF',
+    });
+
+    test ()
+      .isArray ('fail', 'data', data)
+      .isNotEmpty ('warn', 'data', data)
+      .done ()
+    ;
+
+    // save one for the next test
+    if (data[0]) {
+      trip = data[0];
+    }
+  }
+  catch (err) {
+    test (err).done ();
+  }
+});
+
+
+dotest.add ('Method .getTrip', async test => {
+  if (!trip) {
+    test ()
+      .warn ('No trip available!')
+      .done ()
+    ;
+
+    return;
+  }
+
+  try {
+    const data = await ns.getTrip ({
+      ctxRecon: trip.ctxRecon,
+    });
+
+    test ()
+      .isObject ('fail', 'data', data)
+      .isNotEmpty ('fail', 'data', data)
+      .isExactly ('fail', 'data.ctxRecon', data && data.ctxRecon, trip.ctxRecon)
+      .done ()
+    ;
+  }
+  catch (err) {
+    test (err).done ();
+  }
+});
+
+
+dotest.add ('Method .getPrice', async test => {
+  if (!trip) {
+    test ()
+      .warn ('No trip available!')
+      .done ()
+    ;
+
+    return;
+  }
+
+  try {
+    const data = await ns.getPrice ({
+      ctxRecon: trip.ctxRecon,
+    });
+
+    test ()
+      .isObject ('fail', 'data', data)
+      .isNotEmpty ('fail', 'data', data)
+      .isNumber ('fail', 'data.totalPriceInCents', data && data.totalPriceInCents)
+      .done ()
+    ;
+  }
+  catch (err) {
+    test (err).done ();
+  }
+});
+
+
+/*
+dotest.add ('Method .getInternationalPrice', async test => {
+  try {
+    const data = await ns.getInternationalPrice ({
+      fromStation: 'UT',
+      toStation: 'INNSB',
+      plannedFromTime: dateTime.toISOString(),
+    });
+
+    test ()
+      .info (data)
+      .done ()
+    ;
+  }
+  catch (err) {
+    test (err).done ();
+  }
+});
+*/
+
+
+dotest.add ('Config timeout', async test => {
+  let data;
+  let error;
+
+  const tmp = new app ({
+    key: config.key,
+    timeout: 1,
+  });
+
+  try {
+    data = await tmp.getAllStations();
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test ()
+      .isError ('fail', 'err', error)
+      .isExactly ('fail', 'err.code', error && error.code, 'TIMEOUT')
       .isUndefined ('fail', 'data', data)
-      .done();
-  });
+      .done ()
+    ;
+  }
 });
 
 
-dotest.add ('Method .prijzen', test => {
-  ns.prijzen ((err, data) => {
-    test()
-      .warn ('No test available yet')
-      .isError ('fail', 'err', err)
-      .isUndefined ('fail', 'data', data)
-      .done();
-  });
-});
-
-
-dotest.add ('Config .timeout', test => {
-  const tmp = app ({
-    username: config.username,
-    password: config.password,
-    timeout: 1
-  });
-
-  tmp.stations ((err, data) => {
-    test()
-      .isError ('fail', 'err', err)
-      .isUndefined ('fail', 'data', data)
-      .done();
-  });
-});
-
-
-dotest.run();
+dotest.run (500);
