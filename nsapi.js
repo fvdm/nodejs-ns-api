@@ -3,9 +3,8 @@ Name:       nsapi.js - Unofficial NodeJS module for Nederlandse Spoorwegen API
 Author:     Franklin van de Meent
 Source:     https://github.com/fvdm/nodejs-ns-api
 Feedback:   https://github.com/fvdm/nodejs-ns-api/issues
-API Docs:   http://www.ns.nl/api/api
-License:    Unlicense (Public Domain)
-            (see LICENSE file or https://raw.github.com/fvdm/nodejs-ns-api/master/LICENSE)
+API Docs:   https://apiportal.ns.nl
+License:    Unlicense (Public Domain, see LICENSE file)
 */
 
 
@@ -23,7 +22,7 @@ module.exports = class NSAPI {
   constructor ({
 
     key,
-    timeout = 5000,
+    timeout = 8000,
 
   } = {}) {
 
@@ -38,11 +37,10 @@ module.exports = class NSAPI {
   /**
    * HTTP request
    *
-   * @param    {string}   path          Method path
-   * @param    {object}   [parameters]  Request details
+   * @param   {string}           path          Method path
+   * @param   {object}           [parameters]  Request details
    *
-   * @return   {Promise}
-   * @Promise  {object}   resolve
+   * @return  {Promise<object>}
    */
 
   async _request ({ path, parameters }) {
@@ -59,14 +57,16 @@ module.exports = class NSAPI {
 
     return new Promise ((resolve, reject) => {
       doRequest (options, (err, res) => {
-        if (err) return reject (err);
+        if (err) {
+          return reject (err);
+        }
 
         let error;
         const data = JSON.parse (res.body);
 
         // API errors
         if (data.statusCode >= 300) {
-          error = new Error (data.messages);
+          error = new Error (data.message);
           error.statusCode = data.statusCode;
           return reject (error);
         }
@@ -91,22 +91,23 @@ module.exports = class NSAPI {
         }
 
         // ok
-        resolve (data);
+        return resolve (data);
       });
     });
   }
 
 
+  // ! REISINFORMATIE
+
   /**
    * Get a list of all stations
    *
-   * @return   {Promise}
-   * @Promise  {array}    resolve
+   * @return  {Promise<array>}
    */
 
   async getAllStations () {
     const data = await this._request ({
-      path: '/public-reisinformatie/api/v2/stations',
+      path: '/reisinformatie-api/api/v2/stations',
     });
 
     return data.payload;
@@ -116,210 +117,145 @@ module.exports = class NSAPI {
   /**
    * Get arrivals for a station
    *
-   * @param    {Date|string}  [dateTime]     Limit to date
-   * @param    {number}       [maxJourneys]  Limit to number of results
-   * @param    {string}       [lang]         Language of results: 'nl' or 'en'
-   * @param    {string}       [station]      Station ID: either `station` or `uicCode`
-   * @param    {string}       [uicCode]      Station ID: either `station` or `uicCode`
-   * @param    {string}       [source]
-   *
-   * @return   {Promise}
-   * @Promise  {array}        resolve
+   * @param   {object}          [parameters]  Request parameters
+   * @return  {Promise<array>}
    */
 
-  async getArrivals ({
-
-    dateTime = '',
-
-  } = {}) {
-
-    if (dateTime && !(dateTime instanceof Date)) {
-      arguments[0].dateTime = new Date (dateTime).toISOString();
+  async getArrivals (parameters = {}) {
+    if (parameters.dateTime && !(parameters.dateTime instanceof Date)) {
+      parameters.dateTime = new Date (parameters.dateTime).toISOString();
     }
 
     const data = await this._request ({
-      path: '/public-reisinformatie/api/v2/arrivals',
-      parameters: arguments[0],
+      path: '/reisinformatie-api/api/v2/arrivals',
+      parameters,
     });
 
     return data.payload.arrivals;
-
   }
 
 
   /**
-   * Get a large list of departure times for a specified station
+   * Get calamities
    *
-   * @param    {Date|string}  [dateTime]     Limit to date
-   * @param    {number}       [maxJourneys]  Limit to number of results
-   * @param    {string}       [lang]         Language of results: 'nl' or 'en'
-   * @param    {string}       [station]      Station ID: either `station` or `uicCode`
-   * @param    {string}       [uicCode]      Station ID: either `station` or `uicCode`
-   * @param    {string}       [source]
-   *
-   * @return   {Promise}
-   * @Promise  {array}        resolve
+   * @param   {object}          [parameters]  Request parameters
+   * @return  {Promise<array>}
    */
 
-  async getBigDepartures ({
-
-    dateTime = '',
-
-  } = {}) {
-
-    if (dateTime && !(dateTime instanceof Date)) {
-      arguments[0].dateTime = new Date (dateTime).toISOString();
-    }
-
+  async getCalamities (parameters = {}) {
     const data = await this._request ({
-      path: '/public-reisinformatie/api/v2/departures/big',
-      parameters: arguments[0],
+      path: '/reisinformatie-api/api/v1/calamities',
+      parameters,
     });
 
-    return data.payload.departures;
-
+    return data.meldingen;
   }
 
 
   /**
    * Get a list of departure times
    *
-   * @param    {Date|string}  [dateTime]     Limit to date
-   * @param    {number}       [maxJourneys]  Limit to number of results
-   * @param    {string}       [lang]         Language of results: 'nl' or 'en'
-   * @param    {string}       [station]      Station ID: either `station` or `uicCode`
-   * @param    {string}       [uicCode]      Station ID: either `station` or `uicCode`
-   * @param    {string}       [source]
-   *
-   * @return   {Promise}
-   * @Promise  {array}    resolve
+   * @param   {object}          parameters  Request parameters
+   * @return  {Promise<array>}
    */
 
-  async getDepartures ({
-
-    dateTime = '',
-
-  } = {}) {
-
-    if (dateTime && !(dateTime instanceof Date)) {
-      arguments[0].dateTime = new Date (dateTime).toISOString();
+  async getDepartures (parameters) {
+    if (parameters.dateTime && !(parameters.dateTime instanceof Date)) {
+      parameters.dateTime = new Date (parameters.dateTime).toISOString();
     }
 
     const data = await this._request ({
-      path: '/public-reisinformatie/api/v2/departures',
-      parameters: arguments[0],
+      path: '/reisinformatie-api/api/v2/departures',
+      parameters,
     });
 
     return data.payload.departures;
-
   }
 
 
   /**
    * Get details about one disruption
    *
-   * @param    {string}  [id]  Disruption ID
+   * @param   {object}           parameters     Request parameters
+   * @param   {string}           parameters.id  Disruption ID
    *
-   * @return   {Promise}
-   * @Promise  {object}        resolve
+   * @return  {Promise<object>}
    */
 
-  async getDisruption ({ id } = {}) {
+  async getDisruption (parameters) {
+    const id = parameters.id;
+
+    delete parameters.id;
 
     const data = await this._request ({
-      path: `/public-reisinformatie/api/v2/disruptions/${id}`,
+      path: `/reisinformatie-api/api/v2/disruptions/${id}`,
+      parameters,
     });
 
     return data.payload;
-
   }
 
 
   /**
    * Get a list of disruptions
    *
-   * @param    {boolean}  [actual]  Only return disruptions within 2 hours of the request
-   * @param    {string}   [lang]    Language of results: 'nl' or 'en'
-   * @param    {string}   [type]    Filter by type of the disruptions: `storing` or `werkzaamheid`
-   *
-   * @return   {Promise}
-   * @Promise  {array}        resolve
+   * @param   {object}          parameters  Request parameters
+   * @return  {Promise<array>}
    */
 
-  async getDisruptions ({
-
-    actual = '',
-
-  } = {}) {
-
-    arguments[0].actual = String (actual);
+  async getDisruptions (parameters = {}) {
+    parameters.actual = String (parameters.actual);
 
     const data = await this._request ({
-      path: '/public-reisinformatie/api/v2/disruptions',
-      parameters: arguments[0],
+      path: '/reisinformatie-api/api/v2/disruptions',
+      parameters,
     });
 
     return data.payload;
-
   }
 
 
   /**
    * Get a list of disruptions for a specific station
    *
-   * @param    {string}   [station]
+   * @param   {object}           parameters       Request parameters
+   * @param   {object}           parameters.code  UICCode or station code
    *
-   * @return   {Promise}
-   * @Promise  {object}   resolve
+   * @return  {Promise<object>}
    */
 
-  async getStationDisruption ({
+  async getStationDisruption (parameters) {
+    const code = parameters.code;
 
-    station = '',
-
-  } = {}) {
+    delete parameters.code;
 
     const data = await this._request ({
-      path: `/public-reisinformatie/api/v2/disruptions/station/${station}`,
+      path: `/reisinformatie-api/api/v2/disruptions/station/${code}`,
+      parameters,
     });
 
     return data.payload;
-
   }
 
 
   /**
    * Reconstruct a trip if possible using the given reconCtx
    *
-   * @param    {string}   ctxRecon             Representation of a trip found in a travel advice
-   * @param    {string}   [date]
-   * @param    {string}   [lang]
-   * @param    {string}   [product]
-   * @param    {string}   [travelClass]
-   * @param    {string}   [discount]
-   * @param    {string}   [travelRequestType]
-   *
-   * @return   {Promise}
-   * @Promise  {array}    resolve
+   * @param   {object}          parameters  Request parameters
+   * @return  {Promise<array>}
    */
 
-  async getTrip ({
-
-    date = '',
-
-  } = {}) {
-
-    if (date && !(date instanceof Date)) {
-      arguments[0].date = new Date (date).toISOString();
+  async getTrip (parameters = {}) {
+    if (parameters.date && !(parameters.date instanceof Date)) {
+      parameters.date = new Date (parameters.date).toISOString();
     }
 
     const data = await this._request ({
-      path: '/public-reisinformatie/api/v3/trips/trip',
-      parameters: arguments[0],
+      path: '/reisinformatie-api/api/v3/trips/trip',
+      parameters,
     });
 
-    return data.payload;
-
+    return data;
   }
 
 
@@ -327,55 +263,67 @@ module.exports = class NSAPI {
    * Searches for a travel advice with the specified options between the
    * possible backends (HARP, 9292 or PAS/AVG)
    *
-   * @return   {Promise}
-   * @Promise  {array}    resolve
+   * For door-to-door trips you need a special API key
+   *
+   * @param   {object}          parameters  Request parameters
+   * @return  {Promise<array>}
    */
 
-  async getTrips ({
-
-    dateTime = '',
-
-  } = {}) {
-
-    if (dateTime && !(dateTime instanceof Date)) {
-      arguments[0].dateTime = new Date (dateTime).toISOString();
+  async getTrips (parameters) {
+    if (parameters.dateTime && !(parameters.dateTime instanceof Date)) {
+      parameters.dateTime = new Date (parameters.dateTime).toISOString();
     }
 
     const data = await this._request ({
-      path: '/public-reisinformatie/api/v3/trips',
-      parameters: arguments[0],
+      path: '/reisinformatie-api/api/v3/trips',
+      parameters,
     });
 
-    return data;
-
+    return data.trips;
   }
 
 
   /**
    * Get pricing for travel between two stations
    *
-   * @param    {Date|string}  date         Date instance or string 'YYYY-MM-DD'
-   * @param    {string}       fromStation  Name/ID of station #1
-   * @param    {string}       toStation    Name/ID of station #2
+   * @param   {object}          parameters  Request parameters
+   * @return  {Promise<array>}
    */
 
-  async getPrices ({
-
-    date = '',
-
-  } = {}) {
-
+  async getPrice (parameters) {
     // YYYY-MM-DD
-    if (date && !(date instanceof Date)) {
-      arguments[0].date = new Date (date).toISOString().split ('T')[0];
+    if (parameters.date && !(parameters.date instanceof Date)) {
+      parameters.date = new Date (parameters.date).toISOString().split ('T')[0];
     }
 
     const data = await this._request ({
-      path: '/public-prijsinformatie/prices',
-      parameters: arguments[0],
+      path: '/reisinformatie-api/api/v2/price',
+      parameters,
     });
 
-    return data.priceOptions;
+    return data.value;
+  }
+
+
+  /**
+   * Get pricing for travel between two stations
+   *
+   * @param   {object}          [parameters]  Request parameters
+   * @return  {Promise<array>}
+   */
+
+  async getInternationalPrice (parameters = {}) {
+    return new Error ('not yet implemented');
+
+    /*
+    const data = await this._request ({
+      path: '/reisinformatie-api/api/v2/price/international',
+      parameters,
+    });
+
+    return data;
+    */
+
   }
 
 };
