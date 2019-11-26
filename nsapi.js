@@ -24,7 +24,7 @@ module.exports = class NSAPI {
     key,
     timeout = 8000,
 
-  } = {}) {
+  }) {
 
     this._config = {
       key,
@@ -117,11 +117,11 @@ module.exports = class NSAPI {
   /**
    * Get arrivals for a station
    *
-   * @param   {object}          [parameters]  Request parameters
+   * @param   {object}          parameters  Request parameters
    * @return  {Promise<array>}
    */
 
-  async getArrivals (parameters = {}) {
+  async getArrivals (parameters) {
     if (parameters.dateTime && !(parameters.dateTime instanceof Date)) {
       parameters.dateTime = new Date (parameters.dateTime).toISOString();
     }
