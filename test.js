@@ -3,7 +3,7 @@ const app = require ('./');
 
 const config = {
   key: process.env.NS_APIKEY,
-  timeout: process.env.NS_TIMEOUT || 5000,
+  timeout: process.env.NS_TIMEOUT || 8000,
 };
 
 const ns = new app (config);
