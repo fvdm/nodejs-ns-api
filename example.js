@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const NSAPI = require ('ns-api');
 const ns = new NSAPI ({
   key: 'abc123',
