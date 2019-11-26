@@ -39,7 +39,7 @@ dotest.add ('Module', async test => {
 });
 
 
-dotest.add ('API error', async test => {
+dotest.add ('API error - statusCode >= 300', async test => {
   let data;
   let error;
 
@@ -53,6 +53,26 @@ dotest.add ('API error', async test => {
     test ()
       .isError ('fail', 'err', error)
       .isExactly ('fail', 'err.message', error && error.message, 'Resource not found')
+      .isUndefined ('fail', 'data', data)
+      .done ()
+    ;
+  }
+});
+
+
+dotest.add ('API error - code && message', async test => {
+  let data;
+  let error;
+
+  try {
+    data = await ns.getPrice ({});
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test ()
+      .isError ('fail', 'err', error)
       .isUndefined ('fail', 'data', data)
       .done ()
     ;
