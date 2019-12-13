@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 const dotest = require ('dotest');
 const app = require ('./');
 

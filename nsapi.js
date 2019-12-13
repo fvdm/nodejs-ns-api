@@ -78,12 +78,14 @@ module.exports = class NSAPI {
           return reject (error);
         }
 
+        /* istanbul ignore next */
         if (data.fieldErrors && data.fieldErrors.length) {
           error = new Error ('API field errors');
           error.errors = data.fieldErrors;
           return reject (error);
         }
 
+        /* istanbul ignore next */
         if (data.errors && data.errors[0]) {
           error = new Error ('API errors');
           error.errors = data.errors;
