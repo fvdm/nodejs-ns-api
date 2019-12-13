@@ -422,6 +422,8 @@ dotest.add ('Method .getInternationalPrice', async test => {
   let data;
   let error;
 
+  test().warn ('Not yet implemented!');
+
   try {
     data = await ns.getInternationalPrice ({
       fromStation: 8400055,
