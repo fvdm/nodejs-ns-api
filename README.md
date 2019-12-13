@@ -79,7 +79,7 @@ ns.getAllStations()
 ;
 ```
 
-[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV2StationsGet)
+[API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getAllStations)
 
 
 ### getArrivals
@@ -97,7 +97,7 @@ ns.getArrivals ({ dateTime: '2019-05-10' })
 ;
 ```
 
-[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV2ArrivalsGet)
+[API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getArrivals)
 
 
 ### getBigDepartures
@@ -133,7 +133,7 @@ ns.getDepartures ({ id: 'abc123' })
 ;
 ```
 
-[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV2DeparturesGet)
+[API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getDepartures)
 
 
 ### getDisruptions
@@ -151,7 +151,7 @@ ns.getDisruptions()
 ;
 ```
 
-[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV2DisruptionsGet)
+[API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getDisruptions)
 
 
 ### getStationDisruption
@@ -169,7 +169,7 @@ ns.getStationDisruption ({ dateTime: '2019-05-10' })
 ;
 ```
 
-[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV2DisruptionsStationByCodeGet)
+[API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getStationDisruption)
 
 
 ### getDisruption
@@ -187,7 +187,7 @@ ns.getDisruption ({ id: 'abc123' })
 ;
 ```
 
-[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV2DisruptionsByIdGet)
+[API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getDisruption)
 
 
 ### getTrips
@@ -209,7 +209,7 @@ ns.getTrips ({
 ;
 ```
 
-[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV3TripsGet)
+[API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getTrips)
 
 
 ### getTrip
@@ -227,7 +227,7 @@ ns.getTrip ({ ctxRecon: 'abc123' })
 ;
 ```
 
-[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV3TripsTripGet)
+[API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getTrip)
 
 
 ### getPrices
@@ -250,7 +250,7 @@ ns.getPrices ({
 
 ```
 
-[API documentation](https://apiportal.ns.nl/docs/services/public-prijsinformatie-api/operations/getPrices_2)
+[API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getPrice)
 
 
 ## Unlicense
