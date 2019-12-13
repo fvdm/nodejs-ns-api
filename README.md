@@ -48,7 +48,7 @@ ns.getTrips ({
 param   | type   | required | default | description
 :-------|:-------|:---------|:--------|:-----------
 key     | string | yes      |         | One of your API keys
-timeout | number | no       | 5000    | Request time out in ms
+timeout | number | no       | 8000    | Request time out in ms
 
 
 ```js
@@ -100,34 +100,34 @@ ns.getArrivals ({ dateTime: '2019-05-10' })
 [API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getArrivals)
 
 
-### getBigDepartures
+### getCalamities
 
-Large list of departures at a station
+List of calamities
 
 argument   | type           | description
 :----------|:---------------|:-----------
-[dateTime] | Date or string | Value will be converted to the right format
+[lang]     | string         | Text language
 
 ```js
-ns.getBigDepartures ({ dateTime: '2019-05-10' })
+ns.getArrivals ({ lang: 'en' })
   .then (console.log)
   .catch (console.error)
 ;
 ```
 
-[API documentation](https://apiportal.ns.nl/docs/services/public-reisinformatie-api/operations/ApiV2DeparturesBigGet)
+[API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getCalamities)
 
 
 ### getDepartures
 
 List all departures
 
-argument | type   | description
-:--------|:-------|:-----------
-id       | string | Departure object ID
+argument   | type           | description
+:----------|:---------------|:-----------
+[dateTime] | Date or string | Value will be converted to the right format
 
 ```js
-ns.getDepartures ({ id: 'abc123' })
+ns.getDepartures ()
   .then (console.log)
   .catch (console.error)
 ;
@@ -140,9 +140,9 @@ ns.getDepartures ({ id: 'abc123' })
 
 List all disruptions
 
-argument | type    | description
-:--------|:--------|:-----------
-[actual] | boolean | Only return disruptions within 2 hours
+argument   | type           | description
+:----------|:---------------|:-----------
+[actual]   | boolean        | Only return disruptions within 2 hours
 
 ```js
 ns.getDisruptions()
@@ -176,9 +176,9 @@ ns.getStationDisruption ({ dateTime: '2019-05-10' })
 
 Get details about one disruption
 
-argument | type   | description
-:--------|:-------|:-----------
-id       | string | Disruption object ID
+argument   | type           | description
+:----------|:---------------|:-----------
+id         | string         | Disruption object ID
 
 ```js
 ns.getDisruption ({ id: 'abc123' })
@@ -216,9 +216,9 @@ ns.getTrips ({
 
 Get a specific travel advise
 
-argument | type   | description
-:--------|:-------|:-----------
-ctxRecon | string | Trip `ctxRecon` from [getTrips()](#getTrips)
+argument    | type           | description
+:-----------|:---------------|:-----------
+ctxRecon    | string         | Trip `ctxRecon` from [getTrips()](#getTrips)
 
 ```js
 ns.getTrip ({ ctxRecon: 'abc123' })
@@ -230,7 +230,7 @@ ns.getTrip ({ ctxRecon: 'abc123' })
 [API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getTrip)
 
 
-### getPrices
+### getPrice
 
 Get pricing for travel between two stations.
 
@@ -251,6 +251,15 @@ ns.getPrices ({
 ```
 
 [API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getPrice)
+
+
+### getInternationPrice
+
+Get pricing for travel between stations across country borders.
+
+**TODO:** This method is not yet implemented.
+
+[API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getInternationalPrice)
 
 
 ## Unlicense
