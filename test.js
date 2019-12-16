@@ -87,7 +87,6 @@ dotest.add ('Method .getAllStations', async test => {
     const data = await ns.getAllStations();
 
     test ()
-      .info (data)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isObject ('fail', 'data[0]', data && data[0])
