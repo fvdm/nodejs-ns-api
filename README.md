@@ -253,15 +253,6 @@ ns.getPrices ({
 [API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getPrice)
 
 
-### getInternationPrice
-
-Get pricing for travel between stations across country borders.
-
-**TODO:** This method is not yet implemented.
-
-[API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getInternationalPrice)
-
-
 ## Unlicense
 
 This is free and unencumbered software released into the public domain.

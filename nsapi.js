@@ -309,26 +309,4 @@ module.exports = class NSAPI {
     return data.value;
   }
 
-
-  /**
-   * Get pricing for travel between two stations
-   *
-   * @param   {object}          [parameters]  Request parameters
-   * @return  {Promise<array>}
-   */
-
-  async getInternationalPrice (parameters) {
-    throw new Error ('not yet implemented');
-
-    /*
-    const data = await this._request ({
-      path: '/reisinformatie-api/api/v2/price/international',
-      parameters,
-    });
-
-    return data;
-    */
-
-  }
-
 };

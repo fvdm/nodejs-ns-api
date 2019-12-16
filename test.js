@@ -421,32 +421,6 @@ dotest.add ('Method .getPrice - Including date', async test => {
 });
 
 
-dotest.add ('Method .getInternationalPrice', async test => {
-  let data;
-  let error;
-
-  test().warn ('Not yet implemented!');
-
-  try {
-    data = await ns.getInternationalPrice ({
-      fromStation: '8400055',
-      toStation: '8101187',
-      plannedFromTime: '2019-11-26T13:36:00+01:00',
-    });
-  }
-  catch (err) {
-    error = err;
-  }
-  finally {
-    test ()
-      .isError ('fail', 'err', error)
-      .isUndefined ('fail', 'data', data)
-      .done ()
-    ;
-  }
-});
-
-
 dotest.add ('Config timeout', async test => {
   let data;
   let error;
