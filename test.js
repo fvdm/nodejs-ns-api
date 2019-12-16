@@ -87,6 +87,7 @@ dotest.add ('Method .getAllStations', async test => {
     const data = await ns.getAllStations();
 
     test ()
+      .info (data)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isObject ('fail', 'data[0]', data && data[0])
@@ -428,8 +429,8 @@ dotest.add ('Method .getInternationalPrice', async test => {
 
   try {
     data = await ns.getInternationalPrice ({
-      fromStation: 8400055,
-      toStation: 8101187,
+      fromStation: '8400055',
+      toStation: '8101187',
       plannedFromTime: '2019-11-26T13:36:00+01:00',
     });
   }
