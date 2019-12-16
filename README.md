@@ -82,7 +82,8 @@ List of all stations
 
 ```js
 ns.getAllStations()
-  .then (console.log)
+  .then (data => data.filter (station => station.land === 'NL'))
+  .then (data => console.table (data, ['code', 'stationType']))
   .catch (console.error)
 ;
 ```
@@ -99,8 +100,11 @@ argument   | type           | description
 [dateTime] | Date or string | Value will be converted to the right format
 
 ```js
-ns.getArrivals ({ dateTime: '2019-05-10' })
-  .then (console.log)
+ns.getArrivals ({
+  dateTime: '2019-05-10',
+  station: 'UT',
+})
+  .then (data => console.table (data, ['name', 'origin', 'actualDateTime']))
   .catch (console.error)
 ;
 ```
@@ -154,7 +158,7 @@ argument   | type           | description
 
 ```js
 ns.getDisruptions()
-  .then (console.log)
+  .then (data => console.table (data, ['titel']))
   .catch (console.error)
 ;
 ```
@@ -172,7 +176,7 @@ argument   | type           | description
 
 ```js
 ns.getStationDisruption ({ dateTime: '2019-05-10' })
-  .then (console.log)
+  .then (data => console.table (data, ['titel']))
   .catch (console.error)
 ;
 ```
