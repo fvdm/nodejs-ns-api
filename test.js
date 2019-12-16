@@ -35,7 +35,6 @@ dotest.add ('Module', async test => {
     .isFunction ('fail', '.getTrip', ns && ns.getTrip)
     .isFunction ('fail', '.getTrips', ns && ns.getTrips)
     .isFunction ('fail', '.getPrice', ns && ns.getPrice)
-    .isFunction ('fail', '.getInternationalPrice', ns && ns.getInternationalPrice)
     .done ()
   ;
 });
@@ -129,7 +128,7 @@ dotest.add ('Method .getArrivals - Date instance dateTime', async test => {
 
     test ()
       .info ('dateTime = Tomorrow 14:00')
-      .info (dateTime)
+      .info (dateTime.toString())
       .isArray ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isObject ('fail', 'data[0]', data && data[0])
