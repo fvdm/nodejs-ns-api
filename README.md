@@ -93,11 +93,11 @@ ns.getAllStations()
 
 ### getArrivals
 
-List of arrivals at a station
+List of arrivals at a station. It requires a `station` or `uicCode`.
 
-argument   | type           | description
+parameter  | type           | description
 :----------|:---------------|:-----------
-[dateTime] | Date or string | Value will be converted to the right format
+[dateTime] | Date or string | Limit to starting time, will be converted to the right format
 
 ```js
 ns.getArrivals ({
@@ -114,9 +114,9 @@ ns.getArrivals ({
 
 ### getCalamities
 
-List of calamities
+List of all current calamities
 
-argument   | type           | description
+parameter  | type           | description
 :----------|:---------------|:-----------
 [lang]     | string         | Text language
 
@@ -132,11 +132,11 @@ ns.getArrivals ({ lang: 'en' })
 
 ### getDepartures
 
-List all departures
+List all departures at a station. It requires a `station` or `uicCode`.
 
-argument   | type           | description
+parameter  | type           | description
 :----------|:---------------|:-----------
-[dateTime] | Date or string | Value will be converted to the right format
+[dateTime] | Date or string | Limit to starting time, will be converted to the right format
 
 ```js
 ns.getDepartures ()
@@ -150,9 +150,9 @@ ns.getDepartures ()
 
 ### getDisruptions
 
-List all disruptions
+List of disruptions/maintenance.
 
-argument   | type           | description
+parameter  | type           | description
 :----------|:---------------|:-----------
 [actual]   | boolean        | Only return disruptions within 2 hours
 
@@ -170,9 +170,9 @@ ns.getDisruptions()
 
 List of disruptions at a station
 
-argument   | type           | description
+parameter  | type           | description
 :----------|:---------------|:-----------
-[dateTime] | Date or string | Value will be converted to the right format
+[dateTime] | Date or string | Limit to starting time, will be converted to the right format
 
 ```js
 ns.getStationDisruption ({ dateTime: '2019-05-10' })
@@ -188,7 +188,7 @@ ns.getStationDisruption ({ dateTime: '2019-05-10' })
 
 Get details about one disruption
 
-argument   | type           | description
+parameter  | type           | description
 :----------|:---------------|:-----------
 id         | string         | Disruption object ID
 
@@ -206,9 +206,9 @@ ns.getDisruption ({ id: 'abc123' })
 
 Get a list of travel advises
 
-argument   | type           | description
+parameter  | type           | description
 :----------|:---------------|:-----------
-[dateTime] | Date or string | Value will be converted to the right format
+[dateTime] | Date or string | Limit to starting time, will be converted to the right format
 
 ```js
 ns.getTrips ({
@@ -228,7 +228,7 @@ ns.getTrips ({
 
 Get a specific travel advise
 
-argument    | type           | description
+parameter   | type           | description
 :-----------|:---------------|:-----------
 ctxRecon    | string         | Trip `ctxRecon` from [getTrips()](#getTrips)
 
@@ -246,7 +246,7 @@ ns.getTrip ({ ctxRecon: 'abc123' })
 
 Get pricing for travel between two stations.
 
-argument    | type           | description
+parameter   | type           | description
 :-----------|:---------------|:-----------
 fromStation | string         | Station name or ID
 toStation   | string         | Station name or ID
