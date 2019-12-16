@@ -62,6 +62,14 @@ const ns = new NSAPI ({
 ## Methods
 
 Each method returns a Promise, so make sure to catch the errors properly.
+
+When a method takes arguments they are only accepted in object notation.
+This way the order no longer matters and it makes it easier to reuse them.
+
+```js
+methodName ({ one, two });
+```
+
 I'm not going to outline to full possibilities of each method here,
 only the parts that adjust the API response or make the request easier.
 Read the _API documentation_ links to find all available parameters that
