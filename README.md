@@ -45,10 +45,10 @@ ns.getTrips ({
 
 ## Configuration
 
-param   | type   | required | default | description
-:-------|:-------|:---------|:--------|:-----------
-key     | string | yes      |         | One of your API keys
-timeout | number | no       | 8000    | Request time out in ms
+param     | type   | default | description
+:---------|:-------|:--------|:-----------
+key       | string |         | One of your API keys
+[timeout] | number | 8000    | Request time out in ms
 
 
 ```js
