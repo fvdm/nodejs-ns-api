@@ -1,3 +1,29 @@
+#### 4.0.1 (2020-08-31)
+
+##### Chores
+
+* **package:**
+  *  Update author info ([03856d12](https://github.com/fvdm/nodejs-ns-api/commit/03856d12f44955daaa1a096dccc26cf1be726f93))
+  *  Update minimum node to v10 ([92a3bc4a](https://github.com/fvdm/nodejs-ns-api/commit/92a3bc4ae649fdab9e0ff8189cc5a32a88435ff8))
+  *  Update dev deps ([c74c3b48](https://github.com/fvdm/nodejs-ns-api/commit/c74c3b4823e6e1ab24645fac9860062dddd21246))
+
+##### Documentation Changes
+
+*  Update author info ([a0e85371](https://github.com/fvdm/nodejs-ns-api/commit/a0e85371ce6b45ddacede71192abe4607d7afc74))
+
+##### Bug Fixes
+
+* **API:**
+  *  getDisruptions actual must be explicit ([#23](https://github.com/fvdm/nodejs-ns-api/pull/23)) ([517cde9d](https://github.com/fvdm/nodejs-ns-api/commit/517cde9d6f2d6f67da4896e53e918da330655d85))
+  *  getPrice payload was moved to root ([#23](https://github.com/fvdm/nodejs-ns-api/pull/23)) ([1caf0f52](https://github.com/fvdm/nodejs-ns-api/commit/1caf0f52d3455194f6b8c92bca2609b9446fcbc7))
+  *  getArrivals dateTime format ([#23](https://github.com/fvdm/nodejs-ns-api/pull/23)) ([db3a49ac](https://github.com/fvdm/nodejs-ns-api/commit/db3a49ac475705238b56d5d14b28806ed818d4d1))
+
+##### Tests
+
+* **config:**
+  *  Update Travis node versions ([8a92d788](https://github.com/fvdm/nodejs-ns-api/commit/8a92d788382f0deb60c52795f2fccc54405cd97b))
+  *  Update Travis node versions and env ([6f3312eb](https://github.com/fvdm/nodejs-ns-api/commit/6f3312eb25ed0afbf1e0a9670c6b330e62310148))
+
 ## 4.0.0 (2019-12-16)
 
 ##### Breaking Changes
