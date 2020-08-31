@@ -27,7 +27,7 @@
     "httpreq": "^0.4.24"
   },
   "devDependencies": {
-    "dotest": "^2.6.1"
+    "dotest": "^2.7.1"
   },
   "engines": {
     "node": ">=8.0.0"
