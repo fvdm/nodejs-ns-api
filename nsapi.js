@@ -125,7 +125,7 @@ module.exports = class NSAPI {
 
   async getArrivals (parameters) {
     if (parameters.dateTime && !(parameters.dateTime instanceof Date)) {
-      parameters.dateTime = new Date (parameters.dateTime).toISOString();
+      parameters.dateTime = new Date (parameters.dateTime).toString();
     }
 
     const data = await this._request ({
