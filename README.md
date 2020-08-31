@@ -293,7 +293,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org/>
 
 
-Author
-------
+## Author
 
-[Franklin van de Meent](https://fvdm.com)
+[Franklin](https://fvdm.com) | [Buy me a coffee](https://fvdm.com/donating)
