@@ -206,7 +206,7 @@ module.exports = class NSAPI {
    */
 
   async getDisruptions (parameters = {}) {
-    parameters.actual = String (parameters.actual);
+    parameters.actual = parameters.actual === true ? 'true' : 'false';
 
     const data = await this._request ({
       path: '/reisinformatie-api/api/v2/disruptions',
