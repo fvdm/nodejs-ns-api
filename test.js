@@ -364,18 +364,10 @@ dotest.add ('Method .getTrip', async test => {
 
 
 dotest.add ('Method .getPrice - Without date', async test => {
-  if (!trip) {
-    test ()
-      .warn ('No trip available!')
-      .done ()
-    ;
-
-    return;
-  }
-
   try {
     const data = await ns.getPrice ({
-      ctxRecon: trip.ctxRecon,
+      fromStation: 'UT',
+      toStation: 'AMF',
     });
 
     test ()
