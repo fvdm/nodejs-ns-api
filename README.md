@@ -24,15 +24,20 @@ const ns = new NSAPI ({
   key: 'abc123',
 });
 
+// Output w/o limits
+function out (data) {
+  console.dir (data, {
+    depth: null,
+    colors: true,
+  });
+}
+
 // Get travel advise
 ns.getTrips ({
   fromStation: 'UT',
   toStation: 'AMF',
 })
-  .then (data => console.dir (data, {
-    depth: null,
-    colors: true,
-  }))
+  .then (out)
   .catch (console.error)
 ;
 ```
