@@ -3,7 +3,7 @@
 Access public transit data from [Nederlandse Spoorwegen API](https://apiportal.ns.nl) with node.js
 
 [![Changelog](https://img.shields.io/npm/v/ns-api.svg?maxAge=3600)](https://github.com/fvdm/nodejs-ns-api/blob/master/CHANGELOG.md)
-[![Build Status](https://travis-ci.org/fvdm/nodejs-ns-api.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-ns-api)
+[![Build Status](https://travis-ci.com/fvdm/nodejs-ns-api.svg?branch=master)](https://travis-ci.com/github/fvdm/nodejs-ns-api)
 [![Coverage Status](https://coveralls.io/repos/github/fvdm/nodejs-ns-api/badge.svg?branch=master)](https://coveralls.io/github/fvdm/nodejs-ns-api?branch=master)
 
 
