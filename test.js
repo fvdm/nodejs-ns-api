@@ -35,6 +35,7 @@ dotest.add ('Module', async test => {
     .isFunction ('fail', '.getTrip', ns && ns.getTrip)
     .isFunction ('fail', '.getTrips', ns && ns.getTrips)
     .isFunction ('fail', '.getPrice', ns && ns.getPrice)
+    .isFunction ('fail', '.getJourney', ns && ns.getJourney)
     .done ()
   ;
 });
@@ -391,18 +392,10 @@ dotest.add ('Method .getPrice - Without date', async test => {
 
 
 dotest.add ('Method .getPrice - Including date', async test => {
-  if (!trip) {
-    test ()
-      .warn ('No trip available!')
-      .done ()
-    ;
-
-    return;
-  }
-
   try {
     const data = await ns.getPrice ({
-      ctxRecon: trip.ctxRecon,
+      fromStation: 'UT',
+      toStation: 'AMF',
       date: dateTime.toString(),
     });
 
@@ -410,6 +403,24 @@ dotest.add ('Method .getPrice - Including date', async test => {
       .isObject ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isNumber ('fail', 'data.totalPriceInCents', data && data.totalPriceInCents)
+      .done ()
+    ;
+  }
+  catch (err) {
+    test (err).done ();
+  }
+});
+
+
+dotest.add ('Method .getJourney', async test => {
+  try {
+    const data = await ns.getJourney ({
+      id: trip.legs[0].journeyDetail[0].link.uri,
+    });
+
+    test ()
+      .isObject ('fail', 'data', data)
+      .isNotEmpty ('fail', 'data', data)
       .done ()
     ;
   }

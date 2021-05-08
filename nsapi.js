@@ -306,7 +306,28 @@ module.exports = class NSAPI {
       parameters,
     });
 
-    return data;
+    return data.payload;
+  }
+
+
+  /**
+   * Get information about a specific journey
+   *
+   * @param   {object}          Parameters  Request parameters
+   * @return  {Promise<object>
+   */
+
+  async getJourney (parameters) {
+    if (parameters.dateTime && !(parameters.date instanceof Date)) {
+      parameters.dateTime = new Date (parameters.dateTime).toISOString();
+    }
+
+    const data = await this._request ({
+      path: '/reisinformatie-api/api/v2/journey',
+      parameters,
+    });
+
+    return data.payload;
   }
 
 };

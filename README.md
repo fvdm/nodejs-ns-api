@@ -269,6 +269,28 @@ ns.getPrices ({
 [API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getPrice)
 
 
+### getJourney
+
+Get information about a specific journey.
+You can find the `id` in the trip data from `getTrip()` at `trip.legs[].journeyDetail[].link.uri`.
+Just use that whole path.
+
+
+parameter | type   | description
+:---------|:-------|:-----------
+id        | string | Journey ID
+
+
+```js
+ns.getJourney ({
+  id: 'HARP_S2S-1|3824|0|784|8052021',
+})
+  .then (console.log)
+  .catch (console.error)
+;
+```
+
+
 ## Unlicense
 
 This is free and unencumbered software released into the public domain.
