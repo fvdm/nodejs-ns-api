@@ -320,14 +320,14 @@ Returns an object.
 parameter | type   | description
 :---------|:-------|:-----------
 type      | string | Place type, ex: stationV2
-id        | string | Place ID, ex: UTR
+id        | string | Place ID, ex: AMF
 [lang]    | string | Response language
 
 
 ```js
 ns.placesGet ({
   type: 'stationV2',
-  id: 'UTR',
+  id: 'AMF',
 });
 ```
 
@@ -343,7 +343,7 @@ parameter      | type   | description
 
 ```js
 ns.placesOvfiets ({
-  station_code: 'UTR',
+  station_code: 'AMF',
 });
 ```
 
