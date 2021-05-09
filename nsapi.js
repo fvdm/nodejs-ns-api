@@ -341,7 +341,7 @@ module.exports = class NSAPI {
    */
 
   async placesList (parameters) {
-    const data = this._request ({
+    const data = await this._request ({
       path: '/places-api/v2/places',
       parameters,
     });
@@ -358,7 +358,7 @@ module.exports = class NSAPI {
    */
 
   async placesOvfiets (parameters) {
-    const data = this._request ({
+    const data = await this._request ({
       path: '/places-api/v2/ovfiets',
       parameters,
     });
@@ -382,7 +382,7 @@ module.exports = class NSAPI {
     id,
     lang = '',
   }) {
-    const data = this._request ({
+    const data = await this._request ({
       path: `/places-api/v2/places/${type}/${id}`,
       parameters: {
         lang,
