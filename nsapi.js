@@ -346,7 +346,7 @@ module.exports = class NSAPI {
       parameters,
     });
 
-    return data;
+    return data.payload;
   }
 
 
