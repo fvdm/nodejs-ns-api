@@ -21,7 +21,7 @@ dateTime.setHours (14);
 dateTime.setMinutes (0);
 
 
-// Basic tests
+// ! Basic tests
 dotest.add ('Module', async test => {
   test()
     .isClass ('fail', 'exports', app)
@@ -36,6 +36,9 @@ dotest.add ('Module', async test => {
     .isFunction ('fail', '.getTrips', ns && ns.getTrips)
     .isFunction ('fail', '.getPrice', ns && ns.getPrice)
     .isFunction ('fail', '.getJourney', ns && ns.getJourney)
+    .isFunction ('fail', '.placesList', ns && ns.placesList)
+    .isFunction ('fail', '.placesGet', ns && ns.placesGet)
+    .isFunction ('fail', '.placesOvfiets', ns && ns.placesOvfiets)
     .done ()
   ;
 });
@@ -82,6 +85,7 @@ dotest.add ('API error - code && message', async test => {
 });
 
 
+// ! REISINFORMATIE
 dotest.add ('Method .getAllStations', async test => {
   try {
     const data = await ns.getAllStations();
@@ -418,6 +422,64 @@ dotest.add ('Method .getJourney', async test => {
   }
   catch (err) {
     test (err).done ();
+  }
+});
+
+
+// ! PLACES
+dotest.add ('Method .placesList', async test => {
+  try {
+    const data = await ns.placesList ({
+      q: 'utrecht cs',
+    });
+
+    test()
+      .isArray ('fail', 'data', data)
+      .isNotEmpty ('fail', 'data', data)
+      .isObject ('fail', 'data[0]', data && data[0])
+      .done()
+    ;
+  }
+  catch (err) {
+    test (err).done();
+  }
+});
+
+
+dotest.add ('Method .placesGet', async test => {
+  try {
+    const data = await ns.placesGet ({
+      type: 'stationV2',
+      id: 'AMF',
+    });
+
+    test()
+      .isObject ('fail', 'data', data)
+      .isNotEmpty ('fail', 'data', data)
+      .done()
+    ;
+  }
+  catch (err) {
+    test (err).done();
+  }
+});
+
+
+dotest.add ('Method .placesOvfiets', async test => {
+  try {
+    const data = await ns.placesOvfiets ({
+      station_code: 'AMF',
+    });
+
+    test()
+      .isArray ('fail', 'data', data)
+      .isNotEmpty ('fail', 'data', data)
+      .isObject ('fail', 'data[0]', data && data[0])
+      .done()
+    ;
+  }
+  catch (err) {
+    test (err).done();
   }
 });
 

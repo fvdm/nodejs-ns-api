@@ -330,4 +330,66 @@ module.exports = class NSAPI {
     return data.payload;
   }
 
+
+  // ! PLACES
+
+  /**
+   * Get list of places
+   *
+   * @param   {object}  parameters  Request parameters
+   * @return  {Promise<array>}
+   */
+
+  async placesList (parameters) {
+    const data = await this._request ({
+      path: '/places-api/v2/places',
+      parameters,
+    });
+
+    return data.payload;
+  }
+
+
+  /**
+   * Get list of OV Fiets locations
+   *
+   * @param   {object}  parameters  Request parameters
+   * @return  {Promise<array>}
+   */
+
+  async placesOvfiets (parameters) {
+    const data = await this._request ({
+      path: '/places-api/v2/ovfiets',
+      parameters,
+    });
+
+    return data.payload;
+  }
+
+
+  /**
+   * Get place
+   *
+   * @param   {string}  type    Place type, ie. stationV2
+   * @param   {string}  id      Place ID, ie. AMF
+   * @param   {string}  [lang]  Response language
+   *
+   * @return  {Promise<object>}
+   */
+
+  async placesGet ({
+    type,
+    id,
+    lang = '',
+  }) {
+    const data = await this._request ({
+      path: `/places-api/v2/places/${type}/${id}`,
+      parameters: {
+        lang,
+      },
+    });
+
+    return data.payload;
+  }
+
 };
