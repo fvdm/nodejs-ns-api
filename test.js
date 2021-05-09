@@ -22,7 +22,6 @@ dateTime.setMinutes (0);
 
 
 // ! Basic tests
-
 dotest.add ('Module', async test => {
   test()
     .isClass ('fail', 'exports', app)
@@ -87,7 +86,6 @@ dotest.add ('API error - code && message', async test => {
 
 
 // ! REISINFORMATIE
-
 dotest.add ('Method .getAllStations', async test => {
   try {
     const data = await ns.getAllStations();
@@ -429,7 +427,6 @@ dotest.add ('Method .getJourney', async test => {
 
 
 // ! PLACES
-
 dotest.add ('Method .placesList', async test => {
   try {
     const data = await ns.placesList ({
