@@ -21,7 +21,8 @@ dateTime.setHours (14);
 dateTime.setMinutes (0);
 
 
-// Basic tests
+// ! Basic tests
+
 dotest.add ('Module', async test => {
   test()
     .isClass ('fail', 'exports', app)
@@ -85,6 +86,7 @@ dotest.add ('API error - code && message', async test => {
 });
 
 
+// ! REISINFORMATIE
 
 dotest.add ('Method .getAllStations', async test => {
   try {
