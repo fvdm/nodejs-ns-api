@@ -311,6 +311,8 @@ ns.placesList ({
 });
 ```
 
+[API documentation](https://apiportal.ns.nl/docs/services/Places-API/operations/places)
+
 
 ### placesGet
 
@@ -331,6 +333,8 @@ ns.placesGet ({
 });
 ```
 
+[API documentation](https://apiportal.ns.nl/docs/services/Places-API/operations/placesForType)
+
 
 ### placesOvfiets
 
@@ -346,6 +350,8 @@ ns.placesOvfiets ({
   station_code: 'AMF',
 });
 ```
+
+[API documentation](https://apiportal.ns.nl/docs/services/Places-API/operations/beschikbaarheid)
 
 
 ## Unlicense
