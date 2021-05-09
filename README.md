@@ -80,6 +80,8 @@ Read the _API documentation_ links to find all available parameters that
 each method can take.
 
 
+## Reisinformatie
+
 ### getAllStations
 
 List of all stations
@@ -288,6 +290,61 @@ ns.getJourney ({
   .then (console.log)
   .catch (console.error)
 ;
+```
+
+
+## Places
+
+### placesList
+
+Search for places.
+Returns an array.
+
+argument   | type   | description
+:----------|:-------|:-----------
+parameters | object | See API docs
+
+
+```js
+ns.placesList ({
+  q: 'utrecht cs',
+});
+```
+
+
+### placesGet
+
+Get details about one place.
+Returns an object.
+
+parameter | type   | description
+:---------|:-------|:-----------
+type      | string | Place type, ex: stationV2
+id        | string | Place ID, ex: UTR
+[lang]    | string | Response language
+
+
+```js
+ns.placesGet ({
+  type: 'stationV2',
+  id: 'UTR',
+});
+```
+
+
+### placesOvfiets
+
+Get a list of OV Fiets locations.
+Returns an array.
+
+parameter      | type   | description
+:--------------|:-------|:-----------
+[station_code] | string | Filter by station
+
+```js
+ns.placesOvfiets ({
+  station_code: 'UTR',
+});
 ```
 
 
