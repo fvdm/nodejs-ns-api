@@ -85,6 +85,7 @@ dotest.add ('API error - code && message', async test => {
 });
 
 
+
 dotest.add ('Method .getAllStations', async test => {
   try {
     const data = await ns.getAllStations();
@@ -450,7 +451,7 @@ dotest.add ('Method .placesGet', async test => {
   try {
     const data = await ns.placesGet ({
       type: 'stationV2',
-      id: 'UTR',
+      id: 'AMF',
     });
 
     test()
@@ -468,7 +469,7 @@ dotest.add ('Method .placesGet', async test => {
 dotest.add ('Method .placesOvfiets', async test => {
   try {
     const data = await ns.placesOvfiets ({
-      station_code: 'UTR',
+      station_code: 'AMF',
     });
 
     test()
