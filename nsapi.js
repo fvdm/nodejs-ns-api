@@ -48,7 +48,7 @@ module.exports = class NSAPI {
           reject (err);
           return;
         }
-  
+
         resolve (res);
       });
     });
