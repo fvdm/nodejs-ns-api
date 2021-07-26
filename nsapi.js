@@ -65,9 +65,6 @@ module.exports = class NSAPI {
    */
 
   async _request ({ path, parameters }) {
-    let res = {};
-    let data = {};
-
     const options = {
       method: 'GET',
       url: `https://gateway.apiportal.ns.nl${path}`,
@@ -79,43 +76,38 @@ module.exports = class NSAPI {
       },
     };
 
-    try {
-      res = await this._httpRequest (options);
-      data = JSON.parse (res.body);
+    const res = await this._httpRequest (options);
+    const data = JSON.parse (res.body);
+    let error;
+
+    // API errors
+    if (res.statusCode >= 300) {
+      error = new Error (data.message);
+      error.statusCode = res.statusCode;
+      throw error;
     }
 
-    finally {
-      let error;
-
-      // API errors
-      if (res.statusCode >= 300) {
-        error = new Error (data.message);
-        error.statusCode = res.statusCode;
-        throw error;
-      }
-
-      if (data.code && data.message) {
-        error = new Error (data.message);
-        error.code = data.code;
-        error.errors = data.errors;
-        throw error;
-      }
-
-      if (data.fieldErrors && data.fieldErrors.length) {
-        error = new Error ('API field errors');
-        error.errors = data.fieldErrors;
-        throw error;
-      }
-
-      if (data.errors && data.errors[0]) {
-        error = new Error ('API errors');
-        error.errors = data.errors;
-        throw error;
-      }
-
-      // ok
-      return data;
+    if (data.code && data.message) {
+      error = new Error (data.message);
+      error.code = data.code;
+      error.errors = data.errors;
+      throw error;
     }
+
+    if (data.fieldErrors && data.fieldErrors.length) {
+      error = new Error ('API field errors');
+      error.errors = data.fieldErrors;
+      throw error;
+    }
+
+    if (data.errors && data.errors[0]) {
+      error = new Error ('API errors');
+      error.errors = data.errors;
+      throw error;
+    }
+
+    // ok
+    return data;
   }
 
 
