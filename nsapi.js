@@ -88,6 +88,7 @@ module.exports = class NSAPI {
       throw error;
     }
 
+    /* istanbul ignore next */
     if (data.fieldErrors && data.fieldErrors.length) {
       error = new Error ('API field error');
       error.errors = data.fieldErrors;
