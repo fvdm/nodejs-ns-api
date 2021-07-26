@@ -37,13 +37,37 @@ module.exports = class NSAPI {
   /**
    * HTTP request
    *
-   * @param   {string}           path          Method path
-   * @param   {object}           [parameters]  Request details
+   * @param   {object}  options  httpreq.doRequest options
+   * @return  {Promise<object>}
+   */
+
+  _httpRequest (options) {
+    return new Promise ((resolve, reject) => {
+      doRequest (options, (err, res) => {
+        if (err) {
+          reject (err);
+          return;
+        }
+  
+        resolve (res);
+      });
+    });
+  }
+
+
+  /**
+   * Talk to the API
+   *
+   * @param   {string}  path          Method path
+   * @param   {object}  [parameters]  Request details
    *
    * @return  {Promise<object>}
    */
 
   async _request ({ path, parameters }) {
+    let res = {};
+    let data = {};
+
     const options = {
       method: 'GET',
       url: `https://gateway.apiportal.ns.nl${path}`,
@@ -55,47 +79,43 @@ module.exports = class NSAPI {
       },
     };
 
-    return new Promise ((resolve, reject) => {
-      doRequest (options, (err, res) => {
-        if (err) {
-          return reject (err);
-        }
+    try {
+      res = await this._httpRequest (options);
+      data = JSON.parse (res.body);
+    }
 
-        let error;
-        const data = JSON.parse (res.body);
+    finally {
+      let error;
 
-        // API errors
-        if (data.statusCode >= 300) {
-          error = new Error (data.message);
-          error.statusCode = data.statusCode;
-          return reject (error);
-        }
+      // API errors
+      if (res.statusCode >= 300) {
+        error = new Error (data.message);
+        error.statusCode = res.statusCode;
+        throw error;
+      }
 
-        if (data.code && data.message) {
-          error = new Error (data.message);
-          error.code = data.code;
-          error.errors = data.errors;
-          return reject (error);
-        }
+      if (data.code && data.message) {
+        error = new Error (data.message);
+        error.code = data.code;
+        error.errors = data.errors;
+        throw error;
+      }
 
-        /* istanbul ignore next */
-        if (data.fieldErrors && data.fieldErrors.length) {
-          error = new Error ('API field errors');
-          error.errors = data.fieldErrors;
-          return reject (error);
-        }
+      if (data.fieldErrors && data.fieldErrors.length) {
+        error = new Error ('API field errors');
+        error.errors = data.fieldErrors;
+        throw error;
+      }
 
-        /* istanbul ignore next */
-        if (data.errors && data.errors[0]) {
-          error = new Error ('API errors');
-          error.errors = data.errors;
-          return reject (error);
-        }
+      if (data.errors && data.errors[0]) {
+        error = new Error ('API errors');
+        error.errors = data.errors;
+        throw error;
+      }
 
-        // ok
-        return resolve (data);
-      });
-    });
+      // ok
+      return data;
+    }
   }
 
 
