@@ -80,7 +80,7 @@ module.exports = class NSAPI {
     const data = JSON.parse (res.body);
     let error;
 
-    // API errors
+    // Normal API error
     if (data.code && data.message) {
       error = new Error (data.message);
       error.code = data.code;
@@ -88,6 +88,7 @@ module.exports = class NSAPI {
       throw error;
     }
 
+    // API field error - hard to replicate
     /* istanbul ignore next */
     if (data.fieldErrors && data.fieldErrors.length) {
       error = new Error ('API field error');
@@ -95,12 +96,15 @@ module.exports = class NSAPI {
       throw error;
     }
 
+    // API error without message - hard to replate
+    /* istanbul ignore next */
     if (data.errors && data.errors[0]) {
       error = new Error ('API error');
       error.errors = data.errors;
       throw error;
     }
 
+    // API server error
     if (res.statusCode >= 300) {
       error = new Error ('API error');
       error.statusCode = res.statusCode;
