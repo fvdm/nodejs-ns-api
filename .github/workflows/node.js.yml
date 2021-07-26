@@ -32,6 +32,9 @@ jobs:
       - run: git fetch --prune --unshallow
       - run: npm install
       - run: npm test
+        env:
+          NS_APIKEY: ${{ secrets.NS_APIKEY }}
+          NS_TIMEOUT: ${{ secrets.NS_TIMEOUT }}
       - run: npm audit --production
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
