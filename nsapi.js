@@ -81,12 +81,6 @@ module.exports = class NSAPI {
     let error;
 
     // API errors
-    if (res.statusCode >= 300) {
-      error = new Error (data.message);
-      error.statusCode = res.statusCode;
-      throw error;
-    }
-
     if (data.code && data.message) {
       error = new Error (data.message);
       error.code = data.code;
@@ -95,14 +89,20 @@ module.exports = class NSAPI {
     }
 
     if (data.fieldErrors && data.fieldErrors.length) {
-      error = new Error ('API field errors');
+      error = new Error ('API field error');
       error.errors = data.fieldErrors;
       throw error;
     }
 
     if (data.errors && data.errors[0]) {
-      error = new Error ('API errors');
+      error = new Error ('API error');
       error.errors = data.errors;
+      throw error;
+    }
+
+    if (res.statusCode >= 300) {
+      error = new Error ('API error');
+      error.statusCode = res.statusCode;
       throw error;
     }
 

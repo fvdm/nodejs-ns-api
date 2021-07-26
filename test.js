@@ -44,7 +44,7 @@ dotest.add ('Module', async test => {
 });
 
 
-dotest.add ('API error - statusCode >= 300', async test => {
+dotest.add ('API error - statusCode', async test => {
   let data;
   let error;
 
@@ -57,7 +57,8 @@ dotest.add ('API error - statusCode >= 300', async test => {
   finally {
     test ()
       .isError ('fail', 'err', error)
-      .isExactly ('fail', 'err.message', error && error.message, 'Resource not found')
+      .isExactly ('fail', 'err.message', error && error.message, 'API error')
+      .isExactly ('fail', 'err.statusCode', error && error.statusCode, 404)
       .isUndefined ('fail', 'data', data)
       .done ()
     ;
@@ -77,7 +78,9 @@ dotest.add ('API error - code && message', async test => {
   }
   finally {
     test ()
-      .isError ('fail', 'err', error)
+      .isError ('fail', 'error', error)
+      .isNotEmpty ('fail', 'error.message', error && error.message)
+      .isExactly ('fail', 'error.code', error && error.code, 404)
       .isUndefined ('fail', 'data', data)
       .done ()
     ;
