@@ -96,7 +96,7 @@ module.exports = class NSAPI {
       throw error;
     }
 
-    // API error without message - hard to replate
+    // API error without message - hard to replicate
     /* istanbul ignore next */
     if (data.errors && data.errors[0]) {
       error = new Error ('API error');
