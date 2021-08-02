@@ -259,6 +259,7 @@ dotest.add ('Method .getDisruption', async test => {
 
   try {
     const data = await ns.getDisruption ({
+      type: disruption.type,
       id: disruption.id,
     });
 
