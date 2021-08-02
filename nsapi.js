@@ -195,23 +195,26 @@ module.exports = class NSAPI {
   /**
    * Get details about one disruption
    *
-   * @param   {object}           parameters     Request parameters
-   * @param   {string}           parameters.id  Disruption ID
+   * @param   {object}  parameters       Request parameters
+   * @param   {string}  parameters.type  Disruption type
+   * @param   {string}  parameters.id    Disruption ID
    *
    * @return  {Promise<object>}
    */
 
   async getDisruption (parameters) {
+    const type = parameters.type;
     const id = parameters.id;
 
+    delete parameters.type;
     delete parameters.id;
 
     const data = await this._request ({
-      path: `/reisinformatie-api/api/v2/disruptions/${id}`,
+      path: `/reisinformatie-api/api/v3/disruptions/${type}/${id}`,
       parameters,
     });
 
-    return data.payload;
+    return data;
   }
 
 
@@ -226,11 +229,11 @@ module.exports = class NSAPI {
     parameters.actual = parameters.actual === true ? 'true' : 'false';
 
     const data = await this._request ({
-      path: '/reisinformatie-api/api/v2/disruptions',
+      path: '/reisinformatie-api/api/v3/disruptions',
       parameters,
     });
 
-    return data.payload;
+    return data;
   }
 
 
@@ -249,11 +252,11 @@ module.exports = class NSAPI {
     delete parameters.code;
 
     const data = await this._request ({
-      path: `/reisinformatie-api/api/v2/disruptions/station/${code}`,
+      path: `/reisinformatie-api/api/v3/disruptions/station/${code}`,
       parameters,
     });
 
-    return data.payload;
+    return data;
   }
 
 

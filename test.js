@@ -294,6 +294,7 @@ dotest.add ('Method .getDisruption', async test => {
 
   try {
     data = await ns.getDisruption ({
+      type: disruption.type,
       id: disruption.id,
     });
   }

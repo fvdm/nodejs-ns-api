@@ -196,10 +196,14 @@ Get details about one disruption
 
 parameter  | type           | description
 :----------|:---------------|:-----------
+type       | string         | Disruption type
 id         | string         | Disruption object ID
 
 ```js
-ns.getDisruption ({ id: 'abc123' })
+ns.getDisruption ({
+  type: 'maintenance',
+  id: '7001000',
+})
   .then (console.log)
   .catch (console.error)
 ;
