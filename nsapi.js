@@ -214,7 +214,7 @@ module.exports = class NSAPI {
       parameters,
     });
 
-    return data.payload;
+    return data;
   }
 
 
@@ -233,7 +233,7 @@ module.exports = class NSAPI {
       parameters,
     });
 
-    return data.payload;
+    return data;
   }
 
 
@@ -256,7 +256,7 @@ module.exports = class NSAPI {
       parameters,
     });
 
-    return data.payload;
+    return data;
   }
 
 
