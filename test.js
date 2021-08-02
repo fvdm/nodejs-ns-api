@@ -23,7 +23,7 @@ dateTime.setMinutes (0);
 
 // ! Basic tests
 dotest.add ('Module', async test => {
-  test()
+  test ()
     .isClass ('fail', 'exports', app)
     .isFunction ('fail', '.getAllStations', ns && ns.getAllStations)
     .isFunction ('fail', '.getArrivals', ns && ns.getArrivals)
@@ -90,10 +90,17 @@ dotest.add ('API error - code && message', async test => {
 
 // ! REISINFORMATIE
 dotest.add ('Method .getAllStations', async test => {
-  try {
-    const data = await ns.getAllStations();
+  let data;
+  let error;
 
-    test ()
+  try {
+    data = await ns.getAllStations();
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isObject ('fail', 'data[0]', data && data[0])
@@ -101,19 +108,23 @@ dotest.add ('Method .getAllStations', async test => {
       .done ()
     ;
   }
-  catch (err) {
-    test (err).done ();
-  }
 });
 
 
 dotest.add ('Method .getArrivals - Without dateTime', async test => {
+  let data;
+  let error;
+
   try {
-    const data = await ns.getArrivals ({
+    data = await ns.getArrivals ({
       station: 'UT',
     });
-
-    test ()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isObject ('fail', 'data[0]', data && data[0])
@@ -121,20 +132,24 @@ dotest.add ('Method .getArrivals - Without dateTime', async test => {
       .done ()
     ;
   }
-  catch (err) {
-    test (err).done ();
-  }
 });
 
 
 dotest.add ('Method .getArrivals - Date instance dateTime', async test => {
+  let data;
+  let error;
+
   try {
-    const data = await ns.getArrivals ({
+    data = await ns.getArrivals ({
       dateTime,
       station: 'UT',
     });
-
-    test ()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .info ('dateTime = Tomorrow 14:00')
       .info (dateTime.toString())
       .isArray ('fail', 'data', data)
@@ -143,21 +158,25 @@ dotest.add ('Method .getArrivals - Date instance dateTime', async test => {
       .isString ('fail', 'data[0].actualDateTime', data && data[0] && data[0].actualDateTime)
       .done ()
     ;
-  }
-  catch (err) {
-    test (err).done ();
   }
 });
 
 
 dotest.add ('Method .getArrivals - String dateTime', async test => {
+  let error;
+  let data;
+
   try {
-    const data = await ns.getArrivals ({
+    data = await ns.getArrivals ({
       dateTime: dateTime.toString(),
       station: 'UT',
     });
-
-    test ()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .info ('dateTime = Tomorrow 14:00')
       .info (dateTime.toString())
       .isArray ('fail', 'data', data)
@@ -167,70 +186,86 @@ dotest.add ('Method .getArrivals - String dateTime', async test => {
       .done ()
     ;
   }
-  catch (err) {
-    test (err).done ();
-  }
 });
 
 
 dotest.add ('Method .getCalamities', async test => {
-  try {
-    const data = await ns.getCalamities();
+  let data;
+  let error;
 
-    test ()
+  try {
+    data = await ns.getCalamities();
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('warn', 'data', data)
       .done ()
     ;
-  }
-  catch (err) {
-    test (err).done ();
   }
 });
 
 
 dotest.add ('Method .getDepartures - Without dateTime', async test => {
+  let data;
+  let error;
+
   try {
-    const data = await ns.getDepartures ({
+    data = await ns.getDepartures ({
       station: 'UT',
     });
-
-    test ()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('warn', 'data', data)
       .done ()
     ;
-  }
-  catch (err) {
-    test (err).done ();
   }
 });
 
 
 dotest.add ('Method .getDepartures - Date instance dateTime', async test => {
+  let data;
+  let error;
+
   try {
-    const data = await ns.getDepartures ({
+    data = await ns.getDepartures ({
       station: 'UT',
       dateTime: dateTime.toGMTString(),
     });
-
-    test ()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('warn', 'data', data)
       .done ()
     ;
   }
-  catch (err) {
-    test (err).done ();
-  }
 });
 
 
 dotest.add ('Method .getDisruptions', async test => {
-  try {
-    const data = await ns.getDisruptions();
+  let data;
+  let error;
 
-    test ()
+  try {
+    data = await ns.getDisruptions();
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('warn', 'data', data)
       .done ()
@@ -240,9 +275,6 @@ dotest.add ('Method .getDisruptions', async test => {
     if (data[0]) {
       disruption = data[0];
     }
-  }
-  catch (err) {
-    test (err).done ();
   }
 });
 
@@ -257,51 +289,66 @@ dotest.add ('Method .getDisruption', async test => {
     return;
   }
 
+  let data;
+  let error;
+
   try {
-    const data = await ns.getDisruption ({
+    data = await ns.getDisruption ({
       type: disruption.type,
       id: disruption.id,
     });
-
-    test ()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isObject ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isExactly ('fail', 'data.id', data && data.id, disruption.id)
       .done ()
     ;
   }
-  catch (err) {
-    test (err).done ();
-  }
 });
 
 
 dotest.add ('Method .getStationDisruption', async test => {
+  let data;
+  let error;
+
   try {
-    const data = await ns.getStationDisruption ({
+    data = await ns.getStationDisruption ({
       code: 'UT',
     });
-
-    test ()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('warn', 'data', data)
       .done ()
     ;
-  }
-  catch (err) {
-    test (err).done ();
   }
 });
 
 
 dotest.add ('Method .getTrips - Without dateTime', async test => {
+  let data;
+  let error;
+
   try {
-    const data = await ns.getTrips ({
+    data = await ns.getTrips ({
       fromStation: 'UT',
       toStation: 'AMF',
     });
-
-    test ()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('warn', 'data', data)
       .done ()
@@ -311,22 +358,26 @@ dotest.add ('Method .getTrips - Without dateTime', async test => {
     if (data[0]) {
       trip = data[0];
     }
-  }
-  catch (err) {
-    test (err).done ();
   }
 });
 
 
 dotest.add ('Method .getTrips - Including dateTime', async test => {
+  let data;
+  let error;
+
   try {
-    const data = await ns.getTrips ({
+    data = await ns.getTrips ({
       fromStation: 'UT',
       toStation: 'AMF',
       dateTime: dateTime.toGMTString(),
     });
-
-    test ()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('warn', 'data', data)
       .done ()
@@ -336,9 +387,6 @@ dotest.add ('Method .getTrips - Including dateTime', async test => {
     if (data[0]) {
       trip = data[0];
     }
-  }
-  catch (err) {
-    test (err).done ();
   }
 });
 
@@ -353,137 +401,165 @@ dotest.add ('Method .getTrip', async test => {
     return;
   }
 
+  let data;
+  let error;
+
   try {
-    const data = await ns.getTrip ({
+    data = await ns.getTrip ({
       ctxRecon: trip.ctxRecon,
     });
-
-    test ()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isObject ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isExactly ('fail', 'data.ctxRecon', data && data.ctxRecon, trip.ctxRecon)
       .done ()
     ;
   }
-  catch (err) {
-    test (err).done ();
-  }
 });
 
 
 dotest.add ('Method .getPrice - Without date', async test => {
+  let data;
+  let error;
+
   try {
-    const data = await ns.getPrice ({
+    data = await ns.getPrice ({
       fromStation: 'UT',
       toStation: 'AMF',
     });
-
-    test ()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isObject ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isNumber ('fail', 'data.totalPriceInCents', data && data.totalPriceInCents)
       .done ()
     ;
-  }
-  catch (err) {
-    test (err).done ();
   }
 });
 
 
 dotest.add ('Method .getPrice - Including date', async test => {
+  let data;
+  let error;
+
   try {
-    const data = await ns.getPrice ({
+    data = await ns.getPrice ({
       fromStation: 'UT',
       toStation: 'AMF',
       date: dateTime.toString(),
     });
-
-    test ()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isObject ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isNumber ('fail', 'data.totalPriceInCents', data && data.totalPriceInCents)
       .done ()
     ;
   }
-  catch (err) {
-    test (err).done ();
-  }
 });
 
 
 dotest.add ('Method .getJourney', async test => {
+  let data;
+  let error;
+
   try {
-    const data = await ns.getJourney ({
+    data = await ns.getJourney ({
       id: trip.legs[0].journeyDetail[0].link.uri,
     });
-
-    test ()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isObject ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .done ()
     ;
-  }
-  catch (err) {
-    test (err).done ();
   }
 });
 
 
 // ! PLACES
 dotest.add ('Method .placesList', async test => {
+  let data;
+  let error;
+
   try {
-    const data = await ns.placesList ({
+    data = await ns.placesList ({
       q: 'utrecht cs',
     });
-
-    test()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isObject ('fail', 'data[0]', data && data[0])
       .done()
     ;
-  }
-  catch (err) {
-    test (err).done();
   }
 });
 
 
 dotest.add ('Method .placesGet', async test => {
+  let data;
+  let error;
+
   try {
-    const data = await ns.placesGet ({
+    data = await ns.placesGet ({
       type: 'stationV2',
       id: 'AMF',
     });
-
-    test()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isObject ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .done()
     ;
   }
-  catch (err) {
-    test (err).done();
-  }
 });
 
 
 dotest.add ('Method .placesOvfiets', async test => {
+  let data;
+  let error;
+
   try {
-    const data = await ns.placesOvfiets ({
+    data = await ns.placesOvfiets ({
       station_code: 'AMF',
     });
-
-    test()
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
       .isArray ('fail', 'data', data)
       .isNotEmpty ('fail', 'data', data)
       .isObject ('fail', 'data[0]', data && data[0])
       .done()
     ;
-  }
-  catch (err) {
-    test (err).done();
   }
 });
 
