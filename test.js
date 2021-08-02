@@ -23,7 +23,7 @@ dateTime.setMinutes (0);
 
 // ! Basic tests
 dotest.add ('Module', async test => {
-  test (error)
+  test ()
     .isClass ('fail', 'exports', app)
     .isFunction ('fail', '.getAllStations', ns && ns.getAllStations)
     .isFunction ('fail', '.getArrivals', ns && ns.getArrivals)
@@ -55,7 +55,7 @@ dotest.add ('API error - statusCode', async test => {
     error = err;
   }
   finally {
-    test (error)
+    test ()
       .isError ('fail', 'err', error)
       .isExactly ('fail', 'err.message', error && error.message, 'API error')
       .isExactly ('fail', 'err.statusCode', error && error.statusCode, 404)
@@ -77,7 +77,7 @@ dotest.add ('API error - code && message', async test => {
     error = err;
   }
   finally {
-    test (error)
+    test ()
       .isError ('fail', 'error', error)
       .isNotEmpty ('fail', 'error.message', error && error.message)
       .isExactly ('fail', 'error.code', error && error.code, 404)
@@ -165,7 +165,7 @@ dotest.add ('Method .getArrivals - Date instance dateTime', async test => {
 dotest.add ('Method .getArrivals - String dateTime', async test => {
   let error;
   let data;
-  
+
   try {
     data = await ns.getArrivals ({
       dateTime: dateTime.toString(),
@@ -281,7 +281,7 @@ dotest.add ('Method .getDisruptions', async test => {
 
 dotest.add ('Method .getDisruption', async test => {
   if (!disruption) {
-    test (error)
+    test ()
       .warn ('No disruption available! Wow this is unique.')
       .done ()
     ;
@@ -392,7 +392,7 @@ dotest.add ('Method .getTrips - Including dateTime', async test => {
 
 dotest.add ('Method .getTrip', async test => {
   if (!trip) {
-    test (error)
+    test ()
       .warn ('No trip available!')
       .done ()
     ;
@@ -579,7 +579,7 @@ dotest.add ('Config timeout', async test => {
     error = err;
   }
   finally {
-    test (error)
+    test ()
       .isError ('fail', 'err', error)
       .isExactly ('fail', 'err.code', error && error.code, 'TIMEOUT')
       .isUndefined ('fail', 'data', data)
