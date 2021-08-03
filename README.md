@@ -296,6 +296,8 @@ ns.getJourney ({
 ;
 ```
 
+[API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getJourneyDetail)
+
 
 ## Places
 
