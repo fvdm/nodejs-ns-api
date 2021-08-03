@@ -5,7 +5,7 @@
     "url": "https://fvdm.com"
   },
   "name": "ns-api",
-  "version": "4.0.1",
+  "version": "4.1.0",
   "description": "Public transit data from Nederlandse Spoorwegen API",
   "repository": {
     "type": "git",
