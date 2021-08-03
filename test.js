@@ -279,6 +279,28 @@ dotest.add ('Method .getDisruptions', async test => {
 });
 
 
+dotest.add ('Method .getDisruptions - actual', async test => {
+  let data;
+  let error;
+
+  try {
+    data = await ns.getDisruptions({
+      actual: true,
+    });
+  }
+  catch (err) {
+    error = err;
+  }
+  finally {
+    test (error)
+      .isArray ('fail', 'data', data)
+      .isNotEmpty ('warn', 'data', data)
+      .done ()
+    ;
+  }
+});
+
+
 dotest.add ('Method .getDisruption', async test => {
   if (!disruption) {
     test ()
