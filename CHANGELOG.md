@@ -1,3 +1,62 @@
+### 4.1.0 (2021-08-03)
+
+##### Chores
+
+* **license:**  Update link ([84833a69](https://github.com/fvdm/nodejs-ns-api/commit/84833a6935e090aa44c9f9e370d111cdd3ca24c8))
+* **package:**
+  *  Minor clean up ([aa49cf55](https://github.com/fvdm/nodejs-ns-api/commit/aa49cf55e097cd538c0d3cdcb2049db279193cc1))
+  *  Update httpreq ([#28](https://github.com/fvdm/nodejs-ns-api/pull/28)) ([958df2e6](https://github.com/fvdm/nodejs-ns-api/commit/958df2e6c0897e2e730260c2d74317028ccfac0f))
+  *  Minimum node v12 ([1da43ddc](https://github.com/fvdm/nodejs-ns-api/commit/1da43ddc857bf5a9125e6e8b6f320e613c2ead4b))
+* **github:**
+  *  Added Dependabot config ([0f3e3a15](https://github.com/fvdm/nodejs-ns-api/commit/0f3e3a15fdedef5b19f4291555c407dc47dd13ed))
+  *  Update funding link ([5e19873b](https://github.com/fvdm/nodejs-ns-api/commit/5e19873b19e223028144530575421f91e9d3375d))
+
+##### Documentation Changes
+
+*  Add API docs url to getJourney ([9d8471dd](https://github.com/fvdm/nodejs-ns-api/commit/9d8471ddceb339bba3e42649d9145312ce4cba65))
+*  Cleaner example ([e6b14ff8](https://github.com/fvdm/nodejs-ns-api/commit/e6b14ff898b12d7d75e61915256ae4084dcf75b2))
+* **contrib:**  Removed file ([3a2b2dbb](https://github.com/fvdm/nodejs-ns-api/commit/3a2b2dbb2fc0f95b61e68c0ac99c547882373d80))
+* **badges:**
+  *  Replaced Travis with Github action ([0c0cdc0c](https://github.com/fvdm/nodejs-ns-api/commit/0c0cdc0c1046847539375361bd38a33f077d7b38))
+  *  Update Travis url ([24893fef](https://github.com/fvdm/nodejs-ns-api/commit/24893fef8f9be0113c4e335866849e5cd14bdb5a))
+  *  Removed Greenkeeper ([a7512d6d](https://github.com/fvdm/nodejs-ns-api/commit/a7512d6d36b1aa0c3cb5f709bc793c69f7d2abdd))
+
+##### New Features
+
+*  Add places methods ([#27](https://github.com/fvdm/nodejs-ns-api/pull/27)) ([980b7b17](https://github.com/fvdm/nodejs-ns-api/commit/980b7b17cc9d9b7b6cd624d4ec16c740973750db))
+*  Added getJourney() ([aab25469](https://github.com/fvdm/nodejs-ns-api/commit/aab2546947bce2c79181f1e4bc728019a039c6bd))
+
+##### Bug Fixes
+
+*  Moved API error fallback to bottom ([298e9ecd](https://github.com/fvdm/nodejs-ns-api/commit/298e9ecd067d8382b98908b075ccf03b489425a7))
+*  getPrices() changed response ([f59ae268](https://github.com/fvdm/nodejs-ns-api/commit/f59ae268e2cbb330fe5740017274f72eda8b3740))
+
+##### Refactors
+
+*  Update disruption endpoints [#24](https://github.com/fvdm/nodejs-ns-api/pull/24) ([#29](https://github.com/fvdm/nodejs-ns-api/pull/29)) ([e430df6b](https://github.com/fvdm/nodejs-ns-api/commit/e430df6b3ba940e4911b9d0bbab929641bfdf4d1))
+*  Removed the try..finally from _request() ([5223259d](https://github.com/fvdm/nodejs-ns-api/commit/5223259db383991a6c28806ec43025f6924acc81))
+*  Rewrite request handling ([337379e1](https://github.com/fvdm/nodejs-ns-api/commit/337379e1bebf8f8377db8e06699068471a6ada30))
+
+##### Code Style Changes
+
+*  Minor clean up ([20202037](https://github.com/fvdm/nodejs-ns-api/commit/20202037968c41494af4cd42166dfaffc8b0241c))
+*  Fix comment typo ([850f7231](https://github.com/fvdm/nodejs-ns-api/commit/850f7231181427be0119b8197af66b666dda347a))
+*  Clarify API errors in comments ([ef361e0f](https://github.com/fvdm/nodejs-ns-api/commit/ef361e0fe9e1b69dff03a2947d99c9bd313bcb8b))
+*  Skip odd errors in coverage ([a63a26c6](https://github.com/fvdm/nodejs-ns-api/commit/a63a26c68a3ec7ecbe07fa41768b81fc55e480d7))
+* **lint:**  Clean up whitespace ([4289ce90](https://github.com/fvdm/nodejs-ns-api/commit/4289ce9076c47b3c0b300b7fadd08dae36b57d55))
+
+##### Tests
+
+*  Added getDisruptions actual test ([1aff11d2](https://github.com/fvdm/nodejs-ns-api/commit/1aff11d26dcf4f305c7d16ccadec1ea1450dd4a4))
+*  Fix errors ([277a771a](https://github.com/fvdm/nodejs-ns-api/commit/277a771a722749581304f24fe42876f1cdab5ada))
+*  Improve testing and error handling ([8aed25f5](https://github.com/fvdm/nodejs-ns-api/commit/8aed25f592d3e4daed6ed12568d94078814f541c))
+*  Update Travis CI node versions ([7afd99ec](https://github.com/fvdm/nodejs-ns-api/commit/7afd99ec95b7dc13c5b006b34c5c4a9c5b0be841))
+* **config:**
+  *  Fix ESLint hierarchy problem ([b2ef9013](https://github.com/fvdm/nodejs-ns-api/commit/b2ef90134b839ba6ecaeef24d0ffe1aaadc0bc9f))
+  *  Map env vars in build action ([09fc5b75](https://github.com/fvdm/nodejs-ns-api/commit/09fc5b75c25e1e2bbdaa27be75829084307c307a))
+  *  Added CodeQL action ([dc1939ff](https://github.com/fvdm/nodejs-ns-api/commit/dc1939ff777685eea7cabf18d6cebb33980b6c0e))
+  *  Replaced Travis with Github action ([c54f5422](https://github.com/fvdm/nodejs-ns-api/commit/c54f54227aaaed0cd24f672d2652708131305bae))
+
 #### 4.0.1 (2020-08-31)
 
 ##### Chores
