@@ -1,8 +1,8 @@
 {
   "author": {
     "name": "Franklin",
-    "email": "npmjscom@frankl.in",
-    "url": "https://frankl.in"
+    "email": "info@fvdm.com",
+    "url": "https://fvdm.com"
   },
   "name": "ns-api",
   "version": "4.0.1",
@@ -16,7 +16,6 @@
   },
   "main": "nsapi.js",
   "files": [
-    "CONTRIBUTING.md",
     "example.js"
   ],
   "tonicExampleFilename": "example.js",
