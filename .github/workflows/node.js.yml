@@ -5,6 +5,8 @@ on:
     branches: [ master, develop ]
   pull_request:
     branches: [ develop ]
+  schedule:
+    - cron: '42 18 * * 6'
 
 jobs:
   lts_versions:
@@ -35,6 +37,7 @@ jobs:
         env:
           NS_APIKEY: ${{ secrets.NS_APIKEY }}
           NS_TIMEOUT: ${{ secrets.NS_TIMEOUT }}
+          DOTEST_NOCOV: ${{ secrets.DOTEST_NOCOV }}
       - run: npm audit --production
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
