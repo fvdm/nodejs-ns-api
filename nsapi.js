@@ -34,27 +34,6 @@ module.exports = class NSAPI {
 
 
   /**
-   * HTTP request
-   *
-   * @param   {object}  options  httpreq.doRequest options
-   * @return  {Promise<object>}
-   */
-
-  _httpRequest (options) {
-    return new Promise ((resolve, reject) => {
-      doRequest (options, (err, res) => {
-        if (err) {
-          reject (err);
-          return;
-        }
-
-        resolve (res);
-      });
-    });
-  }
-
-
-  /**
    * Talk to the API
    *
    * @param   {string}  path          Method path
@@ -75,7 +54,7 @@ module.exports = class NSAPI {
       },
     };
 
-    const res = await this._httpRequest (options);
+    const res = await doRequest (options);
     const data = JSON.parse (res.body);
     let error;
 
