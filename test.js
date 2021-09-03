@@ -569,7 +569,7 @@ dotest.add ('Method .placesOvfiets', async test => {
 
   try {
     data = await ns.placesOvfiets ({
-      station_code: 'AMF',
+      station_code: 'UT',
     });
   }
   catch (err) {
