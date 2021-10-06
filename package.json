@@ -18,7 +18,7 @@
   "files": [
     "example.js"
   ],
-  "tonicExampleFilename": "example.js",
+  "runkitExampleFilename": "example.js",
   "scripts": {
     "test": "dotest"
   },
