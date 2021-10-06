@@ -1,3 +1,31 @@
+#### 4.1.1 (2021-10-06)
+
+##### Chores
+
+* **ci:**
+  *  Fix Dependabit array ([5601b50c](https://github.com/fvdm/nodejs-ns-api/commit/5601b50cb762cad792991bbea4bdd0b63cb45447))
+  *  Added Dependabot config ([ea37740a](https://github.com/fvdm/nodejs-ns-api/commit/ea37740ae37316f20cb5fa32e8249637b1836ac0))
+* **package:**
+  *  Update dependencies ([0f7bd3fe](https://github.com/fvdm/nodejs-ns-api/commit/0f7bd3fe1b6c8d3b0cdb92babd42f7fe2e8b3a80))
+  *  Update RunKit example key ([829f9735](https://github.com/fvdm/nodejs-ns-api/commit/829f973565ed4d2ba6ce286e09dccc4c47ad6c94))
+
+##### Refactors
+
+*  doRequest now returns a promise ([59235338](https://github.com/fvdm/nodejs-ns-api/commit/59235338a4bba8b573ca93462950448219fb9d50))
+
+##### Code Style Changes
+
+*  Whitespace fixes ([3fb6a1de](https://github.com/fvdm/nodejs-ns-api/commit/3fb6a1dee8af72ecfe3eb7c1d41fbb1cbe44b07f))
+
+##### Tests
+
+* **config:**
+  *  Modern ESLint config ([56a24ea0](https://github.com/fvdm/nodejs-ns-api/commit/56a24ea0514f6fc133bf35070feac92ac5b1a5a9))
+  *  Run Github action every week ([b23fdd21](https://github.com/fvdm/nodejs-ns-api/commit/b23fdd216714f6e9002c4bae7e3a5f4334926ee6))
+  *  Deleting dependabot ([e6b465f5](https://github.com/fvdm/nodejs-ns-api/commit/e6b465f518ed146df6c434af18ed26838d5a5754))
+* **ci:**  Updated Github action ([a8e82c97](https://github.com/fvdm/nodejs-ns-api/commit/a8e82c9779a3d88b8d96355cefe1ec146379754d))
+*  Change OV Fiets station to Utrecht ([5b18f571](https://github.com/fvdm/nodejs-ns-api/commit/5b18f57145887179c4ad8773148ee4bc20f1993b))
+
 ### 4.1.0 (2021-08-03)
 
 ##### Chores
