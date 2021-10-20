@@ -312,7 +312,7 @@ module.exports = class NSAPI {
    * Get information about a specific journey
    *
    * @param   {object}          Parameters  Request parameters
-   * @return  {Promise<object>
+   * @return  {Promise<object>}
    */
 
   async getJourney (parameters) {
