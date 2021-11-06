@@ -31,7 +31,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-      - run: git fetch --prune --unshallow
       - run: npm install
       - run: npm test
         env:
@@ -57,7 +56,7 @@ jobs:
       - run: echo "Build was sucessfull"
 
   finish:
-    name: "Finish"
+    name: "Upload coverage"
     needs: build
     if: always()
     runs-on: ubuntu-latest
