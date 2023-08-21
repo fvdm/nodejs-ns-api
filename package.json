@@ -23,7 +23,7 @@
     "test": "dotest"
   },
   "dependencies": {
-    "httpreq": "^0.5.2"
+    "httpreq": "^1.0.0"
   },
   "devDependencies": {
     "dotest": "^2.10.0"
