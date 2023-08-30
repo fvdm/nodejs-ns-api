@@ -1,3 +1,16 @@
+#### 4.1.2 (2023-08-30)
+
+##### Chores
+
+* **github:**
+  *  Bump github/codeql-action from 1 to 2 ([#33](https://github.com/fvdm/nodejs-ns-api/pull/33)) ([66b69fb3](https://github.com/fvdm/nodejs-ns-api/commit/66b69fb3ffbee4cfa767e0a8dfc925bfe42e87b1))
+  *  Bump actions/checkout from 2 to 3 ([#31](https://github.com/fvdm/nodejs-ns-api/pull/31)) ([7ffd07d3](https://github.com/fvdm/nodejs-ns-api/commit/7ffd07d3236a348da78a6a2f2bbae6c5a217f86f))
+  *  Bump actions/setup-node from v2 to v3.0.0 ([#30](https://github.com/fvdm/nodejs-ns-api/pull/30)) ([f7009d1a](https://github.com/fvdm/nodejs-ns-api/commit/f7009d1a0c8cba9833834e451022b9424d7f33e9))
+
+##### Refactors
+
+*  No deps, minimum Node 18, cleanup ([#36](https://github.com/fvdm/nodejs-ns-api/pull/36)) ([8f7eb065](https://github.com/fvdm/nodejs-ns-api/commit/8f7eb065c966b8ab939e0e993582b78e69626a6c))
+
 #### 4.1.1 (2021-10-06)
 
 ##### Chores
