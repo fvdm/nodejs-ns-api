@@ -61,6 +61,7 @@ dotest.add ('API error - statusCode', async test => {
       .isExactly ('fail', 'err.statusCode', error && error.statusCode, 404)
       .isUndefined ('fail', 'data', data)
       .done ()
+      .isNotEmpty( 'fail', 'err.statusText', error && error.statusText )
     ;
   }
 });
