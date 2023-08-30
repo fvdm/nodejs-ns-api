@@ -22,14 +22,12 @@
   "scripts": {
     "test": "dotest"
   },
-  "dependencies": {
-    "httpreq": "^0.5.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "dotest": "^2.10.0"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=18"
   },
   "keywords": [
     "api",

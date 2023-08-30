@@ -38,6 +38,7 @@
     "dot-location": ["error", "property"],
     "eol-last": "error",
     "eqeqeq": "error",
+    "func-call-spacing": ["error", "never"],
     "func-style": "off",
     "guard-for-in": "off",
     "handle-callback-err": ["error", "^(e|er|err|error)[0-9]{1,2}?$"],
@@ -108,7 +109,6 @@
     "no-sequences": "error",
     "no-shadow": "error",
     "no-shadow-restricted-names": "error",
-    "no-spaced-func": "off",
     "no-sparse-arrays": "warn",
     "no-sync": "warn",
     "no-ternary": "off",
@@ -117,6 +117,7 @@
     "no-undef": "error",
     "no-undef-init": "error",
     "no-undefined": "error",
+    "no-underscore-dangle": ["error", {"allowAfterThis": true}],
     "no-unexpected-multiline": "error",
     "no-unneeded-ternary": "error",
     "no-unreachable": "error",
@@ -133,6 +134,7 @@
     "one-var": ["error", "never"],
     "operator-assignment": ["error", "always"],
     "operator-linebreak": ["error", "before"],
+    "padded-blocks": "off",
     "quote-props": ["error", "consistent"],
     "quotes": ["error", "single", "avoid-escape"],
     "radix": "error",
@@ -142,12 +144,18 @@
       "after": true
     }],
     "space-before-blocks": ["error", "always"],
-    "space-before-function-paren": ["error", "always"],
-    "space-in-parens": ["error", "never"],
+    "space-before-function-paren": ["error", {
+      "anonymous": "never",
+      "named": "always"
+    }],
+    "space-in-parens": ["error", "always"],
     "space-infix-ops": "error",
     "space-unary-ops": ["error", {
       "words": true,
-      "nonwords": false
+      "nonwords": false,
+      "overrides": {
+        "!": true,
+      }
     }],
     "spaced-comment": ["error", "always"],
     "use-isnan": "error",
