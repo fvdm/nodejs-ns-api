@@ -22,9 +22,7 @@
   "scripts": {
     "test": "dotest"
   },
-  "dependencies": {
-    "httpreq": "^0.5.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "dotest": "^2.10.0"
   },
