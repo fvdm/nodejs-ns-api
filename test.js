@@ -605,9 +605,9 @@ dotest.add ('Config timeout', async test => {
   finally {
     test ()
       .isError ('fail', 'err', error)
-      .isExactly ('fail', 'err.code', error && error.code, 'TIMEOUT')
       .isUndefined ('fail', 'data', data)
       .done ()
+      .isExactly( 'fail', 'err.name', error && error.name, 'TimeoutError' )
     ;
   }
 });
