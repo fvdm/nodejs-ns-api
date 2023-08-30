@@ -42,9 +42,9 @@ module.exports = class NSAPI {
 
   async _request ( { path, parameters } ) {
 		let url = `https://gateway.apiportal.ns.nl${path}`;
-		const params = new URLSearchParams( params );
+		const parameters = new URLSearchParams( parameters );
 
-		url += '?' + params.toString();
+    url += '?' + parameters.toString();
 
     const options = {
       method: 'GET',
