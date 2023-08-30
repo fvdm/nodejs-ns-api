@@ -7,8 +7,6 @@ License:    Unlicense (Public Domain, see LICENSE file)
 */
 
 
-const { doRequest } = require ('httpreq');
-
 module.exports = class NSAPI {
 
   /**
@@ -43,19 +41,22 @@ module.exports = class NSAPI {
    */
 
   async _request ({ path, parameters }) {
+		let url = `https://gateway.apiportal.ns.nl${path}`;
+		const params = new URLSearchParams( params );
+
+		url += '?' + params.toString();
+
     const options = {
       method: 'GET',
-      url: `https://gateway.apiportal.ns.nl${path}`,
-      parameters,
-      timeout: this._config.timeout,
+      signal: AbortSignal.timeout( this._config.timeout ),
       headers: {
         'Accept': 'application/json',
         'Ocp-Apim-Subscription-Key': this._config.key,
       },
     };
 
-    const res = await doRequest (options);
-    const data = JSON.parse (res.body);
+    const res = await fetch( url, options );
+    const data = await res.json();
     let error;
 
     // Normal API error
