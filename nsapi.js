@@ -41,8 +41,8 @@ module.exports = class NSAPI {
    */
 
   async _request ( { path, parameters } ) {
-		let url = `https://gateway.apiportal.ns.nl${path}`;
-		const params = new URLSearchParams( parameters );
+    let url = `https://gateway.apiportal.ns.nl${path}`;
+    const params = new URLSearchParams( parameters );
 
     url += '?' + params.toString();
 
@@ -105,7 +105,7 @@ module.exports = class NSAPI {
    */
 
   async getAllStations () {
-    const data = await this._request ( {
+    const data = await this._request( {
       path: '/reisinformatie-api/api/v2/stations',
     } );
 
@@ -121,11 +121,11 @@ module.exports = class NSAPI {
    */
 
   async getArrivals ( parameters ) {
-    if ( parameters.dateTime && !( parameters.dateTime instanceof Date ) ) {
-      parameters.dateTime = new Date ( parameters.dateTime ).toString();
+    if ( parameters.dateTime && ! ( parameters.dateTime instanceof Date ) ) {
+      parameters.dateTime = new Date( parameters.dateTime ).toString();
     }
 
-    const data = await this._request ( {
+    const data = await this._request( {
       path: '/reisinformatie-api/api/v2/arrivals',
       parameters,
     } );
@@ -142,7 +142,7 @@ module.exports = class NSAPI {
    */
 
   async getCalamities ( parameters = {} ) {
-    const data = await this._request ( {
+    const data = await this._request( {
       path: '/reisinformatie-api/api/v1/calamities',
       parameters,
     } );
@@ -159,11 +159,11 @@ module.exports = class NSAPI {
    */
 
   async getDepartures ( parameters ) {
-    if ( parameters.dateTime && !( parameters.dateTime instanceof Date ) ) {
-      parameters.dateTime = new Date ( parameters.dateTime ).toISOString();
+    if ( parameters.dateTime && ! ( parameters.dateTime instanceof Date ) ) {
+      parameters.dateTime = new Date( parameters.dateTime ).toISOString();
     }
 
-    const data = await this._request ( {
+    const data = await this._request( {
       path: '/reisinformatie-api/api/v2/departures',
       parameters,
     } );
@@ -189,7 +189,7 @@ module.exports = class NSAPI {
     delete parameters.type;
     delete parameters.id;
 
-    const data = await this._request ( {
+    const data = await this._request( {
       path: `/reisinformatie-api/api/v3/disruptions/${type}/${id}`,
       parameters,
     } );
@@ -208,7 +208,7 @@ module.exports = class NSAPI {
   async getDisruptions ( parameters = {} ) {
     parameters.actual = parameters.actual === true ? 'true' : 'false';
 
-    const data = await this._request ( {
+    const data = await this._request( {
       path: '/reisinformatie-api/api/v3/disruptions',
       parameters,
     } );
@@ -231,7 +231,7 @@ module.exports = class NSAPI {
 
     delete parameters.code;
 
-    const data = await this._request ( {
+    const data = await this._request( {
       path: `/reisinformatie-api/api/v3/disruptions/station/${code}`,
       parameters,
     } );
@@ -255,7 +255,7 @@ module.exports = class NSAPI {
     }
     */
 
-    const data = await this._request ( {
+    const data = await this._request( {
       path: '/reisinformatie-api/api/v3/trips/trip',
       parameters,
     } );
@@ -275,11 +275,11 @@ module.exports = class NSAPI {
    */
 
   async getTrips ( parameters ) {
-    if ( parameters.dateTime && !( parameters.dateTime instanceof Date ) ) {
-      parameters.dateTime = new Date ( parameters.dateTime ).toISOString();
+    if ( parameters.dateTime && ! ( parameters.dateTime instanceof Date ) ) {
+      parameters.dateTime = new Date( parameters.dateTime ).toISOString();
     }
 
-    const data = await this._request ( {
+    const data = await this._request( {
       path: '/reisinformatie-api/api/v3/trips',
       parameters,
     } );
@@ -297,11 +297,11 @@ module.exports = class NSAPI {
 
   async getPrice ( parameters ) {
     // YYYY-MM-DD
-    if ( parameters.date && !( parameters.date instanceof Date ) ) {
-      parameters.date = new Date ( parameters.date ).toISOString().split ( 'T' )[0];
+    if ( parameters.date && ! ( parameters.date instanceof Date ) ) {
+      parameters.date = new Date( parameters.date ).toISOString().split( 'T' )[0];
     }
 
-    const data = await this._request ( {
+    const data = await this._request( {
       path: '/reisinformatie-api/api/v2/price',
       parameters,
     } );
@@ -318,11 +318,11 @@ module.exports = class NSAPI {
    */
 
   async getJourney ( parameters ) {
-    if ( parameters.dateTime && !( parameters.date instanceof Date ) ) {
-      parameters.dateTime = new Date ( parameters.dateTime ).toISOString();
+    if ( parameters.dateTime && ! ( parameters.date instanceof Date ) ) {
+      parameters.dateTime = new Date( parameters.dateTime ).toISOString();
     }
 
-    const data = await this._request ( {
+    const data = await this._request( {
       path: '/reisinformatie-api/api/v2/journey',
       parameters,
     } );
@@ -341,7 +341,7 @@ module.exports = class NSAPI {
    */
 
   async placesList ( parameters ) {
-    const data = await this._request ( {
+    const data = await this._request( {
       path: '/places-api/v2/places',
       parameters,
     } );
@@ -358,7 +358,7 @@ module.exports = class NSAPI {
    */
 
   async placesOvfiets ( parameters ) {
-    const data = await this._request ( {
+    const data = await this._request( {
       path: '/places-api/v2/ovfiets',
       parameters,
     } );
@@ -382,7 +382,7 @@ module.exports = class NSAPI {
     id,
     lang = '',
   } ) {
-    const data = await this._request ( {
+    const data = await this._request( {
       path: `/places-api/v2/places/${type}/${id}`,
       parameters: {
         lang,
