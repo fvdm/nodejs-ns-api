@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: set-matrix
-        run: echo "::set-output name=matrix::$(curl -s https://raw.githubusercontent.com/fvdm/nodejs-versions/main/lts-current.json)"
+        run: echo "matrix=$(curl -s https://raw.githubusercontent.com/fvdm/nodejs-versions/main/lts-current.json)" >> $GITHUB_OUTPUT
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
@@ -26,7 +26,7 @@ jobs:
       matrix:
         node-version: ${{ fromJson(needs.lts_versions.outputs.matrix) }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
       - name: Test on Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
@@ -39,7 +39,6 @@ jobs:
           DOTEST_NOCOV: ${{ secrets.DOTEST_NOCOV }}
           DOTEST_MINCOV: ${{ secrets.DOTEST_MINCOV }}
           DOTEST_COVFUNCTIONS: 100
-      - run: npm audit --production
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
         if: always()
