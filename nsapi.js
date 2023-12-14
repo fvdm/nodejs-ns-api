@@ -61,9 +61,9 @@ module.exports = class NSAPI {
 
     // Normal API error
     if ( data.code && data.message ) {
-      error = new Error( data.message );
+      error = new Error( `API: ${data.message}` );
       error.code = data.code;
-      error.errors = data.errors;
+      error.reason = data.errors;
       throw error;
     }
 
@@ -71,7 +71,7 @@ module.exports = class NSAPI {
     /* istanbul ignore next */
     if ( data.fieldErrors && data.fieldErrors.length ) {
       error = new Error( 'API field error' );
-      error.errors = data.fieldErrors;
+      error.reason = data.fieldErrors;
       throw error;
     }
 
@@ -79,7 +79,7 @@ module.exports = class NSAPI {
     /* istanbul ignore next */
     if ( data.errors && data.errors[0] ) {
       error = new Error( 'API error' );
-      error.errors = data.errors;
+      error.reason = data.errors;
       throw error;
     }
 
