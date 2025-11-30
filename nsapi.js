@@ -1,6 +1,6 @@
 /*
 Name:       nsapi.js - Unofficial NodeJS module for Nederlandse Spoorwegen API
-Author:     Franklin
+Author:     Franklin (https://frankl.in)
 Source:     https://github.com/fvdm/nodejs-ns-api
 API Docs:   https://apiportal.ns.nl
 License:    Unlicense (Public Domain, see LICENSE file)
