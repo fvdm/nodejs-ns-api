@@ -62,12 +62,12 @@ export default [
       'new-cap': 'off',
       'padding-line-between-statements': ['error', {
         blankLine: 'always',
-        prev: 'var',
+        prev: ['var', 'let', 'const'],
         next: '*',
       }, {
         blankLine: 'any',
-        prev: 'var',
-        next: 'var',
+        prev: ['var', 'let', 'const'],
+        next: ['var', 'let', 'const'],
       }],
       'no-alert': 'error',
       'no-caller': 'error',
