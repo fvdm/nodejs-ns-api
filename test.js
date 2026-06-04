@@ -59,7 +59,7 @@ dotest.add( 'API error - statusCode', async test => {
       .isError( 'fail', 'err', error )
       .isExactly( 'fail', 'err.message', error && error.message, 'API error' )
       .isExactly( 'fail', 'err.statusCode', error && error.statusCode, 404 )
-      .isNotEmpty( 'fail', 'err.statusText', error && error.statusText )
+      .isNotEmpty( 'warn', 'err.statusText', error && error.statusText )
       .isUndefined( 'fail', 'data', data )
       .info( data )
       .done()

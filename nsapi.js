@@ -87,7 +87,7 @@ module.exports = class NSAPI {
     if ( res.status >= 300 ) {
       error = new Error( 'API error' );
       error.statusCode = res.status;
-      error.statusText = res.statusText;
+      error.statusText = res.statusText ?? null;
       throw error;
     }
 
