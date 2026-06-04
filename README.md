@@ -18,26 +18,26 @@ which you can request at [Here](https://apiportal.ns.nl/startersguide) (Dutch).
 ## Example
 
 ```js
-const NSAPI = require ('ns-api');
-const ns = new NSAPI ({
+const NSAPI = require( 'ns-api' );
+const ns = new NSAPI( {
   key: 'abc123',
-});
+} );
 
 // Output w/o limits
-function out (data) {
-  console.dir (data, {
+function out( data ) {
+  console.dir( data, {
     depth: null,
     colors: true,
-  });
+  } );
 }
 
 // Get travel advise
-ns.getTrips ({
+ns.getTrips( {
   fromStation: 'UT',
   toStation: 'AMF',
-})
-  .then (out)
-  .catch (console.error)
+} )
+  .then( out )
+  .catch( console.error )
 ;
 ```
 
@@ -49,17 +49,17 @@ ns.getTrips ({
 
 ## Configuration
 
-param     | type   | default | description
-:---------|:-------|:--------|:-----------
-key       | string |         | One of your API keys
-[timeout] | number | 8000    | Request time out in ms
+| param     | type   | default | description |
+|:----------|:-------|:--------|:------------|
+| key       | string |         | One of your API keys   |
+| [timeout] | number | 8000    | Request time out in ms |
 
 
 ```js
-const NSAPI = require ('ns-api');
-const ns = new NSAPI ({
+const NSAPI = require( 'ns-api' );
+const ns = new NSAPI( {
   key: 'abc123',
-});
+} );
 ```
 
 
@@ -71,7 +71,7 @@ When a method takes arguments they are only accepted in object notation.
 This way the order no longer matters and it makes it easier to reuse them.
 
 ```js
-methodName ({ one, two });
+methodName( { one, two } );
 ```
 
 I'm not going to outline to full possibilities of each method here,
@@ -83,14 +83,15 @@ each method can take.
 ## Reisinformatie
 
 ### getAllStations
+**( ) : array**
 
 List of all stations
 
 ```js
 ns.getAllStations()
-  .then (data => data.filter (station => station.land === 'NL'))
-  .then (data => console.table (data, ['code', 'stationType']))
-  .catch (console.error)
+  .then( data => data.filter( station => station.land === 'NL' ) )
+  .then( data => console.table( data, ['code', 'stationType'] ) )
+  .catch( console.error )
 ;
 ```
 
@@ -98,20 +99,21 @@ ns.getAllStations()
 
 
 ### getArrivals
+**( object ) : array**
 
-List of arrivals at a station. It requires a `station` or `uicCode`.
+List of arrivals at a station. It requires a `station` or `uicCode`. |
 
-parameter  | type           | description
-:----------|:---------------|:-----------
-[dateTime] | Date or string | Limit to starting time, will be converted to the right format
+| parameter  | type           | description |
+|:-----------|:---------------|:------------|
+| [dateTime] | Date or string | Limit to starting time, will be converted to the right format |
 
 ```js
-ns.getArrivals ({
+ns.getArrivals( {
   dateTime: '2019-05-10',
   station: 'UT',
-})
-  .then (data => console.table (data, ['name', 'origin', 'actualDateTime']))
-  .catch (console.error)
+} )
+  .then( data => console.table( data, ['name', 'origin', 'actualDateTime'] ) )
+  .catch( console.error )
 ;
 ```
 
@@ -119,17 +121,18 @@ ns.getArrivals ({
 
 
 ### getCalamities
+**( [object] ) : array**
 
-List of all current calamities
+List of all current calamities |
 
-parameter  | type           | description
-:----------|:---------------|:-----------
-[lang]     | string         | Text language
+| parameter  | type           | description   |
+|:-----------|:---------------|:--------------|
+| [lang]     | string         | Text language |
 
 ```js
-ns.getArrivals ({ lang: 'en' })
-  .then (console.log)
-  .catch (console.error)
+ns.getArrivals( { lang: 'en' } )
+  .then( console.log )
+  .catch( console.error )
 ;
 ```
 
@@ -137,17 +140,18 @@ ns.getArrivals ({ lang: 'en' })
 
 
 ### getDepartures
+**( object ) : array**
 
-List all departures at a station. It requires a `station` or `uicCode`.
+List all departures at a station. It requires a `station` or `uicCode`. |
 
-parameter  | type           | description
-:----------|:---------------|:-----------
-[dateTime] | Date or string | Limit to starting time, will be converted to the right format
+| parameter  | type           | description |
+|:-----------|:---------------|:------------|
+| [dateTime] | Date or string | Limit to starting time, will be converted to the right format |
 
 ```js
-ns.getDepartures ()
-  .then (console.log)
-  .catch (console.error)
+ns.getDepartures( )
+  .then( console.log )
+  .catch( console.error )
 ;
 ```
 
@@ -155,17 +159,18 @@ ns.getDepartures ()
 
 
 ### getDisruptions
+**( [object] ) : array**
 
-List of disruptions/maintenance.
+List of disruptions/maintenance. |
 
-parameter  | type           | description
-:----------|:---------------|:-----------
-[actual]   | boolean        | Only return disruptions within 2 hours
+| parameter  | type           | description |
+|:-----------|:---------------|:------------|
+| [actual]   | boolean        | Only return disruptions within 2 hours |
 
 ```js
 ns.getDisruptions()
-  .then (data => console.table (data, ['titel']))
-  .catch (console.error)
+  .then( data => console.table( data, ['titel'] ) )
+  .catch( console.error )
 ;
 ```
 
@@ -173,17 +178,18 @@ ns.getDisruptions()
 
 
 ### getStationDisruption
+**( object ) : array**
 
-List of disruptions at a station
+List of disruptions at a station |
 
-parameter  | type           | description
-:----------|:---------------|:-----------
-[dateTime] | Date or string | Limit to starting time, will be converted to the right format
+| parameter  | type           | description |
+|:-----------|:---------------|:------------|
+| [dateTime] | Date or string | Limit to starting time, will be converted to the right format |
 
 ```js
-ns.getStationDisruption ({ dateTime: '2019-05-10' })
-  .then (data => console.table (data, ['titel']))
-  .catch (console.error)
+ns.getStationDisruption( { dateTime: '2019-05-10' } )
+  .then( data => console.table( data, ['titel'] ) )
+  .catch( console.error )
 ;
 ```
 
@@ -191,21 +197,22 @@ ns.getStationDisruption ({ dateTime: '2019-05-10' })
 
 
 ### getDisruption
+**( object ) : object**
 
-Get details about one disruption
+Get details about one disruption |
 
-parameter  | type           | description
-:----------|:---------------|:-----------
-type       | string         | Disruption type
-id         | string         | Disruption object ID
+| parameter  | type           | description  |
+|:-----------|:---------------|:-------------|
+| type       | string         | Disruption type      |
+| id         | string         | Disruption object ID |
 
 ```js
-ns.getDisruption ({
+ns.getDisruption( {
   type: 'maintenance',
   id: '7001000',
-})
-  .then (console.log)
-  .catch (console.error)
+} )
+  .then( console.log )
+  .catch( console.error )
 ;
 ```
 
@@ -213,21 +220,22 @@ ns.getDisruption ({
 
 
 ### getTrips
+**( object ) : array**
 
-Get a list of travel advises
+Get a list of travel advises |
 
-parameter  | type           | description
-:----------|:---------------|:-----------
-[dateTime] | Date or string | Limit to starting time, will be converted to the right format
+| parameter  | type           | description |
+|:-----------|:---------------|:------------|
+| [dateTime] | Date or string | Limit to starting time, will be converted to the right format |
 
 ```js
-ns.getTrips ({
+ns.getTrips( {
   dateTime: '2019-05-10 17:40',
   fromStation: 'Amersfoort',
   toStation: 'Den Haag',
-})
-  .then (console.log)
-  .catch (console.error)
+} )
+  .then( console.log )
+  .catch( console.error )
 ;
 ```
 
@@ -235,17 +243,18 @@ ns.getTrips ({
 
 
 ### getTrip
+**( object ) : object**
 
-Get a specific travel advise
+Get a specific travel advise |
 
-parameter   | type           | description
-:-----------|:---------------|:-----------
-ctxRecon    | string         | Trip `ctxRecon` from [getTrips()](#getTrips)
+| parameter   | type           | description |
+|:------------|:---------------|:------------|
+| ctxRecon    | string         | Trip `ctxRecon` from [getTrips()](#getTrips) |
 
 ```js
-ns.getTrip ({ ctxRecon: 'abc123' })
-  .then (console.log)
-  .catch (console.error)
+ns.getTrip( { ctxRecon: 'abc123' } )
+  .then( console.log )
+  .catch( console.error )
 ;
 ```
 
@@ -253,46 +262,47 @@ ns.getTrip ({ ctxRecon: 'abc123' })
 
 
 ### getPrice
+**( object ) : object**
 
-Get pricing for travel between two stations.
+Get pricing for travel between two stations. |
 
-parameter   | type           | description
-:-----------|:---------------|:-----------
-fromStation | string         | Station name or ID
-toStation   | string         | Station name or ID
+| parameter   | type           | description |
+|:------------|:---------------|:------------|
+| fromStation | string         | Station name or ID |
+| toStation   | string         | Station name or ID |
 
 ```js
-ns.getPrices ({
+ns.getPrices( {
   fromStation: 'AMF',
   toStation: 'Den Haag',
-})
-  .then (console.log)
-  .catch (console.error)
+} )
+  .then( console.log )
+  .catch( console.error )
 ;
-
 ```
 
 [API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getPrice)
 
 
 ### getJourney
+**( object ) : object**
 
 Get information about a specific journey.
 You can find the `id` in the trip data from `getTrip()` at `trip.legs[].journeyDetail[].link.uri`.
 Just use that whole path.
 
 
-parameter | type   | description
-:---------|:-------|:-----------
-id        | string | Journey ID
+| parameter  | type   | description |
+|:-----------|:-------|:------------|
+| id         | string | Journey ID  |
 
 
-```js
-ns.getJourney ({
+```js |
+ns.getJourney( { |
   id: 'HARP_S2S-1|3824|0|784|8052021',
-})
-  .then (console.log)
-  .catch (console.error)
+} )
+  .then( console.log )
+  .catch( console.error )
 ;
 ```
 
@@ -302,59 +312,63 @@ ns.getJourney ({
 ## Places
 
 ### placesList
+**( object ) : array**
 
 Search for places.
 Returns an array.
 
-argument   | type   | description
-:----------|:-------|:-----------
-parameters | object | See API docs
+| argument    | type   | description  |
+|:------------|:-------|:-------------|
+| q           | string | Search query |
+| parameters  | object | See API docs |
 
 
 ```js
-ns.placesList ({
+ns.placesList( {
   q: 'utrecht cs',
-});
+} );
 ```
 
 [API documentation](https://apiportal.ns.nl/docs/services/Places-API/operations/places)
 
 
 ### placesGet
+**( object ) : object**
 
 Get details about one place.
-Returns an object.
+Returns an object. |
 
-parameter | type   | description
-:---------|:-------|:-----------
-type      | string | Place type, ex: stationV2
-id        | string | Place ID, ex: AMF
-[lang]    | string | Response language
+| parameter  | type   | description |
+|:-----------|:-------|:------------|
+| type       | string | Place type, ex: stationV2 |
+| id         | string | Place ID, ex: AMF |
+| [lang]     | string | Response language |
 
 
 ```js
-ns.placesGet ({
+ns.placesGet( {
   type: 'stationV2',
   id: 'AMF',
-});
+} );
 ```
 
 [API documentation](https://apiportal.ns.nl/docs/services/Places-API/operations/placesForType)
 
 
 ### placesOvfiets
+**( [object] ) : array**
 
 Get a list of OV Fiets locations.
-Returns an array.
+Returns an array. |
 
-parameter      | type   | description
-:--------------|:-------|:-----------
-[station_code] | string | Filter by station
+| parameter       | type   | description |
+|:----------------|:-------|:------------|
+| [station_code]  | string | Filter by station |
 
 ```js
-ns.placesOvfiets ({
+ns.placesOvfiets( {
   station_code: 'AMF',
-});
+} );
 ```
 
 [API documentation](https://apiportal.ns.nl/docs/services/Places-API/operations/beschikbaarheid)
@@ -390,4 +404,5 @@ For more information, please refer to <https://unlicense.org/>
 
 ## Author
 
-[Franklin](https://frankl.in) | [Buy me a coffee](https://frankl.in/donating)
+[Franklin](https://frankl.in) |
+| [Buy me a coffee](https://frankl.in/tip) |
