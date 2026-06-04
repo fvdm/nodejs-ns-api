@@ -101,7 +101,7 @@ ns.getAllStations()
 ### getArrivals
 **( object ) : array**
 
-List of arrivals at a station. It requires a `station` or `uicCode`. |
+List of arrivals at a station. It requires a `station` or `uicCode`.
 
 | parameter  | type           | description |
 |:-----------|:---------------|:------------|
@@ -123,7 +123,7 @@ ns.getArrivals( {
 ### getCalamities
 **( [object] ) : array**
 
-List of all current calamities |
+List of all current calamities
 
 | parameter  | type           | description   |
 |:-----------|:---------------|:--------------|
@@ -142,7 +142,7 @@ ns.getArrivals( { lang: 'en' } )
 ### getDepartures
 **( object ) : array**
 
-List all departures at a station. It requires a `station` or `uicCode`. |
+List all departures at a station. It requires a `station` or `uicCode`.
 
 | parameter  | type           | description |
 |:-----------|:---------------|:------------|
@@ -161,7 +161,7 @@ ns.getDepartures( )
 ### getDisruptions
 **( [object] ) : array**
 
-List of disruptions/maintenance. |
+List of disruptions/maintenance.
 
 | parameter  | type           | description |
 |:-----------|:---------------|:------------|
@@ -180,7 +180,7 @@ ns.getDisruptions()
 ### getStationDisruption
 **( object ) : array**
 
-List of disruptions at a station |
+List of disruptions at a station
 
 | parameter  | type           | description |
 |:-----------|:---------------|:------------|
@@ -199,7 +199,7 @@ ns.getStationDisruption( { dateTime: '2019-05-10' } )
 ### getDisruption
 **( object ) : object**
 
-Get details about one disruption |
+Get details about one disruption
 
 | parameter  | type           | description  |
 |:-----------|:---------------|:-------------|
@@ -222,7 +222,7 @@ ns.getDisruption( {
 ### getTrips
 **( object ) : array**
 
-Get a list of travel advises |
+Get a list of travel advises
 
 | parameter  | type           | description |
 |:-----------|:---------------|:------------|
@@ -245,7 +245,7 @@ ns.getTrips( {
 ### getTrip
 **( object ) : object**
 
-Get a specific travel advise |
+Get a specific travel advise
 
 | parameter   | type           | description |
 |:------------|:---------------|:------------|
@@ -264,7 +264,7 @@ ns.getTrip( { ctxRecon: 'abc123' } )
 ### getPrice
 **( object ) : object**
 
-Get pricing for travel between two stations. |
+Get pricing for travel between two stations.
 
 | parameter   | type           | description |
 |:------------|:---------------|:------------|
@@ -297,8 +297,8 @@ Just use that whole path.
 | id         | string | Journey ID  |
 
 
-```js |
-ns.getJourney( { |
+```js
+ns.getJourney( {
   id: 'HARP_S2S-1|3824|0|784|8052021',
 } )
   .then( console.log )
@@ -336,7 +336,7 @@ ns.placesList( {
 **( object ) : object**
 
 Get details about one place.
-Returns an object. |
+Returns an object.
 
 | parameter  | type   | description |
 |:-----------|:-------|:------------|
@@ -359,7 +359,7 @@ ns.placesGet( {
 **( [object] ) : array**
 
 Get a list of OV Fiets locations.
-Returns an array. |
+Returns an array.
 
 | parameter       | type   | description |
 |:----------------|:-------|:------------|
@@ -404,5 +404,5 @@ For more information, please refer to <https://unlicense.org/>
 
 ## Author
 
-[Franklin](https://frankl.in) |
-| [Buy me a coffee](https://frankl.in/tip) |
+[Franklin](https://frankl.in)
+| [Buy me a coffee](https://frankl.in/tip)
