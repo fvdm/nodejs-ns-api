@@ -25,20 +25,20 @@ dateTime.setMinutes( 0 );
 dotest.add( 'Module', async test => {
   test()
     .isClass( 'fail', 'exports', app )
-    .isFunction( 'fail', '.getAllStations', ns && ns.getAllStations )
-    .isFunction( 'fail', '.getArrivals', ns && ns.getArrivals )
-    .isFunction( 'fail', '.getCalamities', ns && ns.getCalamities )
-    .isFunction( 'fail', '.getDepartures', ns && ns.getDepartures )
-    .isFunction( 'fail', '.getDisruption', ns && ns.getDisruption )
-    .isFunction( 'fail', '.getDisruptions', ns && ns.getDisruptions )
-    .isFunction( 'fail', '.getStationDisruption', ns && ns.getStationDisruption )
-    .isFunction( 'fail', '.getTrip', ns && ns.getTrip )
-    .isFunction( 'fail', '.getTrips', ns && ns.getTrips )
-    .isFunction( 'fail', '.getPrice', ns && ns.getPrice )
-    .isFunction( 'fail', '.getJourney', ns && ns.getJourney )
-    .isFunction( 'fail', '.placesList', ns && ns.placesList )
-    .isFunction( 'fail', '.placesGet', ns && ns.placesGet )
-    .isFunction( 'fail', '.placesOvfiets', ns && ns.placesOvfiets )
+    .isFunction( 'fail', '.getAllStations', ns?.getAllStations )
+    .isFunction( 'fail', '.getArrivals', ns?.getArrivals )
+    .isFunction( 'fail', '.getCalamities', ns?.getCalamities )
+    .isFunction( 'fail', '.getDepartures', ns?.getDepartures )
+    .isFunction( 'fail', '.getDisruption', ns?.getDisruption )
+    .isFunction( 'fail', '.getDisruptions', ns?.getDisruptions )
+    .isFunction( 'fail', '.getStationDisruption', ns?.getStationDisruption )
+    .isFunction( 'fail', '.getTrip', ns?.getTrip )
+    .isFunction( 'fail', '.getTrips', ns?.getTrips )
+    .isFunction( 'fail', '.getPrice', ns?.getPrice )
+    .isFunction( 'fail', '.getJourney', ns?.getJourney )
+    .isFunction( 'fail', '.placesList', ns?.placesList )
+    .isFunction( 'fail', '.placesGet', ns?.placesGet )
+    .isFunction( 'fail', '.placesOvfiets', ns?.placesOvfiets )
     .done()
   ;
 } );
@@ -57,9 +57,9 @@ dotest.add( 'API error - statusCode', async test => {
   finally {
     test()
       .isError( 'fail', 'err', error )
-      .isExactly( 'fail', 'err.message', error && error.message, 'API error' )
-      .isExactly( 'fail', 'err.statusCode', error && error.statusCode, 404 )
-      .isNotEmpty( 'warn', 'err.statusText', error && error.statusText )
+      .isExactly( 'fail', 'err.message', error?.message, 'API error' )
+      .isExactly( 'fail', 'err.statusCode', error?.statusCode, 404 )
+      .isNotEmpty( 'warn', 'err.statusText', error?.statusText )
       .isUndefined( 'fail', 'data', data )
       .info( data )
       .done()
@@ -81,8 +81,8 @@ dotest.add( 'API error - code && message', async test => {
   finally {
     test()
       .isError( 'fail', 'error', error )
-      .isNotEmpty( 'fail', 'error.message', error && error.message )
-      .isExactly( 'fail', 'error.code', error && error.code, 404 )
+      .isNotEmpty( 'fail', 'error.message', error?.message )
+      .isExactly( 'fail', 'error.code', error?.code, 404 )
       .isUndefined( 'fail', 'data', data )
       .done()
     ;
@@ -105,8 +105,8 @@ dotest.add( 'Method .getAllStations', async test => {
     test( error )
       .isArray( 'fail', 'data', data )
       .isNotEmpty( 'fail', 'data', data )
-      .isObject( 'fail', 'data[0]', data && data[0] )
-      .isString( 'fail', 'data[0].code', data && data[0] && data[0].code )
+      .isObject( 'fail', 'data[0]', data?.[0] )
+      .isString( 'fail', 'data[0].code', data?.[0]?.code )
       .done()
     ;
   }
@@ -129,8 +129,8 @@ dotest.add( 'Method .getArrivals - Without dateTime', async test => {
     test( error )
       .isArray( 'fail', 'data', data )
       .isNotEmpty( 'fail', 'data', data )
-      .isObject( 'fail', 'data[0]', data && data[0] )
-      .isString( 'fail', 'data[0].name', data && data[0] && data[0].name )
+      .isObject( 'fail', 'data[0]', data?.[0] )
+      .isString( 'fail', 'data[0].name', data?.[0]?.name )
       .done()
     ;
   }
@@ -155,8 +155,8 @@ dotest.add( 'Method .getArrivals - Date instance dateTime', async test => {
       .info( 'dateTime is proving impossible to test' )
       .isArray( 'fail', 'data', data )
       .isNotEmpty( 'warn', 'data', data )
-      .isObject( 'warn', 'data[0]', data && data[0] )
-      .isString( 'warn', 'data[0].actualDateTime', data && data[0] && data[0].actualDateTime )
+      .isObject( 'warn', 'data[0]', data?.[0] )
+      .isString( 'warn', 'data[0].actualDateTime', data?.[0]?.actualDateTime )
       .done()
     ;
   }
@@ -181,8 +181,8 @@ dotest.add( 'Method .getArrivals - String dateTime', async test => {
       .info( 'dateTime is proving impossible to test' )
       .isArray( 'fail', 'data', data )
       .isNotEmpty( 'warn', 'data', data )
-      .isObject( 'warn', 'data[0]', data && data[0] )
-      .isString( 'warn', 'data[0].actualDateTime', data && data[0] && data[0].actualDateTime )
+      .isObject( 'warn', 'data[0]', data?.[0] )
+      .isString( 'warn', 'data[0].actualDateTime', data?.[0]?.actualDateTime )
       .done()
     ;
   }
@@ -327,7 +327,7 @@ dotest.add( 'Method .getDisruption', async test => {
     test( error )
       .isObject( 'fail', 'data', data )
       .isNotEmpty( 'fail', 'data', data )
-      .isExactly( 'fail', 'data.id', data && data.id, disruption.id )
+      .isExactly( 'fail', 'data.id', data?.id, disruption.id )
       .done()
     ;
   }
@@ -438,7 +438,7 @@ dotest.add( 'Method .getTrip', async test => {
     test( error )
       .isObject( 'fail', 'data', data )
       .isNotEmpty( 'fail', 'data', data )
-      .isExactly( 'fail', 'data.ctxRecon', data && data.ctxRecon, trip.ctxRecon )
+      .isExactly( 'fail', 'data.ctxRecon', data?.ctxRecon, trip.ctxRecon )
       .done()
     ;
   }
@@ -462,7 +462,7 @@ dotest.add( 'Method .getPrice - Without date', async test => {
     test( error )
       .isObject( 'fail', 'data', data )
       .isNotEmpty( 'fail', 'data', data )
-      .isNumber( 'fail', 'data.totalPriceInCents', data && data.totalPriceInCents )
+      .isNumber( 'fail', 'data.totalPriceInCents', data?.totalPriceInCents )
       .done()
     ;
   }
@@ -487,7 +487,7 @@ dotest.add( 'Method .getPrice - Including date', async test => {
     test( error )
       .isObject( 'fail', 'data', data )
       .isNotEmpty( 'fail', 'data', data )
-      .isNumber( 'fail', 'data.totalPriceInCents', data && data.totalPriceInCents )
+      .isNumber( 'fail', 'data.totalPriceInCents', data?.totalPriceInCents )
       .done()
     ;
   }
@@ -495,12 +495,21 @@ dotest.add( 'Method .getPrice - Including date', async test => {
 
 
 dotest.add( 'Method .getJourney', async test => {
+  if ( ! trip ) {
+    test()
+      .warn( 'No trip available!' )
+      .done()
+    ;
+
+    return;
+  }
+
   let data;
   let error;
 
   try {
     data = await ns.getJourney( {
-      id: trip.legs[0].journeyDetail[0].link.uri,
+      id: trip.legs?.[0]?.journeyDetail?.[0]?.link?.uri,
     } );
   }
   catch ( err ) {
@@ -533,7 +542,7 @@ dotest.add( 'Method .placesList', async test => {
     test( error )
       .isArray( 'fail', 'data', data )
       .isNotEmpty( 'fail', 'data', data )
-      .isObject( 'fail', 'data[0]', data && data[0] )
+      .isObject( 'fail', 'data[0]', data?.[0] )
       .done()
     ;
   }
@@ -579,7 +588,7 @@ dotest.add( 'Method .placesOvfiets', async test => {
     test( error )
       .isArray( 'fail', 'data', data )
       .isNotEmpty( 'fail', 'data', data )
-      .isObject( 'fail', 'data[0]', data && data[0] )
+      .isObject( 'fail', 'data[0]', data?.[0] )
       .done()
     ;
   }
@@ -604,7 +613,7 @@ dotest.add( 'Config timeout', async test => {
   finally {
     test()
       .isError( 'fail', 'err', error )
-      .isExactly( 'fail', 'err.name', error && error.name, 'TimeoutError' )
+      .isExactly( 'fail', 'err.name', error?.name, 'TimeoutError' )
       .isUndefined( 'fail', 'data', data )
       .done()
     ;

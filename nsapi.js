@@ -69,7 +69,7 @@ module.exports = class NSAPI {
 
     // API field error - hard to replicate
     /* istanbul ignore next */
-    if ( data.fieldErrors && data.fieldErrors.length ) {
+    if ( data?.fieldErrors?.length ) {
       error = new Error( 'API field error' );
       error.reason = data.fieldErrors;
       throw error;
@@ -77,7 +77,7 @@ module.exports = class NSAPI {
 
     // API error without message - hard to replicate
     /* istanbul ignore next */
-    if ( data.errors && data.errors[0] ) {
+    if ( data?.errors?.[0] ) {
       error = new Error( 'API error' );
       error.reason = data.errors;
       throw error;
@@ -121,7 +121,7 @@ module.exports = class NSAPI {
    */
 
   async getArrivals ( parameters ) {
-    if ( parameters.dateTime && ! ( parameters.dateTime instanceof Date ) ) {
+    if ( ! ( parameters?.dateTime instanceof Date ) ) {
       parameters.dateTime = new Date( parameters.dateTime ).toString();
     }
 
@@ -159,7 +159,7 @@ module.exports = class NSAPI {
    */
 
   async getDepartures ( parameters ) {
-    if ( parameters.dateTime && ! ( parameters.dateTime instanceof Date ) ) {
+    if ( ! ( parameters?.dateTime instanceof Date ) ) {
       parameters.dateTime = new Date( parameters.dateTime ).toISOString();
     }
 
@@ -275,7 +275,7 @@ module.exports = class NSAPI {
    */
 
   async getTrips ( parameters ) {
-    if ( parameters.dateTime && ! ( parameters.dateTime instanceof Date ) ) {
+    if ( ! ( parameters?.dateTime instanceof Date ) ) {
       parameters.dateTime = new Date( parameters.dateTime ).toISOString();
     }
 
@@ -297,7 +297,7 @@ module.exports = class NSAPI {
 
   async getPrice ( parameters ) {
     // YYYY-MM-DD
-    if ( parameters.date && ! ( parameters.date instanceof Date ) ) {
+    if ( ! ( parameters?.date instanceof Date ) ) {
       parameters.date = new Date( parameters.date ).toISOString().split( 'T' )[0];
     }
 
@@ -318,7 +318,7 @@ module.exports = class NSAPI {
    */
 
   async getJourney ( parameters ) {
-    if ( parameters.dateTime && ! ( parameters.date instanceof Date ) ) {
+    if ( ! ( parameters?.dateTime instanceof Date ) ) {
       parameters.dateTime = new Date( parameters.dateTime ).toISOString();
     }
 
