@@ -622,4 +622,3 @@ dotest.add( 'Config timeout', async test => {
 
 
 dotest.run( 500 );
-

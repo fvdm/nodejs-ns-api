@@ -121,8 +121,8 @@ module.exports = class NSAPI {
    */
 
   async getArrivals ( parameters ) {
-    if ( ! ( parameters?.dateTime instanceof Date ) ) {
-      parameters.dateTime = new Date( parameters.dateTime ).toString();
+    if ( parameters.dateTime ) {
+      parameters.dateTime = new Date( parameters.dateTime ).toISOString();
     }
 
     const data = await this._request( {
@@ -159,7 +159,7 @@ module.exports = class NSAPI {
    */
 
   async getDepartures ( parameters ) {
-    if ( ! ( parameters?.dateTime instanceof Date ) ) {
+    if ( parameters.dateTime ) {
       parameters.dateTime = new Date( parameters.dateTime ).toISOString();
     }
 
@@ -275,7 +275,7 @@ module.exports = class NSAPI {
    */
 
   async getTrips ( parameters ) {
-    if ( ! ( parameters?.dateTime instanceof Date ) ) {
+    if ( parameters.dateTime ) {
       parameters.dateTime = new Date( parameters.dateTime ).toISOString();
     }
 
@@ -297,7 +297,7 @@ module.exports = class NSAPI {
 
   async getPrice ( parameters ) {
     // YYYY-MM-DD
-    if ( ! ( parameters?.date instanceof Date ) ) {
+    if ( parameters?.date ) {
       parameters.date = new Date( parameters.date ).toISOString().split( 'T' )[0];
     }
 
@@ -318,7 +318,7 @@ module.exports = class NSAPI {
    */
 
   async getJourney ( parameters ) {
-    if ( ! ( parameters?.dateTime instanceof Date ) ) {
+    if ( parameters.dateTime ) {
       parameters.dateTime = new Date( parameters.dateTime ).toISOString();
     }
 
