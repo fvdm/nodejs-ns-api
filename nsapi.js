@@ -135,23 +135,6 @@ module.exports = class NSAPI {
 
 
   /**
-   * Get calamities
-   *
-   * @param   {object}          [parameters]  Request parameters
-   * @return  {Promise<array>}
-   */
-
-  async getCalamities ( parameters = {} ) {
-    const data = await this._request( {
-      path: '/reisinformatie-api/api/v1/calamities',
-      parameters,
-    } );
-
-    return data.meldingen;
-  }
-
-
-  /**
    * Get a list of departure times
    *
    * @param   {object}          parameters  Request parameters

@@ -27,7 +27,6 @@ dotest.add( 'Module', async test => {
     .isClass( 'fail', 'exports', app )
     .isAsyncFunction( 'fail', '.getAllStations', ns?.getAllStations )
     .isAsyncFunction( 'fail', '.getArrivals', ns?.getArrivals )
-    .isAsyncFunction( 'fail', '.getCalamities', ns?.getCalamities )
     .isAsyncFunction( 'fail', '.getDepartures', ns?.getDepartures )
     .isAsyncFunction( 'fail', '.getDisruption', ns?.getDisruption )
     .isAsyncFunction( 'fail', '.getDisruptions', ns?.getDisruptions )
@@ -188,25 +187,6 @@ dotest.add( 'Method .getArrivals - String dateTime', async test => {
   }
 } );
 
-
-dotest.add( 'Method .getCalamities', async test => {
-  let data;
-  let error;
-
-  try {
-    data = await ns.getCalamities();
-  }
-  catch ( err ) {
-    error = err;
-  }
-  finally {
-    test( error )
-      .isArray( 'fail', 'data', data )
-      .isNotEmpty( 'warn', 'data', data )
-      .done()
-    ;
-  }
-} );
 
 
 dotest.add( 'Method .getDepartures - Without dateTime', async test => {
