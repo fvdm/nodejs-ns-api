@@ -189,26 +189,6 @@ dotest.add( 'Method .getArrivals - String dateTime', async test => {
 } );
 
 
-dotest.add( 'Method .getCalamities', async test => {
-  let data;
-  let error;
-
-  try {
-    data = await ns.getCalamities();
-  }
-  catch ( err ) {
-    error = err;
-  }
-  finally {
-    test( error )
-      .isArray( 'fail', 'data', data )
-      .isNotEmpty( 'warn', 'data', data )
-      .done()
-    ;
-  }
-} );
-
-
 dotest.add( 'Method .getDepartures - Without dateTime', async test => {
   let data;
   let error;
@@ -342,6 +322,26 @@ dotest.add( 'Method .getStationDisruption', async test => {
     data = await ns.getStationDisruption( {
       code: 'UT',
     } );
+  }
+  catch ( err ) {
+    error = err;
+  }
+  finally {
+    test( error )
+      .isArray( 'fail', 'data', data )
+      .isNotEmpty( 'warn', 'data', data )
+      .done()
+    ;
+  }
+} );
+
+
+dotest.add( 'Method .getCalamities (alias)', async test => {
+  let data;
+  let error;
+
+  try {
+    data = await ns.getCalamities();
   }
   catch ( err ) {
     error = err;

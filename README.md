@@ -120,25 +120,6 @@ ns.getArrivals( {
 [API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getArrivals)
 
 
-### getCalamities
-**( [object] ) : array**
-
-List of all current calamities
-
-| parameter  | type           | description   |
-|:-----------|:---------------|:--------------|
-| [lang]     | string         | Text language |
-
-```js
-ns.getArrivals( { lang: 'en' } )
-  .then( console.log )
-  .catch( console.error )
-;
-```
-
-[API documentation](https://apiportal.ns.nl/docs/services/reisinformatie-api/operations/getCalamities)
-
-
 ### getDepartures
 **( object ) : array**
 

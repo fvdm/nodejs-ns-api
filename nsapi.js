@@ -135,19 +135,15 @@ module.exports = class NSAPI {
 
 
   /**
-   * Get calamities
+   * Get calamities - DEPRECATED
    *
    * @param   {object}          [parameters]  Request parameters
    * @return  {Promise<array>}
    */
 
   async getCalamities ( parameters = {} ) {
-    const data = await this._request( {
-      path: '/reisinformatie-api/api/v1/calamities',
-      parameters,
-    } );
-
-    return data.meldingen;
+    console.trace( 'DEPRECATED - getCalamities is deprecated by the API, use getDisruptions' );
+    return this.getDisruptions( parameters );
   }
 
 
