@@ -135,6 +135,19 @@ module.exports = class NSAPI {
 
 
   /**
+   * Get calamities - DEPRECATED
+   *
+   * @param   {object}          [parameters]  Request parameters
+   * @return  {Promise<array>}
+   */
+
+  async getCalamities ( parameters = {} ) {
+    console.trace( 'DEPRECATED - getCalamities is deprecated by the API, use getDisruptions' );
+    return this.getDisruptions( parameters );
+  }
+
+
+  /**
    * Get a list of departure times
    *
    * @param   {object}          parameters  Request parameters
