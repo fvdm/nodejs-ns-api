@@ -188,7 +188,6 @@ dotest.add( 'Method .getArrivals - String dateTime', async test => {
 } );
 
 
-
 dotest.add( 'Method .getDepartures - Without dateTime', async test => {
   let data;
   let error;
